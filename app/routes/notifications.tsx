@@ -2,7 +2,7 @@ import { Layout } from "~/design-system";
 
 export default function Notifications() {
   return (
-    <Layout currentUrl={"/notifications"}>
+    <Layout>
       <p>{"Notifications"}</p>
     </Layout>
   );
