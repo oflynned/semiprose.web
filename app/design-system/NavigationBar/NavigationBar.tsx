@@ -1,20 +1,26 @@
 import type { FunctionComponent } from "react";
 import { Avatar, Button } from "~/design-system";
 import { Link } from "@remix-run/react";
+import classNames from "classnames";
 
 type Props = {
-  showCompose: boolean;
-  titles: string[];
+  currentUrl: string;
 };
 
-export const NavigationBar: FunctionComponent<Props> = ({
-  showCompose,
-  titles,
-}) => {
+type Section = { label: string; url: string };
+
+const section: Section[] = [
+  { label: "Explore", url: "/explore" },
+  { label: "Stories", url: "/stories" },
+  { label: "Notifications", url: "/notifications" },
+  { label: "Guilds", url: "/guilds" },
+];
+
+export const NavigationBar: FunctionComponent<Props> = ({ currentUrl }) => {
   return (
     <aside
       className={
-        "flex flex-col h-screen sticky top-0 justify-between w-fit p-8"
+        "flex flex-col h-screen sticky top-0 justify-between w-[256px] p-4"
       }
     >
       <div className={"flex flex-col gap-8"}>
@@ -22,22 +28,35 @@ export const NavigationBar: FunctionComponent<Props> = ({
           <h1 className={"text-4xl font-bold"}>{"Semiprose"}</h1>
         </div>
         <div className={"flex justify-center"}>
-          {showCompose ? <Button label={"Compose"} /> : null}
+          <Button label={"Compose"} />
         </div>
-        <div className={"flex flex-col gap-4"}>
-          {titles.map((title) => (
-            <div key={title}>
-              <Link to={"/"}>
-                <h3 className={"text-2xl font-bold"}>{title}</h3>
+        <div className={"flex flex-col gap-2"}>
+          {section.map(({ url, label }) => (
+            <div key={label}>
+              <Link to={url}>
+                <h3
+                  className={classNames([
+                    "text-2xl p-4 rounded-xl hover:bg-gray-100 active:bg-gray-200 font-bold transition duration-150",
+                    {
+                      "bg-gray-100": currentUrl === url,
+                    },
+                  ])}
+                >
+                  {label}
+                </h3>
               </Link>
             </div>
           ))}
         </div>
       </div>
       <div>
-        <div className={"flex flex-row align-middle gap-2"}>
+        <div
+          className={
+            "flex flex-row items-center gap-2 rounded-xl hover:bg-gray-200 transition duration-150 cursor-pointer p-2"
+          }
+        >
           <Avatar initials={"WD"} />
-          <div className={"flex align-middle"}>
+          <div className={"flex items-center"}>
             <p>{"@wetdaddy69"}</p>
           </div>
         </div>
