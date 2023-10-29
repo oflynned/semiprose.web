@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Card } from "~/design-system";
+import { Card, NavigationBar } from "~/design-system";
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,12 +10,8 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className={"m-4"}>
-      <Card>
-        <div className={"flex w-fit m-4"}>
-          <h1 className={"text-4xl"}>{"Semiprose"}</h1>
-        </div>
-      </Card>
+    <div>
+      <NavigationBar showCompose={true} titles={[""]} />
     </div>
   );
 }
