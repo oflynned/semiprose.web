@@ -4,19 +4,19 @@ import { Link } from "@remix-run/react";
 import classNames from "classnames";
 
 type Props = {
-  currentUrl: string;
+  page: string;
 };
 
-type Section = { label: string; url: string };
+type Section = { label: string; id: string };
 
 const section: Section[] = [
-  { label: "Explore", url: "/explore" },
-  { label: "Stories", url: "/stories" },
-  { label: "Notifications", url: "/notifications" },
-  { label: "Guilds", url: "/guilds" },
+  { label: "Explore", id: "explore" },
+  { label: "Stories", id: "stories" },
+  { label: "Notifications", id: "notifications" },
+  { label: "Guilds", id: "guilds" },
 ];
 
-export const NavigationBar: FunctionComponent<Props> = ({ currentUrl }) => {
+export const NavigationBar: FunctionComponent<Props> = ({ page }) => {
   return (
     <aside
       className={
@@ -31,14 +31,14 @@ export const NavigationBar: FunctionComponent<Props> = ({ currentUrl }) => {
           <Button label={"Compose"} />
         </div>
         <div className={"flex flex-col gap-2"}>
-          {section.map(({ url, label }) => (
+          {section.map(({ id, label }) => (
             <div key={label}>
-              <Link to={url}>
+              <Link to={`/${id}`}>
                 <h3
                   className={classNames([
                     "text-2xl p-4 rounded-xl hover:bg-gray-100 active:bg-gray-200 font-bold transition duration-150",
                     {
-                      "bg-gray-100": currentUrl === url,
+                      "bg-gray-100": page === id,
                     },
                   ])}
                 >

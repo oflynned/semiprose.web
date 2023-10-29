@@ -3,7 +3,7 @@ import { PARAGRAPHS, PROMPT } from "~/constants";
 
 export default function StoryDetail() {
   return (
-    <Layout currentUrl={"/stories"}>
+    <Layout>
       <Story
         week={44}
         author={"exiled_druid"}

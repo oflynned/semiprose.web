@@ -2,7 +2,7 @@ import { Layout } from "~/design-system";
 
 export default function Explore() {
   return (
-    <Layout currentUrl={"/explore"}>
+    <Layout>
       <p>{"Explore"}</p>
     </Layout>
   );
