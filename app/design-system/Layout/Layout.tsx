@@ -10,7 +10,7 @@ export const Layout: FunctionComponent<PropsWithChildren> = ({ children }) => {
   return (
     <section className={"flex"}>
       <NavigationBar page={page} user={user} />
-      <main className={"p-8"}>{children}</main>
+      <main className={"p-8 flex-1"}>{children}</main>
     </section>
   );
 };
