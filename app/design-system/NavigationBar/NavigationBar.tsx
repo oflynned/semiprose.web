@@ -18,7 +18,8 @@ const section: Section[] = [
   { label: "Explore", id: "explore" },
   { label: "My Stories", id: "stories" },
   { label: "Notifications", id: "notifications" },
-  { label: "Guilds", id: "guilds" },
+  // { label: "Guilds", id: "guilds" },
+  { label: "Settings", id: "settings" },
 ];
 
 export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
@@ -27,11 +28,6 @@ export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const options: MenuOption[] = [
-    {
-      label: "Settings",
-      icon: "settings",
-      onClick: () => navigate("/settings"),
-    },
     theme === "light"
       ? {
           label: "Dark mode",

@@ -1,6 +1,7 @@
 import { Excerpt, Layout, Prompt } from "~/design-system";
 import { Link } from "@remix-run/react";
 import { prompt, story } from "~/constants";
+import { Search } from "~/design-system/Search";
 
 const stories = [story];
 
@@ -9,12 +10,7 @@ export default function Explore() {
     <Layout>
       <div className={"flex flex-col gap-8"}>
         <div className={"max-w-screen-md"}>
-          <input
-            className={
-              "bg-gray-50 rounded-lg text-sm border border-gray-200 overflow-hidden block w-full py-2 px-4 focus:border-blue-500"
-            }
-            placeholder={"Search..."}
-          />
+          <Search />
         </div>
         <div className={"flex flex-col max-w-screen-md gap-4"}>
           <h3 className={"font-medium text-2xl"}>{"This week's prompt"}</h3>
