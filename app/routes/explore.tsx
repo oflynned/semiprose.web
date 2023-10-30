@@ -14,7 +14,7 @@ export default function Explore() {
         </div>
         <div className={"flex flex-col max-w-screen-md gap-4"}>
           <h3 className={"font-medium text-2xl"}>{"This week's prompt"}</h3>
-          <p>{"3 days, 1 hour and 5 minutes remaining"}</p>
+          <p>{"3 days, 1 hour and 5 minutes until the next challenge."}</p>
           <Link to={"/compose"}>
             <Prompt {...prompt} />
           </Link>
