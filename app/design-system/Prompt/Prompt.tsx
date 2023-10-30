@@ -10,7 +10,7 @@ export const Prompt: FunctionComponent<PromptType> = ({ week, text }) => {
           "flex flex-col p-8 gap-4 bg-blue-50 hover:bg-blue-100 active:bg-blue-200 clickable"
         }
       >
-        <h3 className={"font-medium"}>{`Week ${week}`}</h3>
+        <h4 className={"font-medium"}>{`Week ${week}`}</h4>
         <p className={"leading-loose"}>{text}</p>
       </div>
     </Card>

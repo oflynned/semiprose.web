@@ -12,7 +12,6 @@ export const Button: FunctionComponent<Props> = ({
   label,
   visible = true,
 }) => {
-  console.log({ visible });
   return (
     <button
       className={classNames([

@@ -20,7 +20,7 @@ export const Excerpt: FunctionComponent<Props> = ({
         >
           <div className={"flex flex-col"}>
             <div className={"flex justify-between"}>
-              <h3 className={"font-medium"}>{title}</h3>
+              <h4 className={"font-medium"}>{title}</h4>
             </div>
             <p>{`@${author.username}`}</p>
           </div>

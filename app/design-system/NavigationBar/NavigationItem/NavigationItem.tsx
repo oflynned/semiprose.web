@@ -8,13 +8,13 @@ type Props = {
 
 export const NavigationItem: FunctionComponent<Props> = ({ label, active }) => {
   return (
-    <h3
+    <h2
       className={classNames([
         "text-2xl p-4 rounded-xl hover:bg-gray-100 active:bg-gray-200 font-bold clickable",
         { "bg-gray-100": active },
       ])}
     >
       {label}
-    </h3>
+    </h2>
   );
 };
