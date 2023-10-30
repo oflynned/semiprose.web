@@ -15,7 +15,7 @@ export const Button: FunctionComponent<Props> = ({
   return (
     <button
       className={classNames([
-        "bg-black text-white rounded-xl py-2 px-8",
+        "bg-black text-white rounded-xl py-2 px-8 hover:shadow-lg clickable",
         visible ? "visible" : "invisible",
       ])}
       onClick={onClick}
