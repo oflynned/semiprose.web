@@ -1,6 +1,6 @@
 import { Button, Excerpt, Layout, Prompt, Search } from "~/design-system";
 import { Link, useNavigate } from "@remix-run/react";
-import { prompt, story } from "~/constants";
+import { pastStories, prompt, story } from "~/constants";
 
 const stories = [story];
 
@@ -24,7 +24,7 @@ export default function Explore() {
         <div className={"flex flex-col gap-4"}>
           <h3 className={"font-medium text-2xl"}>{"Others wrote"}</h3>
           <div className={"flex gap-4 overflow-scroll"}>
-            {stories.map((story) => (
+            {pastStories.map((story) => (
               <Link to={`/stories/${story.id}`} key={story.id}>
                 <Excerpt {...story} />
               </Link>
