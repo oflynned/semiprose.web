@@ -2,7 +2,7 @@ import { Excerpt, Layout, Prompt } from "~/design-system";
 import { Link } from "@remix-run/react";
 import { prompt, story } from "~/constants";
 
-const stories = [story, story, story];
+const stories = [story];
 
 export default function Explore() {
   return (
