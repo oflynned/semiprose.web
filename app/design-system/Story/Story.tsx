@@ -36,7 +36,7 @@ export const Story: FunctionComponent<StoryType> = ({
               <p key={tag}>{`#${tag}`}</p>
             ))}
           </div>
-          <div>
+          <div className={"flex flex-col gap-2"}>
             {[prompt.text, ...paragraphs].map((text, index) => (
               <p key={`paragraph-${index}`} className={"leading-loose"}>
                 {text}
