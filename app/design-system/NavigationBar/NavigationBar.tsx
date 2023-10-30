@@ -1,13 +1,16 @@
-import type { FunctionComponent } from "react";
+import type { ComponentProps, FunctionComponent } from "react";
 import { Button, ProfileButton } from "~/design-system";
 import { Link, useNavigate } from "@remix-run/react";
 import { NavigationItem } from "./NavigationItem";
 import type { User } from "~/types";
+import { useState } from "react";
 
 type Props = {
   page: string;
   user: User;
 };
+
+type MenuOption = ComponentProps<typeof ProfileButton>["options"][number];
 
 type Section = { label: string; id: string };
 
@@ -20,6 +23,28 @@ const section: Section[] = [
 
 export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  const options: MenuOption[] = [
+    {
+      label: "Settings",
+      icon: "settings",
+      onClick: () => navigate("/settings"),
+    },
+    theme === "light"
+      ? {
+          label: "Dark mode",
+          icon: "dark_mode",
+          onClick: () => setTheme("dark"),
+        }
+      : {
+          label: "Light mode",
+          icon: "light_mode",
+          onClick: () => setTheme("light"),
+        },
+    { label: "Log out", icon: "logout", onClick: () => navigate("/logout") },
+  ];
 
   return (
     <aside
@@ -28,9 +53,7 @@ export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
       }
     >
       <div className={"flex flex-col gap-8"}>
-        <div>
-          <h1 className={"text-4xl font-bold"}>{"Semiprose"}</h1>
-        </div>
+        <h1 className={"text-4xl font-bold"}>{"Semiprose"}</h1>
         <div className={"flex justify-center"}>
           <Button
             label={"Compose"}
@@ -46,9 +69,12 @@ export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
           ))}
         </div>
       </div>
-      <div>
-        <ProfileButton {...user} />
-      </div>
+      <ProfileButton
+        {...user}
+        options={options}
+        open={open}
+        onClick={() => setOpen((value) => !value)}
+      />
     </aside>
   );
 };
