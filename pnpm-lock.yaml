@@ -18,7 +18,7 @@ dependencies:
     specifier: 2.1.0
     version: 2.1.0(typescript@5.1.6)
   classnames:
-    specifier: ^2.3.2
+    specifier: 2.3.2
     version: 2.3.2
   isbot:
     specifier: 3.6.8

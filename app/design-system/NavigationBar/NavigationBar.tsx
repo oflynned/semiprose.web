@@ -32,20 +32,18 @@ export const NavigationBar: FunctionComponent<Props> = ({ page }) => {
         </div>
         <div className={"flex flex-col gap-2"}>
           {section.map(({ id, label }) => (
-            <div key={label}>
-              <Link to={`/${id}`}>
-                <h3
-                  className={classNames([
-                    "text-2xl p-4 rounded-xl hover:bg-gray-100 active:bg-gray-200 font-bold transition duration-150",
-                    {
-                      "bg-gray-100": page === id,
-                    },
-                  ])}
-                >
-                  {label}
-                </h3>
-              </Link>
-            </div>
+            <Link to={`/${id}`} key={label}>
+              <h3
+                className={classNames([
+                  "text-2xl p-4 rounded-xl hover:bg-gray-100 active:bg-gray-200 font-bold transition duration-150",
+                  {
+                    "bg-gray-100": page === id,
+                  },
+                ])}
+              >
+                {label}
+              </h3>
+            </Link>
           ))}
         </div>
       </div>
