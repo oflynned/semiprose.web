@@ -37,6 +37,7 @@ export const ProfileButton: FunctionComponent<Props> = ({
       >
         {options.map(({ label, icon, onClick }) => (
           <div
+            key={label}
             onClick={() => onClick?.()}
             className={
               "flex flex-row gap-2 p-4 hover:bg-gray-100 active:bg-gray-200 clickable"
