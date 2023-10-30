@@ -18,7 +18,6 @@ const section: Section[] = [
   { label: "Explore", id: "explore" },
   { label: "My Stories", id: "stories" },
   { label: "Notifications", id: "notifications" },
-  // { label: "Guilds", id: "guilds" },
   { label: "Settings", id: "settings" },
 ];
 
