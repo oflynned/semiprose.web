@@ -1,7 +1,6 @@
-import { Excerpt, Layout, Prompt, Story } from "~/design-system";
+import { Excerpt, Layout, Search } from "~/design-system";
 import { Link } from "@remix-run/react";
 import { story } from "~/constants";
-import { Search } from "~/design-system/Search";
 
 const stories = [story, story, story];
 
