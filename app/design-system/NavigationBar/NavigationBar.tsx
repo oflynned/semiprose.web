@@ -1,10 +1,12 @@
 import type { FunctionComponent } from "react";
-import { Avatar, Button } from "~/design-system";
+import { Button, ProfileButton } from "~/design-system";
 import { Link } from "@remix-run/react";
-import classNames from "classnames";
+import { NavigationItem } from "./NavigationItem";
+import type { User } from "~/types";
 
 type Props = {
   page: string;
+  user: User;
 };
 
 type Section = { label: string; id: string };
@@ -16,7 +18,7 @@ const section: Section[] = [
   { label: "Guilds", id: "guilds" },
 ];
 
-export const NavigationBar: FunctionComponent<Props> = ({ page }) => {
+export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
   return (
     <aside
       className={
@@ -33,31 +35,13 @@ export const NavigationBar: FunctionComponent<Props> = ({ page }) => {
         <div className={"flex flex-col gap-2"}>
           {section.map(({ id, label }) => (
             <Link to={`/${id}`} key={label}>
-              <h3
-                className={classNames([
-                  "text-2xl p-4 rounded-xl hover:bg-gray-100 active:bg-gray-200 font-bold transition duration-150",
-                  {
-                    "bg-gray-100": page === id,
-                  },
-                ])}
-              >
-                {label}
-              </h3>
+              <NavigationItem active={page === id} label={label} />
             </Link>
           ))}
         </div>
       </div>
       <div>
-        <div
-          className={
-            "flex flex-row items-center gap-2 rounded-xl hover:bg-gray-200 transition duration-150 cursor-pointer p-2"
-          }
-        >
-          <Avatar initials={"WD"} />
-          <div className={"flex items-center"}>
-            <p>{"@wetdaddy69"}</p>
-          </div>
-        </div>
+        <ProfileButton {...user} />
       </div>
     </aside>
   );

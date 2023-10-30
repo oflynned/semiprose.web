@@ -5,3 +5,4 @@ export * from "./NavigationBar";
 export * from "./Story";
 export * from "./Prompt";
 export * from "./Layout";
+export * from "./ProfileButton";

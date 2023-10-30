@@ -48,7 +48,7 @@ export const Story: FunctionComponent<Props> = ({
   };
 
   return (
-    <div className={"flex flex-col m-8 gap-4 max-w-screen-md"}>
+    <div className={"flex flex-col gap-4 max-w-screen-md"}>
       <h1 className={"text-3xl font-medium"}>{title}</h1>
       <h5>
         {[
@@ -61,7 +61,7 @@ export const Story: FunctionComponent<Props> = ({
           <div className={"flex flex-col"}>
             <div className={"flex flex-row justify-between"}>
               <h3 className={"font-medium"}>{`Week ${week}`}</h3>
-              <div className={"flex flex-row"}>
+              <div className={"flex gap-1"}>
                 <span className={"material-symbols-outlined"}>trending_up</span>
                 <p>{`${formatCount(readership)} readers`}</p>
               </div>

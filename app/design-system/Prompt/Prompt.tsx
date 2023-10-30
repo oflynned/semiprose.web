@@ -10,7 +10,11 @@ type Props = {
 export const Prompt: FunctionComponent<Props> = ({ week, prompt }) => {
   return (
     <Card>
-      <div className={"flex flex-col p-8 gap-4 bg-blue-50"}>
+      <div
+        className={
+          "flex flex-col p-8 gap-4 bg-blue-50 hover:bg-blue-100 active:bg-blue-200 clickable"
+        }
+      >
         <h3 className={"font-medium"}>{`Week ${week}`}</h3>
         <p className={"leading-loose"}>{prompt}</p>
       </div>
