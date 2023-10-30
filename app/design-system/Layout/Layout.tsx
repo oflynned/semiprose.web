@@ -1,22 +1,16 @@
 import { useLocation } from "@remix-run/react";
 import type { FunctionComponent, PropsWithChildren } from "react";
 import { NavigationBar } from "~/design-system";
-import type { User } from "~/types";
-
-const user: User = {
-  id: "1",
-  username: "wetdaddy69",
-  initials: "WD",
-};
+import { user } from "~/constants";
 
 export const Layout: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const location = useLocation();
   const [, page] = location.pathname.split("/");
 
   return (
-    <div className={"flex flex-row"}>
+    <section className={"flex"}>
       <NavigationBar page={page} user={user} />
-      <div className={"m-8"}>{children}</div>
-    </div>
+      <main className={"p-8"}>{children}</main>
+    </section>
   );
 };

@@ -6,3 +6,4 @@ export * from "./Story";
 export * from "./Prompt";
 export * from "./Layout";
 export * from "./ProfileButton";
+export * from "./Excerpt";

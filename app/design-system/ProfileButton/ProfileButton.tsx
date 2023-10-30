@@ -14,9 +14,9 @@ export const ProfileButton: FunctionComponent<Props> = ({
   return (
     <div
       className={
-        "flex flex-row items-center gap-2 rounded-xl hover:bg-gray-100 active:bg-gray-200 p-2 clickable"
+        "flex items-center gap-2 rounded-xl hover:bg-gray-100 active:bg-gray-200 p-2 clickable"
       }
-      onClick={() => onClick?.()}
+      onClick={onClick}
     >
       <Avatar initials={initials} />
       <div className={"flex items-center"}>

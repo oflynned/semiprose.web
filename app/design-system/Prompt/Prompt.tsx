@@ -1,13 +1,8 @@
 import type { FunctionComponent } from "react";
 import { Card } from "~/design-system";
+import type { Prompt as PromptType } from "~/types";
 
-type Props = {
-  week: number;
-  prompt: string;
-  onClick?: (id: string) => void;
-};
-
-export const Prompt: FunctionComponent<Props> = ({ week, prompt }) => {
+export const Prompt: FunctionComponent<PromptType> = ({ week, text }) => {
   return (
     <Card>
       <div
@@ -16,7 +11,7 @@ export const Prompt: FunctionComponent<Props> = ({ week, prompt }) => {
         }
       >
         <h3 className={"font-medium"}>{`Week ${week}`}</h3>
-        <p className={"leading-loose"}>{prompt}</p>
+        <p className={"leading-loose"}>{text}</p>
       </div>
     </Card>
   );
