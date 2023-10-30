@@ -61,18 +61,23 @@ export const Story: FunctionComponent<Props> = ({
           <div className={"flex flex-col"}>
             <div className={"flex flex-row justify-between"}>
               <h3 className={"font-medium"}>{`Week ${week}`}</h3>
-              <p>{`${formatCount(readership)} readers`}</p>
+              <div className={"flex flex-row"}>
+                <span className={"material-symbols-outlined"}>trending_up</span>
+                <p>{`${formatCount(readership)} readers`}</p>
+              </div>
             </div>
             <p>{`@${author}`}</p>
           </div>
           <div className={"flex flex-row gap-2"}>
             {tags.map((tag) => (
-              <p>{`#${tag}`}</p>
+              <p key={tag}>{`#${tag}`}</p>
             ))}
           </div>
           <div>
-            {[prompt, ...paragraphs].map((text) => (
-              <p className={"leading-loose"}>{text}</p>
+            {[prompt, ...paragraphs].map((text, index) => (
+              <p key={`paragraph-${index}`} className={"leading-loose"}>
+                {text}
+              </p>
             ))}
           </div>
         </div>
