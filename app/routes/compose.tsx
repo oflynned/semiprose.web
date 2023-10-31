@@ -1,25 +1,63 @@
 import { Button, Layout, Prompt } from "~/design-system";
 import { prompt } from "~/constants";
+import { useState } from "react";
 
 export default function Compose() {
+  const [content, setContent] = useState("");
+  const [disablePublish, setDisablePublish] = useState(content.length === 0);
+  const [disableSaveDraft, setDisableSaveDraft] = useState(
+    content.length === 0
+  );
+
+  const handleSaveDraft = () => {
+    if (!disableSaveDraft) {
+      setDisableSaveDraft(true);
+    }
+  };
+
+  const handleTextChange = (text: string) => {
+    const content = text.trim();
+
+    if (content.length === 0) {
+      setDisableSaveDraft(true);
+      setDisablePublish(true);
+      setContent("");
+    } else {
+      setDisableSaveDraft(false);
+      setDisablePublish(false);
+      setContent(content);
+    }
+  };
+
   return (
     <Layout>
-      <div className={"flex flex-col gap-4 max-w-screen-md"}>
-        <h3 className={"text-4xl font-bold"}>{"Compose"}</h3>
+      <form className={"flex flex-col gap-8 max-w-screen-md"}>
+        <input
+          className={"text-4xl font-bold focus:outline-none"}
+          placeholder={"Title"}
+        />
         <Prompt {...prompt} />
         <div className={"flex flex-col gap-2"}>
-          <label htmlFor="title">{"Title"}</label>
           <textarea
-            className={"border-2 border-gray-100 bg-gray-50 rounded-xl p-8"}
+            className={
+              "border-2 border-gray-100 focus:outline-gray-200 bg-gray-50 rounded-xl p-8"
+            }
             id="title"
             rows={5}
+            onChange={(e) => {
+              handleTextChange(e.target.value);
+            }}
           />
         </div>
         <div className={"flex gap-4 w-full justify-end"}>
-          <Button label={"Save"} />
-          <Button label={"Publish"} />
+          <Button
+            label={"Save draft"}
+            disabled={disableSaveDraft}
+            onClick={handleSaveDraft}
+          />
+          <Button label={"Publish"} disabled={disablePublish} />
         </div>
-      </div>
+      </form>
     </Layout>
   );
 }

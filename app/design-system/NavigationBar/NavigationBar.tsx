@@ -51,9 +51,9 @@ export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
         <h1 className={"text-4xl font-bold"}>{"Semiprose"}</h1>
         <div className={"flex justify-center"}>
           <Button
-            label={"Compose"}
-            visible={page !== "compose"}
+            visibility={page === "compose" ? "invisible" : "visible"}
             onClick={() => navigate("/compose")}
+            label={"Compose"}
           />
         </div>
         <div className={"flex flex-col gap-2"}>

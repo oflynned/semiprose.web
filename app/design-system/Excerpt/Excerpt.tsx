@@ -6,7 +6,6 @@ type Props = Pick<Story, "title" | "author" | "paragraphs" | "tags">;
 
 export const Excerpt: FunctionComponent<Props> = ({
   title,
-  author,
   paragraphs,
   tags,
 }) => {
@@ -22,7 +21,6 @@ export const Excerpt: FunctionComponent<Props> = ({
             <div className={"flex justify-between"}>
               <h4 className={"font-medium"}>{title}</h4>
             </div>
-            <p>{`@${author.username}`}</p>
           </div>
           <div className={"flex gap-2"}>
             {tags.map((tag) => (

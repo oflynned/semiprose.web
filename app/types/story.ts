@@ -3,7 +3,7 @@ import type { Prompt } from "~/types/prompt";
 
 export type Story = {
   id: string;
-  publishedAt: Date;
+  publishedAt: string;
   duration: number;
   readership: number;
   tags: string[];

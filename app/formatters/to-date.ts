@@ -1,7 +1,7 @@
-export const toDate = (date: Date) => {
+export const toDate = (date: string) => {
   return Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
-  }).format(date);
+  }).format(new Date(date));
 };
