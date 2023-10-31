@@ -26,8 +26,8 @@ export default function Explore() {
           <h3 className={"font-medium text-2xl"}>{"Others wrote"}</h3>
           <div className={"grid grid-cols-2 gap-4"}>
             {pastStories.map((story) => (
-              <div className={"flex flex-col max-w-screen-md"}>
-                <Link to={`/stories/${story.id}`} key={story.id}>
+              <div className={"flex flex-col max-w-screen-md"} key={story.id}>
+                <Link to={`/stories/${story.id}`}>
                   <Excerpt {...story} />
                 </Link>
                 <div className={"flex justify-between mx-8 my-4"}>
