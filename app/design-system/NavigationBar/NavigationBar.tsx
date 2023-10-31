@@ -4,6 +4,7 @@ import { Link, useNavigate } from "@remix-run/react";
 import { NavigationItem } from "./NavigationItem";
 import type { User } from "~/types";
 import { useState } from "react";
+import { useTheme } from "~/context";
 
 type Props = {
   page: string;
@@ -22,21 +23,21 @@ const section: Section[] = [
 ];
 
 export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const options: MenuOption[] = [
     theme === "light"
       ? {
           label: "Dark mode",
           icon: "dark_mode",
-          onClick: () => setTheme("dark"),
+          onClick: () => toggleTheme("dark"),
         }
       : {
           label: "Light mode",
           icon: "light_mode",
-          onClick: () => setTheme("light"),
+          onClick: () => toggleTheme("light"),
         },
     { label: "Log out", icon: "logout", onClick: () => navigate("/logout") },
   ];
@@ -44,7 +45,7 @@ export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
   return (
     <aside
       className={
-        "flex flex-col h-screen sticky top-0 left-0 bg-white justify-between w-[256px] p-4"
+        "flex flex-col h-screen sticky top-0 left-0 bg-white dark:bg-slate-800 justify-between w-[256px] p-4"
       }
     >
       <div className={"flex flex-col gap-8"}>
