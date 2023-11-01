@@ -5,7 +5,7 @@ import {
   Layout,
   Prompt,
 } from "~/design-system";
-import { mockFeedback, prompt, story } from "~/constants";
+import { mockFeedback, prompt } from "~/constants";
 import { useState } from "react";
 import classNames from "classnames";
 
@@ -16,6 +16,7 @@ type FeedbackState =
   | { state: "closed" };
 
 export default function Compose() {
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [draftState, setDraftState] = useState<ContentState>("disabled");
   const [publishState, setPublishState] = useState<ContentState>("disabled");
@@ -75,7 +76,12 @@ export default function Compose() {
 
   return (
     <Layout>
-      <div className={"flex gap-4 justify-between"}>
+      <div
+        className={classNames([
+          "flex gap-4",
+          { "justify-between": feedbackState.state === "closed" },
+        ])}
+      >
         <div
           className={classNames([
             "flex flex-col gap-8 max-w-screen-md",
@@ -85,6 +91,8 @@ export default function Compose() {
           <input
             className={"text-4xl font-bold focus:outline-none"}
             placeholder={"Title"}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
           <Prompt {...prompt} />
           <div className={"flex flex-col gap-2"}>
