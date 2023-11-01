@@ -31,7 +31,12 @@ export const Improvement: FunctionComponent<Props> = ({
       </div>
       <div className={"flex flex-col flex-1"}>
         <h5>{title}</h5>
-        <p className={"text-gray-400 text-sm text-ellipsis"}>
+        <p
+          className={classNames([
+            "text-gray-400 text-sm text-ellipsis",
+            { "text-gray-600": selected },
+          ])}
+        >
           {shortDescription}
         </p>
       </div>
