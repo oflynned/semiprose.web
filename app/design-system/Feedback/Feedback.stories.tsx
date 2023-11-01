@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Feedback } from "./Feedback";
+import { mockFeedback } from "~/constants";
 
 const meta = {
   title: "Feedback",
@@ -13,28 +14,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    improvements: [
-      {
-        title: "Sentence structure",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        weight: 2,
-      },
-      {
-        title: "Show, don't tell",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        weight: 11,
-      },
-      {
-        title: "Imagery",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        weight: 2,
-      },
-    ],
+    state: "completed",
+    improvements: mockFeedback,
   },
 };
 
 export const Flawless: Story = {
   args: {
+    state: "completed",
     improvements: [],
   },
 };

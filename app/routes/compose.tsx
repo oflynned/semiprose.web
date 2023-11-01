@@ -1,22 +1,9 @@
 import { Button, Feedback, Layout, Prompt } from "~/design-system";
-import { prompt } from "~/constants";
+import { mockFeedback, prompt } from "~/constants";
 import type { ComponentProps } from "react";
 import { useState } from "react";
 
 type ContentState = "disabled" | "clickable" | "loading" | "completed";
-
-const mockImprovements: ComponentProps<typeof Feedback>["improvements"] = [
-  {
-    title: "Sentence structure",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    weight: 2,
-  },
-  {
-    title: "Show, don't tell",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    weight: 6,
-  },
-];
 
 export default function Compose() {
   const [content, setContent] = useState("");
@@ -108,7 +95,10 @@ export default function Compose() {
           </div>
         </div>
         <div className={"max-w-screen-md"}>
-          <Feedback improvements={mockImprovements} />
+          <Feedback
+            state={content.length === 0 ? "empty" : "completed"}
+            improvements={content.length > 0 ? mockFeedback : []}
+          />
         </div>
       </div>
     </Layout>
