@@ -15,8 +15,8 @@ export const FeedbackDetail: FunctionComponent<Props> = ({
     <Card border>
       <div className={"flex flex-col gap-4 p-8"}>
         <h3 className={"font-bold text-2xl"}>{improvement.title}</h3>
-        <p>{improvement.description}</p>
-        <p>{improvement.example}</p>
+        <p className={"leading-relaxed"}>{improvement.description}</p>
+        <p className={"leading-relaxed"}>{improvement.example}</p>
         <div className={"flex justify-end"}>
           <Button
             label={"Return"}
