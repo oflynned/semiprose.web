@@ -2,36 +2,66 @@ import { Button, Layout, Prompt } from "~/design-system";
 import { prompt } from "~/constants";
 import { useState } from "react";
 
+type ContentState = "disabled" | "clickable" | "loading" | "completed";
+
 export default function Compose() {
   const [content, setContent] = useState("");
-  const [disablePublish, setDisablePublish] = useState(content.length === 0);
-  const [disableSaveDraft, setDisableSaveDraft] = useState(
-    content.length === 0
-  );
+  const [draftState, setDraftState] = useState<ContentState>("disabled");
+  const [publishState, setPublishState] = useState<ContentState>("disabled");
+
+  const handlePublish = () => {
+    if (publishState === "clickable") {
+      setPublishState("loading");
+
+      setTimeout(() => {
+        setPublishState("completed");
+      }, 2000);
+    }
+  };
 
   const handleSaveDraft = () => {
-    if (!disableSaveDraft) {
-      setDisableSaveDraft(true);
+    if (draftState === "clickable") {
+      setDraftState("loading");
+      setTimeout(() => {
+        setDraftState("completed");
+      }, 2000);
     }
   };
 
   const handleTextChange = (text: string) => {
-    const content = text.trim();
+    const updatedContent = text.trim();
 
-    if (content.length === 0) {
-      setDisableSaveDraft(true);
-      setDisablePublish(true);
-      setContent("");
-    } else {
-      setDisableSaveDraft(false);
-      setDisablePublish(false);
-      setContent(content);
+    setContent(updatedContent);
+
+    if (updatedContent.length === 0) {
+      setDraftState("disabled");
+      setPublishState("disabled");
+
+      return;
     }
+
+    if (updatedContent === content) {
+      setDraftState("disabled");
+      setPublishState("clickable");
+      return;
+    }
+
+    setDraftState("clickable");
+    setPublishState("clickable");
   };
+
+  const isPublishDisabled =
+    publishState === "disabled" || publishState === "completed";
+
+  const isDraftDisabled =
+    isPublishDisabled ||
+    publishState === "loading" ||
+    draftState === "disabled" ||
+    draftState === "completed";
 
   return (
     <Layout>
-      <form className={"flex flex-col gap-8 max-w-screen-md"}>
+      <div className={"flex flex-col gap-8 max-w-screen-md"}>
         <input
           className={"text-4xl font-bold focus:outline-none"}
           placeholder={"Title"}
@@ -44,21 +74,25 @@ export default function Compose() {
             }
             id="title"
             rows={5}
-            onChange={(e) => {
-              handleTextChange(e.target.value);
-            }}
+            onChange={(e) => handleTextChange(e.target.value)}
           />
         </div>
         <div className={"flex gap-4 w-full justify-end"}>
           <Button
             variant={"outlined"}
-            label={"Save draft"}
-            disabled={disableSaveDraft}
+            label={draftState === "completed" ? "Draft saved" : "Save draft"}
+            disabled={isDraftDisabled}
+            loading={draftState === "loading"}
             onClick={handleSaveDraft}
           />
-          <Button label={"Publish"} disabled={disablePublish} />
+          <Button
+            label={"Publish"}
+            disabled={isPublishDisabled}
+            loading={publishState === "loading"}
+            onClick={handlePublish}
+          />
         </div>
-      </form>
+      </div>
     </Layout>
   );
 }
