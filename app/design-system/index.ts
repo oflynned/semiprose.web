@@ -7,4 +7,5 @@ export * from "./Prompt";
 export * from "./Layout";
 export * from "./ProfileButton";
 export * from "./Search";
+export * from "./Spinner";
 export * from "./Excerpt";

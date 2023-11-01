@@ -4,8 +4,8 @@ import type { User } from "~/types";
 import classNames from "classnames";
 
 type Props = {
-  open: boolean;
   options: Option[];
+  open?: boolean;
   onClick?: () => void;
 } & Pick<User, "initials" | "username">;
 
@@ -17,15 +17,15 @@ type Option = {
 
 export const ProfileButton: FunctionComponent<Props> = ({
   options,
-  open,
   initials,
   username,
   onClick,
+  open = false,
 }) => {
   return (
     <div
       className={classNames([
-        "rounded-2xl overflow-hidden border-2 border-transparent",
+        "rounded-2xl overflow-hidden border border-transparent",
         { "border-gray-100 bg-gray-50": open },
       ])}
     >

@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useTheme } from "~/context";
 
 type Props = {
-  page: string;
+  pageId: string;
   user: User;
 };
 
@@ -22,7 +22,7 @@ const section: Section[] = [
   { label: "Settings", id: "settings" },
 ];
 
-export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
+export const NavigationBar: FunctionComponent<Props> = ({ pageId, user }) => {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -45,14 +45,14 @@ export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
   return (
     <aside
       className={
-        "flex flex-col h-screen sticky top-0 left-0 bg-white dark:bg-slate-800 justify-between w-[256px] p-4"
+        "flex flex-col h-screen sticky top-0 left-0 bg-white dark:bg-slate-900 justify-between w-[256px] p-4"
       }
     >
       <div className={"flex flex-col gap-8"}>
-        <h1 className={"text-4xl font-bold"}>{"Semiprose"}</h1>
+        <h1 className={"text-4xl font-bold dark:text-white"}>{"Semiprose"}</h1>
         <div className={"flex justify-center"}>
           <Button
-            visibility={page === "compose" ? "invisible" : "visible"}
+            visibility={pageId === "compose" ? "invisible" : "visible"}
             onClick={() => navigate("/compose")}
             label={"Compose"}
           />
@@ -60,7 +60,7 @@ export const NavigationBar: FunctionComponent<Props> = ({ page, user }) => {
         <div className={"flex flex-col gap-2"}>
           {section.map(({ id, label }) => (
             <Link to={`/${id}`} key={label}>
-              <NavigationItem active={page === id} label={label} />
+              <NavigationItem active={pageId === id} label={label} />
             </Link>
           ))}
         </div>

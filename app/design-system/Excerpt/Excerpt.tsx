@@ -1,14 +1,16 @@
 import type { FunctionComponent } from "react";
 import type { Story } from "~/types";
-import { Card } from "../Card";
+import { Card } from "~/design-system";
 
-type Props = Pick<Story, "title" | "author" | "paragraphs" | "tags">;
+type Props = Pick<Story, "title" | "paragraphs" | "tags">;
 
 export const Excerpt: FunctionComponent<Props> = ({
   title,
   paragraphs,
   tags,
 }) => {
+  const content = paragraphs.join(". ").trim();
+
   return (
     <div className={"flex flex-col gap-4 max-w-screen-md"}>
       <Card>
@@ -28,7 +30,7 @@ export const Excerpt: FunctionComponent<Props> = ({
             ))}
           </div>
           <p className={"leading-loose"}>
-            {paragraphs[0].slice(0, 256) + "..."}
+            {content.length > 256 ? content.slice(0, 256) + "..." : content}
           </p>
         </div>
       </Card>
