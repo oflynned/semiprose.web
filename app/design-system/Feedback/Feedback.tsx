@@ -1,6 +1,7 @@
 import type { ComponentProps, FunctionComponent } from "react";
 import { Card } from "~/design-system";
 import { Improvement } from "~/design-system/Feedback/Improvement";
+import { toPercentage } from "~/formatters";
 
 type Props = {
   improvements: ComponentProps<typeof Improvement>[];
@@ -8,14 +9,6 @@ type Props = {
 
 export const Feedback: FunctionComponent<Props> = ({ improvements }) => {
   const score = 100 - improvements.reduce((acc, { weight }) => acc + weight, 0);
-
-  const toPercentage = (percentage: number) => {
-    return Intl.NumberFormat("en-US", {
-      style: "percent",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(percentage / 100);
-  };
 
   return (
     <Card border>
