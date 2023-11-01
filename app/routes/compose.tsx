@@ -131,7 +131,6 @@ export default function Compose() {
         {feedbackState.state === "open" ? (
           <div className={"flex-1"}>
             <FeedbackDetail
-              story={story}
               improvement={mockFeedback[feedbackState.feedbackIndex]}
               onClearFeedback={() => {
                 setFeedbackState({ state: "closed" });
