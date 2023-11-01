@@ -9,7 +9,7 @@ export default function Compose() {
   const [draftState, setDraftState] = useState<ContentState>("disabled");
   const [publishState, setPublishState] = useState<ContentState>("disabled");
 
-  const handlePublish = () => {
+  const onPublish = () => {
     if (publishState === "clickable") {
       setPublishState("loading");
 
@@ -19,7 +19,7 @@ export default function Compose() {
     }
   };
 
-  const handleSaveDraft = () => {
+  const onSaveDraft = () => {
     if (draftState === "clickable") {
       setDraftState("loading");
       setTimeout(() => {
@@ -28,7 +28,7 @@ export default function Compose() {
     }
   };
 
-  const handleTextChange = (text: string) => {
+  const onTextChange = (text: string) => {
     const updatedContent = text.trim();
 
     setContent(updatedContent);
@@ -72,9 +72,8 @@ export default function Compose() {
             className={
               "border border-gray-100 focus:outline-gray-200 bg-gray-50 rounded-xl p-8"
             }
-            id="title"
             rows={5}
-            onChange={(e) => handleTextChange(e.target.value)}
+            onChange={(e) => onTextChange(e.target.value)}
           />
         </div>
         <div className={"flex gap-4 w-full justify-end"}>
@@ -83,13 +82,13 @@ export default function Compose() {
             label={draftState === "completed" ? "Draft saved" : "Save draft"}
             disabled={isDraftDisabled}
             loading={draftState === "loading"}
-            onClick={handleSaveDraft}
+            onClick={onSaveDraft}
           />
           <Button
             label={"Publish"}
             disabled={isPublishDisabled}
             loading={publishState === "loading"}
-            onClick={handlePublish}
+            onClick={onPublish}
           />
         </div>
       </div>
