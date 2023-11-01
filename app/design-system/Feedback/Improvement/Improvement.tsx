@@ -3,6 +3,7 @@ import type { Improvement as ImprovementType } from "~/types";
 import classNames from "classnames";
 
 type Props = {
+  loading?: boolean;
   selected?: boolean;
   onClick?: () => void;
 } & ImprovementType;
@@ -10,6 +11,7 @@ type Props = {
 export const Improvement: FunctionComponent<Props> = ({
   title,
   shortDescription,
+  loading,
   weight,
   onClick,
   selected,
@@ -29,16 +31,28 @@ export const Improvement: FunctionComponent<Props> = ({
       >
         <span className={"text-purple-500 font-medium"}>{weight}</span>
       </div>
-      <div className={"flex flex-col flex-1"}>
-        <h5>{title}</h5>
-        <p
-          className={classNames([
-            "text-gray-400 text-sm text-ellipsis",
-            { "text-gray-600": selected },
-          ])}
-        >
-          {shortDescription}
-        </p>
+      <div
+        className={classNames(["flex flex-col flex-1", { "gap-2": loading }])}
+      >
+        {loading ? (
+          <div className={"animate-pulse rounded-full bg-gray-300 h-3 w-32"} />
+        ) : (
+          <h5>{title}</h5>
+        )}
+        {loading ? (
+          <div
+            className={"animate-pulse rounded-full bg-gray-300 h-3 w-full"}
+          />
+        ) : (
+          <p
+            className={classNames([
+              "text-gray-400 text-sm text-ellipsis",
+              { "text-gray-600": selected },
+            ])}
+          >
+            {shortDescription}
+          </p>
+        )}
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import {
 import { mockFeedback, prompt } from "~/constants";
 import { useState } from "react";
 import classNames from "classnames";
+import type { Improvement } from "~/types";
 
 type ContentState = "disabled" | "clickable" | "loading" | "completed";
 
@@ -15,9 +16,18 @@ type FeedbackState =
   | { state: "open"; feedbackIndex: number }
   | { state: "closed" };
 
+type ImprovementState =
+  | { state: "empty" }
+  | { state: "loading" }
+  | { state: "completed"; improvements: Improvement[] };
+
 export default function Compose() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [improvementState, setImprovementState] = useState<ImprovementState>({
+    state: "empty",
+  });
+
   const [draftState, setDraftState] = useState<ContentState>("disabled");
   const [publishState, setPublishState] = useState<ContentState>("disabled");
   const [feedbackState, setFeedbackState] = useState<FeedbackState>({
@@ -63,6 +73,12 @@ export default function Compose() {
 
     setDraftState("clickable");
     setPublishState("clickable");
+
+    setImprovementState({ state: "loading" });
+
+    setTimeout(() => {
+      setImprovementState({ state: "completed", improvements: mockFeedback });
+    }, 1500);
   };
 
   const isPublishDisabled =
@@ -120,10 +136,15 @@ export default function Compose() {
             />
           </div>
         </div>
-        <div className={"max-w-screen-md"}>
+        <div className={"max-w-screen-md min-w-[512px]"}>
           <Feedback
+            loading={improvementState.state === "loading"}
             state={content.length === 0 ? "empty" : "completed"}
-            improvements={content.length > 0 ? mockFeedback : []}
+            improvements={
+              improvementState.state === "completed"
+                ? improvementState.improvements
+                : []
+            }
             selectedIndex={
               feedbackState.state === "open"
                 ? feedbackState.feedbackIndex
