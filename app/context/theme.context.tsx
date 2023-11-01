@@ -1,5 +1,5 @@
 import type { FunctionComponent, PropsWithChildren } from "react";
-import { createContext, useEffect, useLayoutEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import type { Theme } from "~/types";
 
 export const ThemeContext = createContext<{

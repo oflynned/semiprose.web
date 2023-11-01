@@ -3,7 +3,7 @@ import {
   Feedback,
   FeedbackDetail,
   Layout,
-  Prompt,
+  Prompt, 
 } from "~/design-system";
 import { mockFeedback, prompt } from "~/constants";
 import { useState } from "react";
@@ -16,15 +16,16 @@ type FeedbackState =
   | { state: "open"; feedbackIndex: number }
   | { state: "closed" };
 
-type ImprovementState =
+type AnalysisState =
   | { state: "empty" }
   | { state: "loading" }
-  | { state: "completed"; improvements: Improvement[] };
+  | { state: "completed"; improvements: Improvement[] }
+  | { state: "cancelled" }
 
 export default function Compose() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [improvementState, setImprovementState] = useState<ImprovementState>({
+  const [content, setContent] = useState('');
+  const [analysisState, setAnalysisState] = useState<AnalysisState>({
     state: "empty",
   });
 
@@ -73,13 +74,15 @@ export default function Compose() {
 
     setDraftState("clickable");
     setPublishState("clickable");
+  };
 
-    setImprovementState({ state: "loading" });
+  const onRequestAnalysis = () => {
+    setAnalysisState({state: 'loading'});
 
     setTimeout(() => {
-      setImprovementState({ state: "completed", improvements: mockFeedback });
+      setAnalysisState({ state: "completed", improvements: mockFeedback });
     }, 1500);
-  };
+  }
 
   const isPublishDisabled =
     publishState === "disabled" || publishState === "completed";
@@ -94,7 +97,7 @@ export default function Compose() {
     <Layout>
       <div
         className={classNames([
-          "flex gap-4",
+          "flex gap-4 h-full",
           { "justify-between": feedbackState.state === "closed" },
         ])}
       >
@@ -110,17 +113,17 @@ export default function Compose() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Prompt {...prompt} />
-          <div className={"flex flex-col gap-2"}>
-            <textarea
-              className={
-                "border border-gray-100 focus:outline-gray-200 bg-gray-50 rounded-xl p-8"
-              }
-              rows={5}
-              onChange={(e) => onTextChange(e.target.value)}
-            />
+          <div className={'flex-1'}>
+            <Prompt {...prompt} />
           </div>
-          <div className={"flex gap-4 w-full justify-end"}>
+          <textarea
+            className={
+              "border border-gray-100 focus:outline-gray-200 bg-gray-50 h-full rounded-xl p-8"
+            }
+            value={content}
+            onChange={(e) => onTextChange(e.target.value)}
+          />
+          <div className={"flex gap-4 justify-end"}>
             <Button
               variant={"outlined"}
               label={draftState === "completed" ? "Draft saved" : "Save draft"}
@@ -138,11 +141,10 @@ export default function Compose() {
         </div>
         <div className={"max-w-screen-md min-w-[512px]"}>
           <Feedback
-            loading={improvementState.state === "loading"}
-            state={content.length === 0 ? "empty" : "completed"}
+            state={analysisState.state}
             improvements={
-              improvementState.state === "completed"
-                ? improvementState.improvements
+              analysisState.state === "completed"
+                ? analysisState.improvements
                 : []
             }
             selectedIndex={
@@ -153,6 +155,8 @@ export default function Compose() {
             onExpandFeedback={(index) => {
               setFeedbackState({ state: "open", feedbackIndex: index });
             }}
+            onRequestAnalysis={onRequestAnalysis}
+            onResetAnalysis={() => setAnalysisState({state: 'empty'})}
           />
         </div>
         {feedbackState.state === "open" ? (

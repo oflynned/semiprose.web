@@ -1,25 +1,27 @@
 import type { ComponentProps, FunctionComponent } from "react";
-import { Card } from "~/design-system";
+import { Button, Card, Pill } from "~/design-system";
 import { toPercentage } from "~/formatters";
 import { Improvement } from "./Improvement";
 import { mockFeedback } from "~/constants";
 
-type FeedbackState = "empty" | "loading" | "completed";
+type AnalysisState = "empty" | "loading" | "completed" | 'cancelled';
 
 type Props = {
-  state: FeedbackState;
+  state: AnalysisState;
   improvements: ComponentProps<typeof Improvement>[];
   selectedIndex?: number;
-  loading?: boolean;
   onExpandFeedback?: (index: number) => void;
+  onRequestAnalysis?: () => void;
+  onResetAnalysis?: () => void;
 };
 
 export const Feedback: FunctionComponent<Props> = ({
   improvements,
-  selectedIndex,
   state,
-  loading,
+  selectedIndex,
   onExpandFeedback,
+  onRequestAnalysis,
+  onResetAnalysis
 }) => {
   const score = 100 - improvements.reduce((acc, { weight }) => acc + weight, 0);
 
@@ -50,47 +52,42 @@ export const Feedback: FunctionComponent<Props> = ({
           <h4 className={"font-bold text-xl"}>{"Feedback"}</h4>
           <div className={"flex justify-between items-center"}>
             <h5 className={"font-medium"}>{"Overall impression"}</h5>
-            {loading ? (
+            {state === 'loading' ? (
               <div
                 className={
                   "animate-pulse rounded-full bg-gray-300 w-[92px] h-3"
                 }
               />
-            ) : (
-              <p>{getImpression()}</p>
-            )}
+            ) : state === 'completed' ?(
+              <Pill label={getImpression()}/>
+            ) : <p>{'-'}</p>}
           </div>
           <div className={"flex justify-between items-center"}>
             <h5 className={"font-medium"}>{"Writing score"}</h5>
             <p>
-              {loading ? (
+              {state === 'loading' ? (
                 <div
                   className={
                     "animate-pulse rounded-full bg-gray-300 w-[48px] h-3"
                   }
                 />
-              ) : state === "empty" ? (
-                "-"
-              ) : (
-                toPercentage(score)
-              )}
+              ) : state === 'completed' ?(
+                <Pill label={toPercentage(score)}/>
+              ) : <p>{'-'}</p>}
             </p>
           </div>
         </div>
-        <>
-          {loading ? (
+        {state === 'empty' ? null : (<>
             <div className={"flex flex-col p-4 gap-2"}>
-              {mockFeedback.map((improvement, index) => (
+          {state === 'loading' ? (
+              mockFeedback.map((improvement, index) => (
                 <Improvement
                   {...improvement}
                   loading={true}
                   key={`improvement-${index}`}
                 />
-              ))}
-            </div>
-          ) : (
-            <div className={"flex flex-col p-4 gap-2"}>
-              {improvements.length > 0 ? (
+              ))
+          ) :improvements.length > 0 ? (
                 improvements.map((improvement, index) => (
                   <Improvement
                     {...improvement}
@@ -99,14 +96,16 @@ export const Feedback: FunctionComponent<Props> = ({
                     onClick={() => onExpandFeedback?.(index)}
                   />
                 ))
-              ) : (
-                <div className={"p-4"}>
+              ) :(<div className={"p-4"}>
                   <p>{"It looks like there isn't anything to improve on."}</p>
-                </div>
-              )}
-            </div>
-          )}
-        </>
+                </div>)
+}
+          </div>
+        </>)}
+        <div className={"p-4 gap-2 flex justify-end"}>
+{state === 'completed' ? <Button label={'Reset'} variant='outlined' onClick={onResetAnalysis}/> : null}
+          <Button label={state === 'loading' ? "Analysing" : state === 'completed' ? 'Analyse again' :'Analyse'} loading={state === 'loading'} onClick={onRequestAnalysis} />
+        </div>
       </div>
     </Card>
   );

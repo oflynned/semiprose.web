@@ -26,7 +26,7 @@ export const Improvement: FunctionComponent<Props> = ({
     >
       <div
         className={classNames([
-          "flex rounded-lg border items-center justify-center w-12 h-12",
+          "flex rounded-lg border-2 items-center justify-center w-12 h-12",
           { "border-gray-300 bg-gray-100": loading },
           { "border-purple-300 bg-purple-100": !loading },
         ])}
