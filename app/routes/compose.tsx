@@ -1,8 +1,22 @@
-import { Button, Layout, Prompt } from "~/design-system";
+import { Button, Feedback, Layout, Prompt } from "~/design-system";
 import { prompt } from "~/constants";
+import type { ComponentProps } from "react";
 import { useState } from "react";
 
 type ContentState = "disabled" | "clickable" | "loading" | "completed";
+
+const mockImprovements: ComponentProps<typeof Feedback>["improvements"] = [
+  {
+    title: "Sentence structure",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    weight: 2,
+  },
+  {
+    title: "Show, don't tell",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    weight: 6,
+  },
+];
 
 export default function Compose() {
   const [content, setContent] = useState("");
@@ -61,35 +75,40 @@ export default function Compose() {
 
   return (
     <Layout>
-      <div className={"flex flex-col gap-8 max-w-screen-md"}>
-        <input
-          className={"text-4xl font-bold focus:outline-none"}
-          placeholder={"Title"}
-        />
-        <Prompt {...prompt} />
-        <div className={"flex flex-col gap-2"}>
-          <textarea
-            className={
-              "border border-gray-100 focus:outline-gray-200 bg-gray-50 rounded-xl p-8"
-            }
-            rows={5}
-            onChange={(e) => onTextChange(e.target.value)}
+      <div className={"flex gap-4 justify-between"}>
+        <div className={"flex flex-col gap-8 max-w-screen-md"}>
+          <input
+            className={"text-4xl font-bold focus:outline-none"}
+            placeholder={"Title"}
           />
+          <Prompt {...prompt} />
+          <div className={"flex flex-col gap-2"}>
+            <textarea
+              className={
+                "border border-gray-100 focus:outline-gray-200 bg-gray-50 rounded-xl p-8"
+              }
+              rows={5}
+              onChange={(e) => onTextChange(e.target.value)}
+            />
+          </div>
+          <div className={"flex gap-4 w-full justify-end"}>
+            <Button
+              variant={"outlined"}
+              label={draftState === "completed" ? "Draft saved" : "Save draft"}
+              disabled={isDraftDisabled}
+              loading={draftState === "loading"}
+              onClick={onSaveDraft}
+            />
+            <Button
+              label={"Publish"}
+              disabled={isPublishDisabled}
+              loading={publishState === "loading"}
+              onClick={onPublish}
+            />
+          </div>
         </div>
-        <div className={"flex gap-4 w-full justify-end"}>
-          <Button
-            variant={"outlined"}
-            label={draftState === "completed" ? "Draft saved" : "Save draft"}
-            disabled={isDraftDisabled}
-            loading={draftState === "loading"}
-            onClick={onSaveDraft}
-          />
-          <Button
-            label={"Publish"}
-            disabled={isPublishDisabled}
-            loading={publishState === "loading"}
-            onClick={onPublish}
-          />
+        <div className={"max-w-screen-md"}>
+          <Feedback improvements={mockImprovements} />
         </div>
       </div>
     </Layout>
