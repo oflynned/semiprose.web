@@ -19,7 +19,7 @@ const variants: Record<Variant, string> = {
   text: "bg-white text-black",
 };
 
-const interactivity: Record<Variant, string> = {
+const interactions: Record<Variant, string> = {
   primary: "hover:bg-gray-800 active:bg-gray-600 hover:shadow active:shadow-md",
   outlined:
     "hover:bg-gray-100 active:bg-gray-200 hover:shadow active:shadow-md",
@@ -39,21 +39,17 @@ export const Button: FunctionComponent<Props> = ({
     <button
       {...props}
       className={classNames([
+        "flex flex-row items-center gap-2 rounded-lg py-2 px-8",
         variants[variant],
-        "rounded-lg py-2 px-8",
-        { [`${interactivity[variant]} clickable`]: !disabled && !loading },
-        { "opacity-50 cursor-not-allowed": disabled },
-        { "cursor-not-allowed": loading },
+        { [`${interactions[variant]} clickable`]: !(disabled || loading) },
+        { "opacity-50 cursor-not-allowed": disabled || loading },
         visibility,
       ])}
       disabled={disabled}
       onClick={onClick}
     >
-      {loading ? (
-        <Spinner />
-      ) : (
-        <span className={"uppercase font-bold"}>{label}</span>
-      )}
+      {loading ? <Spinner /> : null}
+      <span className={"uppercase font-bold"}>{label}</span>
     </button>
   );
 };
