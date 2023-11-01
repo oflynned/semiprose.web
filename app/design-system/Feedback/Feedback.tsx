@@ -1,7 +1,7 @@
 import type { ComponentProps, FunctionComponent } from "react";
 import { Card } from "~/design-system";
-import { Improvement } from "~/design-system/Feedback/Improvement";
 import { toPercentage } from "~/formatters";
+import { Improvement } from "./Improvement";
 
 type Props = {
   improvements: ComponentProps<typeof Improvement>[];
