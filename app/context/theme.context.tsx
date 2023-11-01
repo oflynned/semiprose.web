@@ -1,8 +1,8 @@
 import type { FunctionComponent, PropsWithChildren } from "react";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useLayoutEffect, useState } from "react";
 import type { Theme } from "~/types";
 
-const ThemeContext = createContext<{
+export const ThemeContext = createContext<{
   theme: Theme;
   toggleTheme: (preference: Theme) => void;
 }>({
@@ -10,42 +10,26 @@ const ThemeContext = createContext<{
   toggleTheme: () => {},
 });
 
-export const useTheme = () => useContext(ThemeContext);
-
 export const ThemeProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
-    const persistedTheme = window.localStorage.getItem("theme");
+    if (theme) {
+      localStorage.setItem("theme", theme);
+    } else {
+      const persistedTheme = localStorage.getItem("theme");
 
-    setTheme(persistedTheme ? (persistedTheme as Theme) : "light");
-  }, []);
-
-  const toggleTheme = (preference: Theme) => {
-    setTheme(preference);
-  };
-
-  useEffect(() => {
-    if (theme === "system") {
-      const prefersDarkMode = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-
-      setTheme(prefersDarkMode ? "dark" : "light");
+      setTheme(persistedTheme ? (persistedTheme as Theme) : "light");
     }
-  }, [theme]);
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (
     <ThemeContext.Provider
       value={{
-        theme,
-        toggleTheme,
+        theme: theme ?? "light",
+        toggleTheme: (theme: Theme) => setTheme(theme),
       }}
     >
       {children}

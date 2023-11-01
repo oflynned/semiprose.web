@@ -10,18 +10,19 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import { APP_NAME, TAGLINE } from "~/constants";
-import { useTheme } from "~/context";
+import { useTheme } from "~/hooks";
+import { ThemeProvider } from "./context";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export const meta: MetaFunction = () => {
   return [{ title: APP_NAME }, { name: "description", content: TAGLINE }];
 };
-export default function App() {
+const App = () => {
   const { theme } = useTheme();
 
   return (
-    <html lang="en" className={theme}>
+    <html lang="en" className={theme} data-mode={theme}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,5 +36,13 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
+  );
+};
+
+export default function AppWithProviders() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   );
 }

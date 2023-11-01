@@ -4,8 +4,7 @@ import { Link, useNavigate } from "@remix-run/react";
 import { NavigationItem } from "./NavigationItem";
 import type { User } from "~/types";
 import { useRef, useState } from "react";
-import { useTheme } from "~/context";
-import { useClickOutside } from "~/hooks";
+import { useTheme, useClickOutside } from "~/hooks";
 
 type Props = {
   pageId: string;

@@ -3,15 +3,18 @@ import { useEffect } from "react";
 
 export const useClickOutside = (
   ref: RefObject<HTMLElement>,
-  options?: {
-    canTrigger: boolean;
-    onClick: () => void;
-  }
+  {
+    canTrigger = true,
+    onClick,
+  }: {
+    canTrigger?: boolean;
+    onClick?: () => void;
+  } = {}
 ) => {
   useEffect(() => {
     const onClickOutside = (event: any) => {
-      if (!ref.current?.contains(event.target) && options?.canTrigger) {
-        options.onClick();
+      if (!ref.current?.contains(event.target) && canTrigger) {
+        onClick?.();
       }
     };
 
@@ -19,5 +22,5 @@ export const useClickOutside = (
     return () => {
       document.removeEventListener("mousedown", onClickOutside);
     };
-  }, [ref, options?.onClick, options?.canTrigger]);
+  }, [ref, onClick, canTrigger]);
 };

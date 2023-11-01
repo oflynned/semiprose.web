@@ -96,7 +96,10 @@ devDependencies:
     version: 7.5.2
   storybook-addon-react-router-v6:
     specifier: ^2.0.8
-    version: 2.0.8(@storybook/blocks@7.5.2)(@storybook/channels@7.5.2)(@storybook/components@7.5.2)(@storybook/core-events@7.5.2)(@storybook/manager-api@7.5.2)(@storybook/preview-api@7.5.2)(@storybook/theming@7.5.2)(react-dom@18.2.0)(react-router-dom@6.17.0)(react@18.2.0)
+    version: 2.0.8(@storybook/blocks@7.5.2)(@storybook/channels@7.5.2)(@storybook/components@7.5.2)(@storybook/core-events@7.5.2)(@storybook/manager-api@7.5.2)(@storybook/preview-api@7.5.2)(@storybook/theming@7.5.2)(react-dom@18.2.0)(react-router-dom@6.18.0)(react@18.2.0)
+  storybook-tailwind-dark-mode:
+    specifier: ^1.0.22
+    version: 1.0.22(@storybook/addons@7.5.2)(@storybook/api@7.5.2)(@storybook/components@7.5.2)(@storybook/core-events@7.5.2)(@storybook/theming@7.5.2)(react-dom@18.2.0)(react@18.2.0)
   tailwindcss:
     specifier: 3.3.5
     version: 3.3.5
@@ -3045,11 +3048,6 @@ packages:
       typescript: 5.2.2
     dev: false
 
-  /@remix-run/router@1.10.0:
-    resolution: {integrity: sha512-Lm+fYpMfZoEucJ7cMxgt4dYt8jLfbpwRCzAjm9UgSLOkmlqo9gupxt6YX3DY0Fk155NT9l17d/ydi+964uS9Lw==}
-    engines: {node: '>=14.0.0'}
-    dev: true
-
   /@remix-run/router@1.11.0:
     resolution: {integrity: sha512-BHdhcWgeiudl91HvVa2wxqZjSHbheSgIiDvxrF1VjFzBzpTtuDPkOdOi3Iqvc08kXtFkLjhbS+ML9aM8mJS+wQ==}
     engines: {node: '>=14.0.0'}
@@ -3508,6 +3506,36 @@ packages:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+    dev: true
+
+  /@storybook/addons@7.5.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-hRiy56zQbz72Pwa4F40srUWXKGNIriNkZ1R0j5KPd8ZqoMk1hIeW0S8E7s1vuM/MplnUE/jFJZqu6HQCvbqmGg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@storybook/manager-api': 7.5.2(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/preview-api': 7.5.2
+      '@storybook/types': 7.5.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: true
+
+  /@storybook/api@7.5.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-IaA0HDColrLw5k+i1nE4eYHvGychpXW21HpIBvJWCIh2Rv+War+Pr5uMhGDeAj0/xX1SrRiFPVhhKjDZdzHaSQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      '@storybook/client-logger': 7.5.2
+      '@storybook/manager-api': 7.5.2(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: true
 
   /@storybook/blocks@7.5.2(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0):
@@ -9562,19 +9590,6 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.2.33)(react@18.2.0)
     dev: true
 
-  /react-router-dom@6.17.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-qWHkkbXQX+6li0COUUPKAUkxjNNqPJuiBd27dVwQGDNsuFBdMbrS6UZ0CLYc4CsbdLYTckn4oB4tGDuPZpPhaQ==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: '>=16.8'
-      react-dom: '>=16.8'
-    dependencies:
-      '@remix-run/router': 1.10.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-router: 6.17.0(react@18.2.0)
-    dev: true
-
   /react-router-dom@6.18.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Ubrue4+Ercc/BoDkFQfc6og5zRQ4A8YxSO3Knsne+eRbZ+IepAsK249XBH/XaFuOYOYr3L3r13CXTLvYt5JDjw==}
     engines: {node: '>=14.0.0'}
@@ -9586,17 +9601,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-router: 6.18.0(react@18.2.0)
-    dev: false
-
-  /react-router@6.17.0(react@18.2.0):
-    resolution: {integrity: sha512-YJR3OTJzi3zhqeJYADHANCGPUu9J+6fT5GLv82UWRGSxu6oJYCKVmxUcaBQuGm9udpWmPsvpme/CdHumqgsoaA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: '>=16.8'
-    dependencies:
-      '@remix-run/router': 1.10.0
-      react: 18.2.0
-    dev: true
 
   /react-router@6.18.0(react@18.2.0):
     resolution: {integrity: sha512-vk2y7Dsy8wI02eRRaRmOs9g2o+aE72YCx5q9VasT1N9v+lrdB79tIqrjMfByHiY5+6aYkH2rUa5X839nwWGPDg==}
@@ -9606,7 +9610,6 @@ packages:
     dependencies:
       '@remix-run/router': 1.11.0
       react: 18.2.0
-    dev: false
 
   /react-style-singleton@2.2.1(@types/react@18.2.33)(react@18.2.0):
     resolution: {integrity: sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==}
@@ -10172,7 +10175,7 @@ packages:
     resolution: {integrity: sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==}
     dev: true
 
-  /storybook-addon-react-router-v6@2.0.8(@storybook/blocks@7.5.2)(@storybook/channels@7.5.2)(@storybook/components@7.5.2)(@storybook/core-events@7.5.2)(@storybook/manager-api@7.5.2)(@storybook/preview-api@7.5.2)(@storybook/theming@7.5.2)(react-dom@18.2.0)(react-router-dom@6.17.0)(react@18.2.0):
+  /storybook-addon-react-router-v6@2.0.8(@storybook/blocks@7.5.2)(@storybook/channels@7.5.2)(@storybook/components@7.5.2)(@storybook/core-events@7.5.2)(@storybook/manager-api@7.5.2)(@storybook/preview-api@7.5.2)(@storybook/theming@7.5.2)(react-dom@18.2.0)(react-router-dom@6.18.0)(react@18.2.0):
     resolution: {integrity: sha512-Pi97ccelVq6RiLxSg8/puVeiNQnpdl5WlEcpF2wn6IxKlOIpOBOv70W1VGemUpAmJur+7EM79Mf6vMXiRK2W0g==}
     peerDependencies:
       '@storybook/blocks': ^7.0.0
@@ -10202,7 +10205,32 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-inspector: 6.0.2(react@18.2.0)
-      react-router-dom: 6.17.0(react-dom@18.2.0)(react@18.2.0)
+      react-router-dom: 6.18.0(react-dom@18.2.0)(react@18.2.0)
+    dev: true
+
+  /storybook-tailwind-dark-mode@1.0.22(@storybook/addons@7.5.2)(@storybook/api@7.5.2)(@storybook/components@7.5.2)(@storybook/core-events@7.5.2)(@storybook/theming@7.5.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-I0HSVCuvo3OkaGDnCjLM7V1OYmQccrUCAGZ5ZaJfl9s3e93WA6DKFpQRbuoSidci+PTy+KvgrINgE08rA16bWA==}
+    peerDependencies:
+      '@storybook/addons': ^7.0.0
+      '@storybook/api': ^7.0.0
+      '@storybook/components': ^7.0.0
+      '@storybook/core-events': ^7.0.0
+      '@storybook/theming': ^7.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      '@storybook/addons': 7.5.2(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/api': 7.5.2(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/components': 7.5.2(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/core-events': 7.5.2
+      '@storybook/theming': 7.5.2(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: true
 
   /storybook@7.5.2:

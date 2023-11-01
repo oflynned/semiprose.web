@@ -7,17 +7,6 @@ import {
   withRouter,
 } from "storybook-addon-react-router-v6";
 
-export const decorators = [
-  withThemeByDataAttribute({
-    themes: {
-      light: "light",
-      dark: "dark",
-    },
-    defaultTheme: "light",
-    attributeName: "data-mode",
-  }),
-];
-
 const preview: Preview = {
   decorators: [withRouter],
   parameters: {

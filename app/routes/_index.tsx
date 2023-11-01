@@ -1,4 +1,4 @@
-import { Button, Card } from "~/design-system";
+import { Button } from "~/design-system";
 import { useNavigate } from "@remix-run/react";
 
 export default function Index() {
