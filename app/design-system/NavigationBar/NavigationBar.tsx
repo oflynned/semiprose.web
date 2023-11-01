@@ -3,8 +3,9 @@ import { Button, ProfileButton } from "~/design-system";
 import { Link, useNavigate } from "@remix-run/react";
 import { NavigationItem } from "./NavigationItem";
 import type { User } from "~/types";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTheme } from "~/context";
+import { useClickOutside } from "~/hooks";
 
 type Props = {
   pageId: string;
@@ -26,6 +27,12 @@ export const NavigationBar: FunctionComponent<Props> = ({ pageId, user }) => {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useClickOutside(ref, {
+    canTrigger: open,
+    onClick: () => setOpen(false),
+  });
 
   const options: MenuOption[] = [
     theme === "light"
@@ -65,12 +72,14 @@ export const NavigationBar: FunctionComponent<Props> = ({ pageId, user }) => {
           ))}
         </div>
       </div>
-      <ProfileButton
-        {...user}
-        options={options}
-        open={open}
-        onClick={() => setOpen((value) => !value)}
-      />
+      <div ref={ref}>
+        <ProfileButton
+          {...user}
+          options={options}
+          open={open}
+          onClick={() => setOpen((value) => !value)}
+        />
+      </div>
     </aside>
   );
 };

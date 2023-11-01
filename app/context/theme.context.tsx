@@ -12,16 +12,16 @@ const ThemeContext = createContext<{
 
 export const useTheme = () => useContext(ThemeContext);
 
-const getInitialTheme = (): Theme => {
-  const persistedTheme = localStorage.getItem("theme");
-
-  return persistedTheme ? (persistedTheme as Theme) : "light";
-};
-
 export const ThemeProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme());
+  const [theme, setTheme] = useState<Theme>("light");
+
+  useEffect(() => {
+    const persistedTheme = window.localStorage.getItem("theme");
+
+    setTheme(persistedTheme ? (persistedTheme as Theme) : "light");
+  }, []);
 
   const toggleTheme = (preference: Theme) => {
     setTheme(preference);
