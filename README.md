@@ -11,3 +11,6 @@
 - [ ] Create comments component 
 - [ ] Create reactions component 
 - [ ] Add Auth0 integration
+- [ ] Dark mode
+- [ ] Split grid into columns depending on screen size
+- [ ] Framer motion animations
