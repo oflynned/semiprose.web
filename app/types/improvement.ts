@@ -1,4 +1,4 @@
-export type Feedback = {
+export type Improvement = {
   title: string;
   description: string;
   shortDescription: string;

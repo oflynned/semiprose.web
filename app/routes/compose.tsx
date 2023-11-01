@@ -1,14 +1,27 @@
-import { Button, Feedback, Layout, Prompt } from "~/design-system";
-import { mockFeedback, prompt } from "~/constants";
-import type { ComponentProps } from "react";
+import {
+  Button,
+  Feedback,
+  FeedbackDetail,
+  Layout,
+  Prompt,
+} from "~/design-system";
+import { mockFeedback, prompt, story } from "~/constants";
 import { useState } from "react";
+import classNames from "classnames";
 
 type ContentState = "disabled" | "clickable" | "loading" | "completed";
+
+type FeedbackState =
+  | { state: "open"; feedbackIndex: number }
+  | { state: "closed" };
 
 export default function Compose() {
   const [content, setContent] = useState("");
   const [draftState, setDraftState] = useState<ContentState>("disabled");
   const [publishState, setPublishState] = useState<ContentState>("disabled");
+  const [feedbackState, setFeedbackState] = useState<FeedbackState>({
+    state: "closed",
+  });
 
   const onPublish = () => {
     if (publishState === "clickable") {
@@ -63,7 +76,12 @@ export default function Compose() {
   return (
     <Layout>
       <div className={"flex gap-4 justify-between"}>
-        <div className={"flex flex-col gap-8 max-w-screen-md"}>
+        <div
+          className={classNames([
+            "flex flex-col gap-8 max-w-screen-md",
+            { hidden: feedbackState.state === "open" },
+          ])}
+        >
           <input
             className={"text-4xl font-bold focus:outline-none"}
             placeholder={"Title"}
@@ -96,10 +114,31 @@ export default function Compose() {
         </div>
         <div className={"max-w-screen-md"}>
           <Feedback
-            state={content.length === 0 ? "empty" : "completed"}
-            improvements={content.length > 0 ? mockFeedback : []}
+            // state={content.length === 0 ? "empty" : "completed"}
+            // improvements={content.length > 0 ? mockFeedback : []}
+            state={"completed"}
+            improvements={mockFeedback}
+            selectedIndex={
+              feedbackState.state === "open"
+                ? feedbackState.feedbackIndex
+                : undefined
+            }
+            onExpandFeedback={(index) => {
+              setFeedbackState({ state: "open", feedbackIndex: index });
+            }}
           />
         </div>
+        {feedbackState.state === "open" ? (
+          <div className={"flex-1"}>
+            <FeedbackDetail
+              story={story}
+              improvement={mockFeedback[feedbackState.feedbackIndex]}
+              onClearFeedback={() => {
+                setFeedbackState({ state: "closed" });
+              }}
+            />
+          </div>
+        ) : null}
       </div>
     </Layout>
   );
