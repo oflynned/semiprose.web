@@ -1,21 +1,25 @@
 import type { FunctionComponent } from "react";
-import type { Feedback } from "~/types";
+import type { Improvement as ImprovementType } from "~/types";
+import classNames from "classnames";
 
 type Props = {
+  selected?: boolean;
   onClick?: () => void;
-} & Feedback;
+} & ImprovementType;
 
 export const Improvement: FunctionComponent<Props> = ({
   title,
   shortDescription,
   weight,
   onClick,
+  selected,
 }) => {
   return (
     <div
-      className={
-        "flex rounded-lg gap-2 items-center hover:bg-purple-100 active:bg-purple-200 cursor-pointer clickable px-4 py-2"
-      }
+      className={classNames([
+        "flex rounded-lg gap-2 items-center hover:bg-purple-100 active:bg-purple-200 cursor-pointer clickable px-4 py-2",
+        { "bg-purple-200": selected },
+      ])}
       onClick={onClick}
     >
       <div

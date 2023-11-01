@@ -7,10 +7,17 @@ type FeedbackState = "empty" | "loading" | "completed";
 
 type Props = {
   state: FeedbackState;
+  selectedIndex?: number;
   improvements: ComponentProps<typeof Improvement>[];
+  onExpandFeedback?: (index: number) => void;
 };
 
-export const Feedback: FunctionComponent<Props> = ({ improvements, state }) => {
+export const Feedback: FunctionComponent<Props> = ({
+  improvements,
+  selectedIndex,
+  state,
+  onExpandFeedback,
+}) => {
   const score = 100 - improvements.reduce((acc, { weight }) => acc + weight, 0);
 
   return (
@@ -33,10 +40,9 @@ export const Feedback: FunctionComponent<Props> = ({ improvements, state }) => {
               improvements.map((improvement, index) => (
                 <Improvement
                   {...improvement}
+                  selected={index === selectedIndex}
                   key={`improvement-${index}`}
-                  onClick={() => {
-                    console.log(improvement);
-                  }}
+                  onClick={() => onExpandFeedback?.(index)}
                 />
               ))
             ) : (
