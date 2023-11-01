@@ -2,10 +2,9 @@ import type { FunctionComponent } from "react";
 
 type Props = {
   initials: string;
-  username?: string;
 };
 
-export const Avatar: FunctionComponent<Props> = ({ initials, username }) => {
+export const Avatar: FunctionComponent<Props> = ({ initials }) => {
   return (
     <div
       className={
