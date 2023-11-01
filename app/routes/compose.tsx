@@ -114,10 +114,8 @@ export default function Compose() {
         </div>
         <div className={"max-w-screen-md"}>
           <Feedback
-            // state={content.length === 0 ? "empty" : "completed"}
-            // improvements={content.length > 0 ? mockFeedback : []}
-            state={"completed"}
-            improvements={mockFeedback}
+            state={content.length === 0 ? "empty" : "completed"}
+            improvements={content.length > 0 ? mockFeedback : []}
             selectedIndex={
               feedbackState.state === "open"
                 ? feedbackState.feedbackIndex
@@ -129,7 +127,7 @@ export default function Compose() {
           />
         </div>
         {feedbackState.state === "open" ? (
-          <div className={"flex-1"}>
+          <div className={"flex-1 max-w-screen-md"}>
             <FeedbackDetail
               improvement={mockFeedback[feedbackState.feedbackIndex]}
               onClearFeedback={() => {
