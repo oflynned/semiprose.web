@@ -25,11 +25,17 @@ export const Improvement: FunctionComponent<Props> = ({
       onClick={onClick}
     >
       <div
-        className={
-          "flex rounded-lg border border-purple-300 bg-purple-100 items-center justify-center w-12 h-12"
-        }
+        className={classNames([
+          "flex rounded-lg border items-center justify-center w-12 h-12",
+          { "border-gray-300 bg-gray-100": loading },
+          { "border-purple-300 bg-purple-100": !loading },
+        ])}
       >
-        <span className={"text-purple-500 font-medium"}>{weight}</span>
+        {loading ? (
+          <div className={"animate-pulse rounded-full bg-gray-300 h-3 w-6"} />
+        ) : (
+          <span className={"text-purple-500 font-medium"}>{weight}</span>
+        )}
       </div>
       <div
         className={classNames(["flex flex-col flex-1", { "gap-2": loading }])}
