@@ -40,7 +40,7 @@ export default function Compose() {
         <div className={"flex flex-col gap-2"}>
           <textarea
             className={
-              "border-2 border-gray-100 focus:outline-gray-200 bg-gray-50 rounded-xl p-8"
+              "border border-gray-100 focus:outline-gray-200 bg-gray-50 rounded-xl p-8"
             }
             id="title"
             rows={5}
@@ -51,6 +51,7 @@ export default function Compose() {
         </div>
         <div className={"flex gap-4 w-full justify-end"}>
           <Button
+            variant={"outlined"}
             label={"Save draft"}
             disabled={disableSaveDraft}
             onClick={handleSaveDraft}

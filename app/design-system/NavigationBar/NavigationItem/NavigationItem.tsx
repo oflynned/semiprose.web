@@ -2,11 +2,14 @@ import type { FunctionComponent } from "react";
 import classNames from "classnames";
 
 type Props = {
-  active: boolean;
+  active?: boolean;
   label: string;
 };
 
-export const NavigationItem: FunctionComponent<Props> = ({ label, active }) => {
+export const NavigationItem: FunctionComponent<Props> = ({
+  label,
+  active = false,
+}) => {
   return (
     <h2
       className={classNames([

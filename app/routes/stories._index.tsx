@@ -1,6 +1,6 @@
 import { Excerpt, Layout, Search } from "~/design-system";
 import { Link } from "@remix-run/react";
-import { pastStories, user } from "~/constants";
+import { pastStories } from "~/constants";
 
 export default function Stories() {
   return (
@@ -13,7 +13,7 @@ export default function Stories() {
           <h3 className={"font-medium text-2xl"}>{"October 2023"}</h3>
           {pastStories.map((story) => (
             <Link to={`/stories/${story.id}`} key={story.id}>
-              <Excerpt {...story} author={user} />
+              <Excerpt {...story} />
             </Link>
           ))}
         </div>
