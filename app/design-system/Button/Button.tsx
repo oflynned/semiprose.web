@@ -39,7 +39,7 @@ export const Button: FunctionComponent<Props> = ({
     <button
       {...props}
       className={classNames([
-        "flex flex-row items-center gap-2 rounded-lg py-2 px-8",
+        "flex flex-row items-center justify-center gap-2 rounded-lg py-2 px-8",
         variants[variant],
         { [`${interactions[variant]} clickable`]: !(disabled || loading) },
         { "opacity-50 cursor-not-allowed": disabled || loading },
