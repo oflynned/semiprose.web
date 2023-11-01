@@ -8,4 +8,5 @@ export * from "./Layout";
 export * from "./ProfileButton";
 export * from "./Search";
 export * from "./Spinner";
+export * from "./Feedback";
 export * from "./Excerpt";

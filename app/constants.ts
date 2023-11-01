@@ -100,3 +100,48 @@ export const pastStories: Story[] = [
     tags: ["literature", "wisdom", "history"],
   },
 ];
+
+export const mockFeedback = [
+  {
+    title: "Sentence Structure",
+    description:
+      "The paragraph could benefit from some variation in sentence length to maintain readability and make the narrative more engaging.",
+    shortDescription: "Varied sentence structure for engagement",
+    weight: 2,
+  },
+  {
+    title: "Show, Don't Tell",
+    description:
+      "To make the character, Lila, more relatable and the situation more immersive, providing deeper insight into her emotions and reactions would be an improvement.",
+    shortDescription: "Enhance character relatability",
+    weight: 2,
+  },
+  {
+    title: "Imagery",
+    description:
+      "While the imagery is vivid, further use of metaphors and similes could elevate the descriptions and make the narrative even more captivating.",
+    shortDescription: "Enhance metaphoric descriptions",
+    weight: 2,
+  },
+  {
+    title: "Word Choice",
+    description:
+      "Enhancing the choice of words and phrases, particularly in key moments, would add more impact to the narrative.",
+    shortDescription: "Enhance word choice for impact",
+    weight: 1,
+  },
+  {
+    title: "Pacing",
+    description:
+      "Creating a sense of rhythm and tension through sentence structure and pacing would help maintain the reader's interest and anticipation.",
+    shortDescription: "Enhance pacing for engagement",
+    weight: 2,
+  },
+  {
+    title: "Character Development",
+    description:
+      "Providing a bit more insight into Lila's character and her motivation would make her more relatable, and readers would become more invested in her journey.",
+    shortDescription: "Develop character for relatability",
+    weight: 1,
+  },
+];
