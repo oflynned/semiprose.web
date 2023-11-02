@@ -1,7 +1,10 @@
 import { defineConfig } from "vite";
-
-import react from "@vitejs/plugin-react";
+import { unstable_vitePlugin as remix } from "@remix-run/dev";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [react()],
+  // idk why it's erroring with types
+  // remix + vite is still not production ready, so I'm not surprised
+  // @ts-ignore
+  plugins: [remix(), tsconfigPaths()],
 });

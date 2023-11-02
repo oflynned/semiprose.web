@@ -1,7 +1,7 @@
-export type Improvement = {
+export type Suggestion = {
   title: string;
   description: string;
   shortDescription: string;
   example: string;
-  weight: number;
+  gradingWeight: number;
 };

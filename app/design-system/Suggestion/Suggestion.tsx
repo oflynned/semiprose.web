@@ -1,18 +1,18 @@
 import type { FunctionComponent } from "react";
-import type { Improvement as ImprovementType } from "~/types";
+import type { Suggestion as SuggestionType } from "~/types";
 import classNames from "classnames";
 
 type Props = {
   loading?: boolean;
   selected?: boolean;
   onClick?: () => void;
-} & ImprovementType;
+} & SuggestionType;
 
-export const Improvement: FunctionComponent<Props> = ({
+export const Suggestion: FunctionComponent<Props> = ({
   title,
   shortDescription,
   loading,
-  weight,
+  gradingWeight,
   onClick,
   selected,
 }) => {
@@ -26,7 +26,7 @@ export const Improvement: FunctionComponent<Props> = ({
     >
       <div
         className={classNames([
-          "flex rounded-lg border items-center justify-center w-12 h-12",
+          "flex rounded-lg border-2 items-center justify-center w-12 h-12",
           { "border-gray-300 bg-gray-100": loading },
           { "border-purple-300 bg-purple-100": !loading },
         ])}
@@ -34,7 +34,7 @@ export const Improvement: FunctionComponent<Props> = ({
         {loading ? (
           <div className={"animate-pulse rounded-full bg-gray-300 h-3 w-6"} />
         ) : (
-          <span className={"text-purple-500 font-medium"}>{weight}</span>
+          <span className={"text-purple-500 font-medium"}>{gradingWeight}</span>
         )}
       </div>
       <div

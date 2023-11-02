@@ -5,31 +5,28 @@ import {
   Layout,
   Prompt,
 } from "~/design-system";
-import { mockFeedback, prompt } from "~/constants";
+import { mockSuggestions, prompt } from "~/constants";
+import type { ComponentProps } from "react";
 import { useState } from "react";
 import classNames from "classnames";
-import type { Improvement } from "~/types";
 
-type ContentState = "disabled" | "clickable" | "loading" | "completed";
+type AnalysisState = ComponentProps<typeof Feedback>["analysis"];
+
+type ActionState = "disabled" | "clickable" | "loading" | "completed";
 
 type FeedbackState =
   | { state: "open"; feedbackIndex: number }
   | { state: "closed" };
 
-type ImprovementState =
-  | { state: "empty" }
-  | { state: "loading" }
-  | { state: "completed"; improvements: Improvement[] };
-
 export default function Compose() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [improvementState, setImprovementState] = useState<ImprovementState>({
+  const [analysisState, setAnalysisState] = useState<AnalysisState>({
     state: "empty",
   });
 
-  const [draftState, setDraftState] = useState<ContentState>("disabled");
-  const [publishState, setPublishState] = useState<ContentState>("disabled");
+  const [draftState, setDraftState] = useState<ActionState>("disabled");
+  const [publishState, setPublishState] = useState<ActionState>("disabled");
   const [feedbackState, setFeedbackState] = useState<FeedbackState>({
     state: "closed",
   });
@@ -73,11 +70,13 @@ export default function Compose() {
 
     setDraftState("clickable");
     setPublishState("clickable");
+  };
 
-    setImprovementState({ state: "loading" });
+  const onRequestAnalysis = () => {
+    setAnalysisState({ state: "loading" });
 
     setTimeout(() => {
-      setImprovementState({ state: "completed", improvements: mockFeedback });
+      setAnalysisState({ state: "completed", suggestions: mockSuggestions });
     }, 1500);
   };
 
@@ -94,7 +93,7 @@ export default function Compose() {
     <Layout>
       <div
         className={classNames([
-          "flex gap-4",
+          "flex gap-4 h-full",
           { "justify-between": feedbackState.state === "closed" },
         ])}
       >
@@ -110,17 +109,17 @@ export default function Compose() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Prompt {...prompt} />
-          <div className={"flex flex-col gap-2"}>
-            <textarea
-              className={
-                "border border-gray-100 focus:outline-gray-200 bg-gray-50 rounded-xl p-8"
-              }
-              rows={5}
-              onChange={(e) => onTextChange(e.target.value)}
-            />
+          <div className={"flex-1"}>
+            <Prompt {...prompt} />
           </div>
-          <div className={"flex gap-4 w-full justify-end"}>
+          <textarea
+            className={
+              "border border-gray-100 focus:outline-gray-200 bg-gray-50 h-full rounded-xl p-8"
+            }
+            value={content}
+            onChange={(e) => onTextChange(e.target.value)}
+          />
+          <div className={"flex gap-4 justify-end"}>
             <Button
               variant={"outlined"}
               label={draftState === "completed" ? "Draft saved" : "Save draft"}
@@ -138,13 +137,7 @@ export default function Compose() {
         </div>
         <div className={"max-w-screen-md min-w-[512px]"}>
           <Feedback
-            loading={improvementState.state === "loading"}
-            state={content.length === 0 ? "empty" : "completed"}
-            improvements={
-              improvementState.state === "completed"
-                ? improvementState.improvements
-                : []
-            }
+            analysis={analysisState}
             selectedIndex={
               feedbackState.state === "open"
                 ? feedbackState.feedbackIndex
@@ -153,12 +146,14 @@ export default function Compose() {
             onExpandFeedback={(index) => {
               setFeedbackState({ state: "open", feedbackIndex: index });
             }}
+            onRequestAnalysis={onRequestAnalysis}
+            onResetAnalysis={() => setAnalysisState({ state: "empty" })}
           />
         </div>
         {feedbackState.state === "open" ? (
           <div className={"flex-1 max-w-screen-md"}>
             <FeedbackDetail
-              improvement={mockFeedback[feedbackState.feedbackIndex]}
+              improvement={mockSuggestions[feedbackState.feedbackIndex]}
               onClearFeedback={() => {
                 setFeedbackState({ state: "closed" });
               }}

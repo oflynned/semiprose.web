@@ -12,3 +12,5 @@ export * from "./Feedback";
 export * from "./FeedbackDetail";
 export * from "./Excerpt";
 export * from "./Modal";
+export * from "./Suggestion";
+export * from "./Pill";

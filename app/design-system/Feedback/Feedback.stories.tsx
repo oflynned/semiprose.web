@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Feedback } from "./Feedback";
-import { mockFeedback } from "~/constants";
+import { mockSuggestions } from "~/constants";
 
 const meta = {
-  title: "Feedback",
+  title: "Feedback/Feedback",
   component: Feedback,
   tags: ["autodocs"],
 } satisfies Meta<typeof Feedback>;
@@ -14,14 +14,34 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    state: "completed",
-    improvements: mockFeedback,
+    analysis: {
+      state: "completed",
+      suggestions: mockSuggestions,
+    },
   },
 };
 
 export const Flawless: Story = {
   args: {
-    state: "completed",
-    improvements: [],
+    analysis: {
+      state: "completed",
+      suggestions: [],
+    },
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    analysis: {
+      state: "loading",
+    },
+  },
+};
+
+export const Empty: Story = {
+  args: {
+    analysis: {
+      state: "empty",
+    },
   },
 };
