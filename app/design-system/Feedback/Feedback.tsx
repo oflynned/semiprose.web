@@ -4,7 +4,7 @@ import { toPercentage } from "~/formatters";
 import { Improvement } from "./Improvement";
 import { mockFeedback } from "~/constants";
 
-type AnalysisState = "empty" | "loading" | "completed" | 'cancelled';
+type AnalysisState = "empty" | "loading" | "completed" | "cancelled";
 
 type Props = {
   state: AnalysisState;
@@ -21,7 +21,7 @@ export const Feedback: FunctionComponent<Props> = ({
   selectedIndex,
   onExpandFeedback,
   onRequestAnalysis,
-  onResetAnalysis
+  onResetAnalysis,
 }) => {
   const score = 100 - improvements.reduce((acc, { weight }) => acc + weight, 0);
 
@@ -52,42 +52,47 @@ export const Feedback: FunctionComponent<Props> = ({
           <h4 className={"font-bold text-xl"}>{"Feedback"}</h4>
           <div className={"flex justify-between items-center"}>
             <h5 className={"font-medium"}>{"Overall impression"}</h5>
-            {state === 'loading' ? (
+            {state === "loading" ? (
               <div
                 className={
                   "animate-pulse rounded-full bg-gray-300 w-[92px] h-3"
                 }
               />
-            ) : state === 'completed' ?(
-              <Pill label={getImpression()}/>
-            ) : <p>{'-'}</p>}
+            ) : state === "completed" ? (
+              <Pill label={getImpression()} />
+            ) : (
+              <p>{"-"}</p>
+            )}
           </div>
           <div className={"flex justify-between items-center"}>
             <h5 className={"font-medium"}>{"Writing score"}</h5>
             <p>
-              {state === 'loading' ? (
+              {state === "loading" ? (
                 <div
                   className={
                     "animate-pulse rounded-full bg-gray-300 w-[48px] h-3"
                   }
                 />
-              ) : state === 'completed' ?(
-                <Pill label={toPercentage(score)}/>
-              ) : <p>{'-'}</p>}
+              ) : state === "completed" ? (
+                <Pill label={toPercentage(score)} />
+              ) : (
+                <p>{"-"}</p>
+              )}
             </p>
           </div>
         </div>
-        {state === 'empty' ? null : (<>
+        {state === "empty" ? null : (
+          <>
             <div className={"flex flex-col p-4 gap-2"}>
-          {state === 'loading' ? (
-              mockFeedback.map((improvement, index) => (
-                <Improvement
-                  {...improvement}
-                  loading={true}
-                  key={`improvement-${index}`}
-                />
-              ))
-          ) :improvements.length > 0 ? (
+              {state === "loading" ? (
+                mockFeedback.map((improvement, index) => (
+                  <Improvement
+                    {...improvement}
+                    loading={true}
+                    key={`improvement-${index}`}
+                  />
+                ))
+              ) : improvements.length > 0 ? (
                 improvements.map((improvement, index) => (
                   <Improvement
                     {...improvement}
@@ -96,15 +101,33 @@ export const Feedback: FunctionComponent<Props> = ({
                     onClick={() => onExpandFeedback?.(index)}
                   />
                 ))
-              ) :(<div className={"p-4"}>
+              ) : (
+                <div className={"p-4"}>
                   <p>{"It looks like there isn't anything to improve on."}</p>
-                </div>)
-}
-          </div>
-        </>)}
+                </div>
+              )}
+            </div>
+          </>
+        )}
         <div className={"p-4 gap-2 flex justify-end"}>
-{state === 'completed' ? <Button label={'Reset'} variant='outlined' onClick={onResetAnalysis}/> : null}
-          <Button label={state === 'loading' ? "Analysing" : state === 'completed' ? 'Analyse again' :'Analyse'} loading={state === 'loading'} onClick={onRequestAnalysis} />
+          {state === "completed" ? (
+            <Button
+              label={"Reset"}
+              variant="outlined"
+              onClick={onResetAnalysis}
+            />
+          ) : null}
+          <Button
+            label={
+              state === "loading"
+                ? "Analysing"
+                : state === "completed"
+                ? "Analyse again"
+                : "Analyse"
+            }
+            loading={state === "loading"}
+            onClick={onRequestAnalysis}
+          />
         </div>
       </div>
     </Card>

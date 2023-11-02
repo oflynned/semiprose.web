@@ -3,7 +3,7 @@ import {
   Feedback,
   FeedbackDetail,
   Layout,
-  Prompt, 
+  Prompt,
 } from "~/design-system";
 import { mockFeedback, prompt } from "~/constants";
 import { useState } from "react";
@@ -20,11 +20,11 @@ type AnalysisState =
   | { state: "empty" }
   | { state: "loading" }
   | { state: "completed"; improvements: Improvement[] }
-  | { state: "cancelled" }
+  | { state: "cancelled" };
 
 export default function Compose() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   const [analysisState, setAnalysisState] = useState<AnalysisState>({
     state: "empty",
   });
@@ -77,12 +77,12 @@ export default function Compose() {
   };
 
   const onRequestAnalysis = () => {
-    setAnalysisState({state: 'loading'});
+    setAnalysisState({ state: "loading" });
 
     setTimeout(() => {
       setAnalysisState({ state: "completed", improvements: mockFeedback });
     }, 1500);
-  }
+  };
 
   const isPublishDisabled =
     publishState === "disabled" || publishState === "completed";
@@ -113,7 +113,7 @@ export default function Compose() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <div className={'flex-1'}>
+          <div className={"flex-1"}>
             <Prompt {...prompt} />
           </div>
           <textarea
@@ -156,7 +156,7 @@ export default function Compose() {
               setFeedbackState({ state: "open", feedbackIndex: index });
             }}
             onRequestAnalysis={onRequestAnalysis}
-            onResetAnalysis={() => setAnalysisState({state: 'empty'})}
+            onResetAnalysis={() => setAnalysisState({ state: "empty" })}
           />
         </div>
         {feedbackState.state === "open" ? (

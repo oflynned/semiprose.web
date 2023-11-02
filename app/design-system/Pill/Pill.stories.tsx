@@ -12,31 +12,28 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-    args: {
-        label: "Pill"
-    }
+  args: {
+    label: "Pill",
+  },
 };
-
 
 export const Error: Story = {
-    args: {
-        label: "Pill",
-        variant: 'error'
-    }
+  args: {
+    label: "Pill",
+    variant: "error",
+  },
 };
-
 
 export const Warning: Story = {
-    args: {
-        label: "Pill",
-        variant: 'warning'
-    }
+  args: {
+    label: "Pill",
+    variant: "warning",
+  },
 };
 
-
 export const Info: Story = {
-    args: {
-        label: "Pill",
-        variant: 'info'
-    }
+  args: {
+    label: "Pill",
+    variant: "info",
+  },
 };
