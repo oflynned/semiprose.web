@@ -1,8 +1,7 @@
 import type { FunctionComponent } from "react";
+import type { User } from "~/types";
 
-type Props = {
-  initials: string;
-};
+type Props = Pick<User, "initials">;
 
 export const Avatar: FunctionComponent<Props> = ({ initials }) => {
   return (
