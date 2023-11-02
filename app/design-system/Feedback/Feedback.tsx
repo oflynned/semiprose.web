@@ -1,5 +1,12 @@
 import type { ComponentProps, FunctionComponent } from "react";
-import { Suggestion, Button, Card, Pill, PillSkeleton } from "~/design-system";
+import {
+  Suggestion,
+  Button,
+  Card,
+  Pill,
+  PillSkeleton,
+  SuggestionSkeleton,
+} from "~/design-system";
 import { toPercentage } from "~/formatters";
 import { mockSuggestions } from "~/constants";
 
@@ -65,12 +72,8 @@ export const Feedback: FunctionComponent<Props> = ({
               {analysis.state === "loading" ? (
                 mockSuggestions
                   .slice(0, 3)
-                  .map((suggestion, index) => (
-                    <Suggestion
-                      {...suggestion}
-                      loading={true}
-                      key={`suggestion-${index}`}
-                    />
+                  .map((_suggestion, index) => (
+                    <SuggestionSkeleton key={`suggestion-${index}`} />
                   ))
               ) : analysis.state === "completed" &&
                 analysis.suggestions.length > 0 ? (
