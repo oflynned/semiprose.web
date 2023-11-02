@@ -1,4 +1,4 @@
-import type { Improvement, Prompt, Story, User } from "~/types";
+import type { Suggestion, Prompt, Story, User } from "~/types";
 
 export const APP_NAME = "Semiprose";
 export const TAGLINE = "A writing app for the rest of us";
@@ -101,7 +101,7 @@ export const pastStories: Story[] = [
   },
 ];
 
-export const mockFeedback: Improvement[] = [
+export const mockSuggestions: Suggestion[] = [
   {
     title: "Sentence Structure",
     description:
