@@ -7,8 +7,9 @@ import {
 } from "~/design-system";
 import { mockSuggestions, prompt } from "~/constants";
 import type { ComponentProps } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { useDebounce } from "~/hooks";
 
 type AnalysisState = ComponentProps<typeof Feedback>["analysis"];
 
@@ -21,6 +22,10 @@ type FeedbackState =
 export default function Compose() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  const debouncedTitle = useDebounce(title);
+  const debouncedContent = useDebounce(content);
+
   const [analysisState, setAnalysisState] = useState<AnalysisState>({
     state: "empty",
   });
@@ -51,18 +56,14 @@ export default function Compose() {
   };
 
   const onTextChange = (text: string) => {
-    const updatedContent = text.trim();
-
-    setContent(updatedContent);
-
-    if (updatedContent.length === 0) {
+    if (text.length === 0) {
       setDraftState("disabled");
       setPublishState("disabled");
 
       return;
     }
 
-    if (updatedContent === content) {
+    if (text === content) {
       setDraftState("disabled");
       setPublishState("clickable");
       return;
@@ -79,6 +80,10 @@ export default function Compose() {
       setAnalysisState({ state: "completed", suggestions: mockSuggestions });
     }, 1500);
   };
+
+  useEffect(() => {
+    onSaveDraft();
+  }, [debouncedTitle, debouncedContent]);
 
   const isPublishDisabled =
     publishState === "disabled" || publishState === "completed";
@@ -107,7 +112,10 @@ export default function Compose() {
             className={"text-4xl font-bold focus:outline-none"}
             placeholder={"Title"}
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              onTextChange(title);
+            }}
           />
           <div className={"flex-1"}>
             <Prompt {...prompt} />
@@ -117,7 +125,10 @@ export default function Compose() {
               "border border-gray-100 focus:outline-gray-200 bg-gray-50 h-full rounded-xl p-8"
             }
             value={content}
-            onChange={(e) => onTextChange(e.target.value)}
+            onChange={(e) => {
+              setContent(e.target.value);
+              onTextChange(content);
+            }}
           />
           <div className={"flex gap-4 justify-end"}>
             <Button
