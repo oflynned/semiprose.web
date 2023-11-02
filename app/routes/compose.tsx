@@ -5,22 +5,18 @@ import {
   Layout,
   Prompt,
 } from "~/design-system";
-import { mockFeedback, prompt } from "~/constants";
+import { mockSuggestions, prompt } from "~/constants";
+import type { ComponentProps } from "react";
 import { useState } from "react";
 import classNames from "classnames";
-import type { Improvement } from "~/types";
 
-type ContentState = "disabled" | "clickable" | "loading" | "completed";
+type AnalysisState = ComponentProps<typeof Feedback>["analysis"];
+
+type ActionState = "disabled" | "clickable" | "loading" | "completed";
 
 type FeedbackState =
   | { state: "open"; feedbackIndex: number }
   | { state: "closed" };
-
-type AnalysisState =
-  | { state: "empty" }
-  | { state: "loading" }
-  | { state: "completed"; improvements: Improvement[] }
-  | { state: "cancelled" };
 
 export default function Compose() {
   const [title, setTitle] = useState("");
@@ -29,8 +25,8 @@ export default function Compose() {
     state: "empty",
   });
 
-  const [draftState, setDraftState] = useState<ContentState>("disabled");
-  const [publishState, setPublishState] = useState<ContentState>("disabled");
+  const [draftState, setDraftState] = useState<ActionState>("disabled");
+  const [publishState, setPublishState] = useState<ActionState>("disabled");
   const [feedbackState, setFeedbackState] = useState<FeedbackState>({
     state: "closed",
   });
@@ -80,7 +76,7 @@ export default function Compose() {
     setAnalysisState({ state: "loading" });
 
     setTimeout(() => {
-      setAnalysisState({ state: "completed", improvements: mockFeedback });
+      setAnalysisState({ state: "completed", suggestions: mockSuggestions });
     }, 1500);
   };
 
@@ -141,12 +137,7 @@ export default function Compose() {
         </div>
         <div className={"max-w-screen-md min-w-[512px]"}>
           <Feedback
-            state={analysisState.state}
-            improvements={
-              analysisState.state === "completed"
-                ? analysisState.improvements
-                : []
-            }
+            analysis={analysisState}
             selectedIndex={
               feedbackState.state === "open"
                 ? feedbackState.feedbackIndex
@@ -162,7 +153,7 @@ export default function Compose() {
         {feedbackState.state === "open" ? (
           <div className={"flex-1 max-w-screen-md"}>
             <FeedbackDetail
-              improvement={mockFeedback[feedbackState.feedbackIndex]}
+              improvement={mockSuggestions[feedbackState.feedbackIndex]}
               onClearFeedback={() => {
                 setFeedbackState({ state: "closed" });
               }}

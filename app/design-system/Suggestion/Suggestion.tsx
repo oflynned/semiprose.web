@@ -1,14 +1,14 @@
 import type { FunctionComponent } from "react";
-import type { Improvement as ImprovementType } from "~/types";
+import type { Suggestion as SuggestionType } from "~/types";
 import classNames from "classnames";
 
 type Props = {
   loading?: boolean;
   selected?: boolean;
   onClick?: () => void;
-} & ImprovementType;
+} & SuggestionType;
 
-export const Improvement: FunctionComponent<Props> = ({
+export const Suggestion: FunctionComponent<Props> = ({
   title,
   shortDescription,
   loading,

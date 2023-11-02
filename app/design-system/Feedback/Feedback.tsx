@@ -1,15 +1,16 @@
 import type { ComponentProps, FunctionComponent } from "react";
-import { Button, Card, Improvement, Pill } from "~/design-system";
+import { Suggestion, Button, Card, Pill, PillSkeleton } from "~/design-system";
 import { toPercentage } from "~/formatters";
-import { mockFeedback } from "~/constants";
+import { mockSuggestions } from "~/constants";
 
-// TODO refactor this to be state + optional improvements property instead of splitting this
-//      would improve code reuse also
-type AnalysisState = "empty" | "loading" | "completed" | "cancelled";
+type AnalysisState =
+  | { state: "empty" }
+  | { state: "loading" }
+  | { state: "completed"; suggestions: ComponentProps<typeof Suggestion>[] }
+  | { state: "cancelled" };
 
 type Props = {
-  state: AnalysisState;
-  improvements: ComponentProps<typeof Improvement>[];
+  analysis: AnalysisState;
   selectedIndex?: number;
   onExpandFeedback?: (index: number) => void;
   onRequestAnalysis?: () => void;
@@ -17,33 +18,14 @@ type Props = {
 };
 
 export const Feedback: FunctionComponent<Props> = ({
-  improvements,
-  state,
+  analysis,
   selectedIndex,
   onExpandFeedback,
   onRequestAnalysis,
   onResetAnalysis,
 }) => {
-  const score = 100 - improvements.reduce((acc, { weight }) => acc + weight, 0);
-
-  const getImpression = () => {
-    if (score > 80) {
-      return "Excellent";
-    }
-
-    if (score > 60) {
-      return "Good";
-    }
-
-    if (score > 40) {
-      return "Average";
-    }
-
-    if (score > 20) {
-      return "Poor";
-    }
-
-    return "Very Poor";
+  const getScore = (suggestions: ComponentProps<typeof Suggestion>[]) => {
+    return 100 - suggestions.reduce((acc, { weight }) => acc + weight, 0);
   };
 
   return (
@@ -53,14 +35,10 @@ export const Feedback: FunctionComponent<Props> = ({
           <h4 className={"font-bold text-xl"}>{"Feedback"}</h4>
           <div className={"flex justify-between items-center"}>
             <h5 className={"font-medium"}>{"Overall impression"}</h5>
-            {state === "loading" ? (
-              <div
-                className={
-                  "animate-pulse rounded-full bg-gray-300 w-[92px] h-3"
-                }
-              />
-            ) : state === "completed" ? (
-              <Pill label={getImpression()} />
+            {analysis.state === "loading" ? (
+              <PillSkeleton />
+            ) : analysis.state === "completed" ? (
+              <Pill label={"Excellent"} />
             ) : (
               <p>{"-"}</p>
             )}
@@ -68,50 +46,53 @@ export const Feedback: FunctionComponent<Props> = ({
           <div className={"flex justify-between items-center"}>
             <h5 className={"font-medium"}>{"Writing score"}</h5>
             <p>
-              {state === "loading" ? (
-                <div
-                  className={
-                    "animate-pulse rounded-full bg-gray-300 w-[48px] h-3"
-                  }
-                />
-              ) : state === "completed" ? (
-                <Pill label={toPercentage(score)} />
+              {analysis.state === "loading" ? (
+                <PillSkeleton />
+              ) : analysis.state === "completed" ? (
+                <Pill label={toPercentage(getScore(analysis.suggestions))} />
               ) : (
                 <p>{"-"}</p>
               )}
             </p>
           </div>
         </div>
-        {state === "empty" ? null : (
+        {analysis.state === "empty" ? null : (
           <>
             <div className={"flex flex-col p-4 gap-2"}>
-              {state === "loading" ? (
-                mockFeedback.map((improvement, index) => (
-                  <Improvement
-                    {...improvement}
-                    loading={true}
-                    key={`improvement-${index}`}
-                  />
-                ))
-              ) : improvements.length > 0 ? (
-                improvements.map((improvement, index) => (
-                  <Improvement
-                    {...improvement}
+              {analysis.state === "loading" ? (
+                mockSuggestions
+                  .slice(0, 3)
+                  .map((suggestion, index) => (
+                    <Suggestion
+                      {...suggestion}
+                      loading={true}
+                      key={`suggestion-${index}`}
+                    />
+                  ))
+              ) : analysis.state === "completed" &&
+                analysis.suggestions.length > 0 ? (
+                analysis.suggestions.map((suggestion, index) => (
+                  <Suggestion
+                    {...suggestion}
                     selected={index === selectedIndex}
-                    key={`improvement-${index}`}
+                    key={`suggestion-${index}`}
                     onClick={() => onExpandFeedback?.(index)}
                   />
                 ))
               ) : (
                 <div className={"p-4"}>
-                  <p>{"It looks like there isn't anything to improve on."}</p>
+                  <p>
+                    {
+                      "It looks like there isn't anything to improve on yet. Congrats!"
+                    }
+                  </p>
                 </div>
               )}
             </div>
           </>
         )}
         <div className={"p-4 gap-2 flex justify-end"}>
-          {state === "completed" ? (
+          {analysis.state === "completed" ? (
             <Button
               label={"Reset"}
               variant="outlined"
@@ -120,13 +101,13 @@ export const Feedback: FunctionComponent<Props> = ({
           ) : null}
           <Button
             label={
-              state === "loading"
+              analysis.state === "loading"
                 ? "Analysing"
-                : state === "completed"
+                : analysis.state === "completed"
                 ? "Analyse again"
                 : "Analyse"
             }
-            loading={state === "loading"}
+            loading={analysis.state === "loading"}
             onClick={onRequestAnalysis}
           />
         </div>

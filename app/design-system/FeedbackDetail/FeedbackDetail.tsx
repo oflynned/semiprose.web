@@ -1,9 +1,9 @@
 import type { FunctionComponent } from "react";
-import type { Improvement } from "~/types";
+import type { Suggestion } from "~/types";
 import { Button, Card } from "~/design-system";
 
 type Props = {
-  improvement: Improvement;
+  improvement: Suggestion;
   onClearFeedback?: () => void;
 };
 
