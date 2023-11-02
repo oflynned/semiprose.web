@@ -42,7 +42,7 @@ export const Feedback: FunctionComponent<Props> = ({
     <Card border>
       <div className={"flex flex-col divide-y"}>
         <div className={"flex flex-col p-8 gap-2"}>
-          <h4 className={"font-bold text-xl"}>{"Feedback"}</h4>
+          <h4 className={"font-bold text-2xl"}>{"Feedback"}</h4>
           <div className={"flex justify-between items-center"}>
             <h5 className={"font-medium"}>{"Overall impression"}</h5>
             {analysis.state === "loading" ? (
@@ -55,15 +55,13 @@ export const Feedback: FunctionComponent<Props> = ({
           </div>
           <div className={"flex justify-between items-center"}>
             <h5 className={"font-medium"}>{"Writing score"}</h5>
-            <p>
-              {analysis.state === "loading" ? (
-                <PillSkeleton />
-              ) : analysis.state === "completed" ? (
-                <Pill label={toPercentage(getScore(analysis.suggestions))} />
-              ) : (
-                <p>{"-"}</p>
-              )}
-            </p>
+            {analysis.state === "loading" ? (
+              <PillSkeleton />
+            ) : analysis.state === "completed" ? (
+              <Pill label={toPercentage(getScore(analysis.suggestions))} />
+            ) : (
+              <p>{"-"}</p>
+            )}
           </div>
         </div>
         {analysis.state === "empty" ? null : (

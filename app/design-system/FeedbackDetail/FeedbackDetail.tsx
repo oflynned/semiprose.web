@@ -18,11 +18,7 @@ export const FeedbackDetail: FunctionComponent<Props> = ({
         <p className={"leading-relaxed"}>{improvement.description}</p>
         <p className={"leading-relaxed"}>{improvement.example}</p>
         <div className={"flex justify-end"}>
-          <Button
-            label={"Return"}
-            variant={"outlined"}
-            onClick={onClearFeedback}
-          />
+          <Button label={"Close"} variant={"text"} onClick={onClearFeedback} />
         </div>
       </div>
     </Card>
