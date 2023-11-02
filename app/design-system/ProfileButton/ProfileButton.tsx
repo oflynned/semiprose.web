@@ -1,7 +1,7 @@
 import type { FunctionComponent, HTMLProps } from "react";
 import { Avatar } from "~/design-system";
 import type { User } from "~/types";
-import classNames from "classnames";
+import clsx from "clsx";
 
 type Props = {
   options: Option[];
@@ -24,13 +24,13 @@ export const ProfileButton: FunctionComponent<Props> = ({
 }) => {
   return (
     <div
-      className={classNames([
+      className={clsx([
         "rounded-2xl overflow-hidden border border-transparent",
         { "border-gray-100 bg-gray-50": open },
       ])}
     >
       <div
-        className={classNames([
+        className={clsx([
           "flex flex-col align-middle divide-y",
           { hidden: !open },
         ])}
@@ -49,7 +49,7 @@ export const ProfileButton: FunctionComponent<Props> = ({
         ))}
       </div>
       <div
-        className={classNames([
+        className={clsx([
           "flex items-center gap-2 rounded-xl hover:bg-gray-100 active:bg-gray-200 p-2 clickable",
           { "bg-gray-200": open },
         ])}

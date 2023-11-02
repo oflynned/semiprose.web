@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 
 type Props = {
   label: string;
@@ -21,7 +21,7 @@ export const Pill: FunctionComponent<Props> = ({
 
   return (
     <div
-      className={classNames([
+      className={clsx([
         "rounded-full py-1 px-4 w-fit text-sm",
         variants[variant],
       ])}

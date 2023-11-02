@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes, FunctionComponent } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import { Spinner } from "~/design-system";
 
 type Variant = "primary" | "outlined" | "text";
@@ -38,7 +38,7 @@ export const Button: FunctionComponent<Props> = ({
   return (
     <button
       {...props}
-      className={classNames([
+      className={clsx([
         "flex flex-row items-center justify-center gap-2 rounded-lg py-2 px-8",
         variants[variant],
         { [`${interactions[variant]} clickable`]: !(disabled || loading) },

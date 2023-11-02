@@ -1,5 +1,5 @@
 import type { FunctionComponent, PropsWithChildren } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 
 type Props = {
   border?: boolean;
@@ -11,7 +11,7 @@ export const Card: FunctionComponent<PropsWithChildren<Props>> = ({
 }) => {
   return (
     <div
-      className={classNames([
+      className={clsx([
         "rounded-2xl overflow-hidden",
         { "border border-gray-200": border },
       ])}

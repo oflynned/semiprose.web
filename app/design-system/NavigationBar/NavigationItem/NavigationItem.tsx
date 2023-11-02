@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 
 type Props = {
   active?: boolean;
@@ -12,7 +12,7 @@ export const NavigationItem: FunctionComponent<Props> = ({
 }) => {
   return (
     <h2
-      className={classNames([
+      className={clsx([
         "text-2xl p-4 rounded-xl hover:bg-gray-100 active:bg-gray-200 font-bold clickable",
         { "bg-gray-100": active },
       ])}

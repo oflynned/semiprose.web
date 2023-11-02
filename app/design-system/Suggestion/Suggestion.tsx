@@ -1,6 +1,6 @@
 import type { FunctionComponent } from "react";
 import type { Suggestion as SuggestionType } from "~/types";
-import classNames from "classnames";
+import clsx from "clsx";
 
 type Props = {
   selected?: boolean;
@@ -16,7 +16,7 @@ export const Suggestion: FunctionComponent<Props> = ({
 }) => {
   return (
     <div
-      className={classNames([
+      className={clsx([
         "flex rounded-lg gap-2 items-center hover:bg-purple-100 active:bg-purple-200 cursor-pointer clickable px-4 py-2",
         { "bg-purple-200": selected },
       ])}
@@ -32,7 +32,7 @@ export const Suggestion: FunctionComponent<Props> = ({
       <div className={"flex flex-col flex-1"}>
         <h5>{title}</h5>
         <p
-          className={classNames([
+          className={clsx([
             "text-gray-400 text-sm text-ellipsis",
             { "text-gray-600": selected },
           ])}

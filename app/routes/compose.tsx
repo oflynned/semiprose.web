@@ -8,7 +8,7 @@ import {
 import { mockSuggestions, prompt } from "~/constants";
 import type { ComponentProps } from "react";
 import { useState } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 
 type AnalysisState = ComponentProps<typeof Feedback>["analysis"];
 
@@ -92,13 +92,13 @@ export default function Compose() {
   return (
     <Layout>
       <div
-        className={classNames([
+        className={clsx([
           "flex gap-4 h-full",
           { "justify-between": feedbackState.state === "closed" },
         ])}
       >
         <div
-          className={classNames([
+          className={clsx([
             "flex flex-col gap-8 max-w-screen-md",
             { hidden: feedbackState.state === "open" },
           ])}
