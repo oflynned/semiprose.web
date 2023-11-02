@@ -90,7 +90,12 @@ export const ComposeStory: FunctionComponent<Props> = ({
 
   return (
     <>
-      <div className={clsx(["flex flex-col gap-8 flex-1", { hidden }])}>
+      <div
+        className={clsx([
+          "flex flex-col gap-8 flex-1 max-w-screen-md",
+          { hidden },
+        ])}
+      >
         <input
           className={"text-4xl font-bold focus:outline-none"}
           placeholder={"Title"}

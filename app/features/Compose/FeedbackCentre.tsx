@@ -33,7 +33,7 @@ export const FeedbackCentre: FunctionComponent<Props> = ({
 
   return (
     <>
-      <div className={"max-w-screen-sm flex-1"}>
+      <div className={"max-w-[420px] flex-1"}>
         <Feedback
           analysis={analysisState}
           selectedIndex={selectedFeedback}
