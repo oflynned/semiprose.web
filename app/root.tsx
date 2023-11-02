@@ -1,6 +1,6 @@
-import "./tailwind.css";
+import styles from "./tailwind.css";
 
-import type { MetaFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -12,6 +12,8 @@ import {
 import { APP_NAME, TAGLINE } from "~/constants";
 import { useTheme } from "~/hooks";
 import { ThemeProvider } from "./context";
+
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export const meta: MetaFunction = () => {
   return [{ title: APP_NAME }, { name: "description", content: TAGLINE }];
