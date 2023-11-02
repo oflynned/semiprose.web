@@ -1,4 +1,4 @@
-import type { Suggestion, Prompt, Story, User } from "~/types";
+import type { Suggestion, Prompt, Story, User, Comment } from "~/types";
 
 export const APP_NAME = "Semiprose";
 export const TAGLINE = "A writing app for the rest of us";
@@ -15,6 +15,16 @@ export const prompt: Prompt = {
   week: 43,
 };
 
+const comment: Comment = {
+  id: "comment-1",
+  comment: "Wow thats racist wtf is wrong with you",
+  user: {
+    id: "another-user",
+    initials: "PB",
+    username: "power_bottom",
+  },
+};
+
 export const story: Story = {
   id: "story-1",
   title: "The Door in the Forest",
@@ -28,6 +38,7 @@ export const story: Story = {
   duration: 5,
   readership: 53,
   tags: ["fantasy", "adventure", "mystery"],
+  comments: [comment, comment, comment, comment, comment, comment, comment],
 };
 
 export const pastStories: Story[] = [
@@ -54,6 +65,7 @@ export const pastStories: Story[] = [
     duration: 6,
     readership: 62,
     tags: ["time-travel", "mystery", "romance"],
+    comments: [comment],
   },
   {
     id: "story-3",
@@ -76,6 +88,7 @@ export const pastStories: Story[] = [
     duration: 4,
     readership: 48,
     tags: ["music", "inspiration", "time-travel"],
+    comments: [comment],
   },
   {
     id: "story-4",
@@ -98,6 +111,7 @@ export const pastStories: Story[] = [
     duration: 5,
     readership: 55,
     tags: ["literature", "wisdom", "history"],
+    comments: [comment],
   },
 ];
 

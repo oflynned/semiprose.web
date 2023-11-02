@@ -14,3 +14,4 @@ export * from "./Excerpt";
 export * from "./Modal";
 export * from "./Suggestion";
 export * from "./Pill";
+export * from "./Comment";

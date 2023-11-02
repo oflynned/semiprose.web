@@ -1,5 +1,4 @@
-import type { User } from "~/types/user";
-import type { Prompt } from "~/types/prompt";
+import type { Comment, Prompt, User } from "~/types";
 
 export type Story = {
   id: string;
@@ -11,4 +10,5 @@ export type Story = {
   author: User;
   prompt: Prompt;
   paragraphs: string[];
+  comments: Comment[];
 };
