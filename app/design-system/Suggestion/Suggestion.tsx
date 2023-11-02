@@ -17,7 +17,7 @@ export const Suggestion: FunctionComponent<Props> = ({
   return (
     <div
       className={clsx([
-        "flex rounded-lg gap-2 items-center hover:bg-purple-100 active:bg-purple-200 cursor-pointer clickable px-4 py-2",
+        "flex rounded-lg gap-2 items-center hover:bg-purple-100 active:bg-purple-200 cursor-pointer clickable p-2",
         { "bg-purple-200": selected },
       ])}
       onClick={onClick}

@@ -68,7 +68,7 @@ export const Feedback: FunctionComponent<Props> = ({
         </div>
         {analysis.state === "empty" ? null : (
           <>
-            <div className={"flex flex-col p-4 gap-2"}>
+            <div className={"flex flex-col p-6 gap-2"}>
               {analysis.state === "loading" ? (
                 mockSuggestions
                   .slice(0, 3)
@@ -86,7 +86,7 @@ export const Feedback: FunctionComponent<Props> = ({
                   />
                 ))
               ) : (
-                <div className={"p-4"}>
+                <div className={"p-2"}>
                   <p>
                     {
                       "It looks like there isn't anything to improve on yet. Congrats!"

@@ -3,7 +3,7 @@ import { Feedback } from "./Feedback";
 import { mockSuggestions } from "~/constants";
 
 const meta = {
-  title: "Feedback/Feedback",
+  title: "Feedback",
   component: Feedback,
   tags: ["autodocs"],
 } satisfies Meta<typeof Feedback>;

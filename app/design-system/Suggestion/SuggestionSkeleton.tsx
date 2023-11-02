@@ -2,9 +2,7 @@ import type { FunctionComponent } from "react";
 
 export const SuggestionSkeleton: FunctionComponent = () => {
   return (
-    <div
-      className={"flex rounded-lg gap-2 items-center px-4 py-2 animate-pulse"}
-    >
+    <div className={"flex rounded-lg gap-2 items-center p-2 animate-pulse"}>
       <div
         className={
           "flex rounded-lg border-2 items-center justify-center w-12 h-12 border-gray-300 bg-gray-100"

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { PillSkeleton } from "~/design-system";
 
 const meta = {
-  title: "Pill/PillSkeleton",
+  title: "PillSkeleton",
   component: PillSkeleton,
   tags: ["autodocs"],
 } satisfies Meta<typeof PillSkeleton>;
