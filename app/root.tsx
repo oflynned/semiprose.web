@@ -32,8 +32,8 @@ const App = () => {
       <body>
         <Outlet />
         <ScrollRestoration />
-        <LiveReload />
         <Scripts />
+        <LiveReload />
       </body>
     </html>
   );
