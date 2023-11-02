@@ -42,7 +42,7 @@ export default function Compose() {
 
       setTimeout(() => {
         setPublishState("completed");
-      }, 2000);
+      }, 500);
     }
   };
 
@@ -51,7 +51,7 @@ export default function Compose() {
       setDraftState("loading");
       setTimeout(() => {
         setDraftState("completed");
-      }, 2000);
+      }, 500);
     }
   };
 
@@ -113,8 +113,10 @@ export default function Compose() {
             placeholder={"Title"}
             value={title}
             onChange={(e) => {
-              setTitle(e.target.value);
-              onTextChange(title);
+              const reference = e.target.value;
+
+              setTitle(reference);
+              onTextChange(reference);
             }}
           />
           <div className={"flex-1"}>
@@ -126,8 +128,10 @@ export default function Compose() {
             }
             value={content}
             onChange={(e) => {
-              setContent(e.target.value);
-              onTextChange(content);
+              const reference = e.target.value;
+
+              setContent(reference);
+              onTextChange(reference);
             }}
           />
           <div className={"flex gap-4 justify-end"}>
