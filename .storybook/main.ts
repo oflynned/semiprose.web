@@ -22,19 +22,13 @@ const config: StorybookConfig = {
   },
   staticDirs: ["../public"],
   viteFinal: async (config) => {
-    // remix is the second plugin in the list, we have to remove this for storybook to work
-    const [reactDocgen, , ...plugins] = config.plugins ?? [];
+    config.plugins?.push(
+      tsconfigPaths({
+        projects: [resolve(dirname(__dirname), "tsconfig.json")],
+      })
+    );
 
-    return {
-      ...config,
-      plugins: [
-        reactDocgen,
-        ...plugins,
-        tsconfigPaths({
-          projects: [resolve(dirname(__dirname), "tsconfig.json")],
-        }),
-      ],
-    };
+    return config;
   },
 };
 

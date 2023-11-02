@@ -4,8 +4,8 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --port 3000",
-    "build": "vite build && vite build --ssr",
+    "build": "remix build",
+    "dev": "remix dev --manual",
     "start": "remix-serve ./build/index.js",
     "typecheck": "tsc",
     "storybook": "storybook dev -p 6006",
@@ -36,6 +36,7 @@
     "@storybook/testing-library": "0.2.2",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
+    "@vitejs/plugin-react": "^4.1.1",
     "autoprefixer": "10.4.16",
     "eslint": "8.52.0",
     "eslint-plugin-storybook": "0.6.15",
