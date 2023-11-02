@@ -13,6 +13,8 @@ import { APP_NAME, TAGLINE } from "~/constants";
 import { useTheme } from "~/hooks";
 import { ThemeProvider } from "./context";
 
+export const config = { runtime: "nodejs" };
+
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export const meta: MetaFunction = () => {
