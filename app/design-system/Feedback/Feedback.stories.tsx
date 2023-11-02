@@ -25,3 +25,17 @@ export const Flawless: Story = {
     improvements: [],
   },
 };
+
+export const Loading: Story = {
+  args: {
+    state: "loading",
+    improvements: [],
+  },
+};
+
+export const Empty: Story = {
+  args: {
+    state: "empty",
+    improvements: [],
+  },
+};

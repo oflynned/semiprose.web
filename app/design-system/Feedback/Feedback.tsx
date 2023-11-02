@@ -1,9 +1,10 @@
 import type { ComponentProps, FunctionComponent } from "react";
-import { Button, Card, Pill } from "~/design-system";
+import { Button, Card, Improvement, Pill } from "~/design-system";
 import { toPercentage } from "~/formatters";
-import { Improvement } from "./Improvement";
 import { mockFeedback } from "~/constants";
 
+// TODO refactor this to be state + optional improvements property instead of splitting this
+//      would improve code reuse also
 type AnalysisState = "empty" | "loading" | "completed" | "cancelled";
 
 type Props = {

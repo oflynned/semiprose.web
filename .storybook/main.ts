@@ -1,5 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
-import path from "path";
+import { resolve, dirname } from "path";
 const tsconfigPaths = require("vite-tsconfig-paths").default;
 
 const config: StorybookConfig = {
@@ -22,13 +22,19 @@ const config: StorybookConfig = {
   },
   staticDirs: ["../public"],
   viteFinal: async (config) => {
-    config.plugins?.push(
-      tsconfigPaths({
-        projects: [path.resolve(path.dirname(__dirname), "tsconfig.json")],
-      })
-    );
+    // remix is the second plugin in the list, we have to remove this for storybook to work
+    const [reactDocgen, , ...plugins] = config.plugins ?? [];
 
-    return config;
+    return {
+      ...config,
+      plugins: [
+        reactDocgen,
+        ...plugins,
+        tsconfigPaths({
+          projects: [resolve(dirname(__dirname), "tsconfig.json")],
+        }),
+      ],
+    };
   },
 };
 
