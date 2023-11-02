@@ -3,5 +3,5 @@ export type Suggestion = {
   description: string;
   shortDescription: string;
   example: string;
-  weight: number;
+  gradingWeight: number;
 };

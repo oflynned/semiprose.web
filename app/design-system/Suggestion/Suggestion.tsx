@@ -12,7 +12,7 @@ export const Suggestion: FunctionComponent<Props> = ({
   title,
   shortDescription,
   loading,
-  weight,
+  gradingWeight,
   onClick,
   selected,
 }) => {
@@ -34,7 +34,7 @@ export const Suggestion: FunctionComponent<Props> = ({
         {loading ? (
           <div className={"animate-pulse rounded-full bg-gray-300 h-3 w-6"} />
         ) : (
-          <span className={"text-purple-500 font-medium"}>{weight}</span>
+          <span className={"text-purple-500 font-medium"}>{gradingWeight}</span>
         )}
       </div>
       <div

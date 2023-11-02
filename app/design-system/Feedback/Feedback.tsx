@@ -25,7 +25,10 @@ export const Feedback: FunctionComponent<Props> = ({
   onResetAnalysis,
 }) => {
   const getScore = (suggestions: ComponentProps<typeof Suggestion>[]) => {
-    return 100 - suggestions.reduce((acc, { weight }) => acc + weight, 0);
+    return (
+      100 -
+      suggestions.reduce((acc, { gradingWeight }) => acc + gradingWeight, 0)
+    );
   };
 
   return (

@@ -109,7 +109,7 @@ export const mockSuggestions: Suggestion[] = [
     shortDescription: "Varied sentence structure for engagement",
     example:
       "For example, the sentence 'The forest she thought she knew had transformed into a surreal landscape, where gravity could shift, and reality wavered.' could be split into shorter sentences for a more dynamic flow.",
-    weight: 2,
+    gradingWeight: 2,
   },
   {
     title: "Show, Don't Tell",
@@ -118,7 +118,7 @@ export const mockSuggestions: Suggestion[] = [
     shortDescription: "Enhance character relatability",
     example:
       "In the sentence 'She now faced a series of enigmatic challenges,' you could describe her emotions and physical reactions to these challenges to let readers feel her experience.",
-    weight: 2,
+    gradingWeight: 2,
   },
   {
     title: "Imagery",
@@ -127,7 +127,7 @@ export const mockSuggestions: Suggestion[] = [
     shortDescription: "Enhance metaphoric descriptions",
     example:
       "In the sentence 'a rush of cool air, scented with the essence of pine and mystery, greeted her,' you could use metaphors like 'cool air, like a phantom's whisper, scented with the essence of pine and enigma.'",
-    weight: 2,
+    gradingWeight: 2,
   },
   {
     title: "Word Choice",
@@ -136,7 +136,7 @@ export const mockSuggestions: Suggestion[] = [
     shortDescription: "Enhance word choice for impact",
     example:
       "In the sentence 'The countdown had begun,' consider using a more impactful word like 'The ominous countdown had commenced,' to heighten the tension.",
-    weight: 1,
+    gradingWeight: 1,
   },
   {
     title: "Pacing",
@@ -145,7 +145,7 @@ export const mockSuggestions: Suggestion[] = [
     shortDescription: "Enhance pacing for engagement",
     example:
       "To improve pacing, you could vary sentence length and structure in sentences like 'She now faced a series of enigmatic challenges, each more confounding than the last.' to maintain reader engagement.",
-    weight: 2,
+    gradingWeight: 2,
   },
   {
     title: "Character Development",
@@ -154,6 +154,6 @@ export const mockSuggestions: Suggestion[] = [
     shortDescription: "Develop character for relatability",
     example:
       "In the sentence 'Lila's quest to uncover the greatest secret of her life had taken an unexpected turn,' provide a glimpse into her thoughts and emotions, like 'Lila's heart raced as her quest to unveil the forest's deepest enigma took an unforeseen twist.'",
-    weight: 1,
+    gradingWeight: 1,
   },
 ];
