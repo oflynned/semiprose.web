@@ -9,15 +9,18 @@ import {
 } from "~/design-system";
 import { toPercentage } from "~/formatters";
 import { mockSuggestions } from "~/constants";
+import { isDefined } from "~/helpers";
 
 type AnalysisState =
-  | { state: "empty" }
-  | { state: "loading" }
-  | { state: "completed"; suggestions: ComponentProps<typeof Suggestion>[] }
-  | { state: "cancelled" };
+  | "disabled"
+  | "clickable"
+  | "loading"
+  | "completed"
+  | "error";
 
 type Props = {
-  analysis: AnalysisState;
+  suggestions?: ComponentProps<typeof Suggestion>["suggestion"][];
+  state?: AnalysisState;
   selectedIndex?: number;
   onExpandFeedback?: (index: number) => void;
   onRequestAnalysis?: () => void;
@@ -25,29 +28,36 @@ type Props = {
 };
 
 export const Feedback: FunctionComponent<Props> = ({
-  analysis,
+  suggestions,
+  state,
   selectedIndex,
   onExpandFeedback,
   onRequestAnalysis,
   onResetAnalysis,
 }) => {
-  const getScore = (suggestions: ComponentProps<typeof Suggestion>[]) => {
+  const getScore = (suggestions: Props["suggestions"] = []) => {
     return (
       100 -
       suggestions.reduce((acc, { gradingWeight }) => acc + gradingWeight, 0)
     );
   };
 
+  const hideSuggestionList =
+    state === "disabled" || (state === "clickable" && !isDefined(suggestions));
+  const showSuggestions = isDefined(suggestions) && suggestions.length > 0;
+  const showNoSuggestionsPossible =
+    isDefined(suggestions) && suggestions.length === 0;
+
   return (
     <Card border>
       <div className={"flex flex-col divide-y"}>
         <div className={"flex flex-col p-8 gap-2"}>
           <h4 className={"font-bold text-2xl"}>{"Feedback"}</h4>
-          <div className={"flex justify-between items-center"}>
-            <h5 className={"font-medium"}>{"Overall impression"}</h5>
-            {analysis.state === "loading" ? (
+          <div className={"flex justify-between items-center gap-2"}>
+            <h5 className={"font-medium"}>{"Impression"}</h5>
+            {state === "loading" ? (
               <PillSkeleton />
-            ) : analysis.state === "completed" ? (
+            ) : state === "completed" ? (
               <Pill label={"Excellent"} />
             ) : (
               <p>{"-"}</p>
@@ -55,48 +65,41 @@ export const Feedback: FunctionComponent<Props> = ({
           </div>
           <div className={"flex justify-between items-center"}>
             <h5 className={"font-medium"}>{"Writing score"}</h5>
-            {analysis.state === "loading" ? (
+            {state === "loading" ? (
               <PillSkeleton />
-            ) : analysis.state === "completed" ? (
-              <Pill label={toPercentage(getScore(analysis.suggestions))} />
+            ) : state === "completed" ? (
+              <Pill label={toPercentage(getScore(suggestions))} />
             ) : (
               <p>{"-"}</p>
             )}
           </div>
         </div>
-        {analysis.state === "empty" ? null : (
-          <>
-            <div className={"flex flex-col p-6 gap-2"}>
-              {analysis.state === "loading" ? (
-                mockSuggestions
-                  .slice(0, 3)
-                  .map((_suggestion, index) => (
-                    <SuggestionSkeleton key={`suggestion-${index}`} />
-                  ))
-              ) : analysis.state === "completed" &&
-                analysis.suggestions.length > 0 ? (
-                analysis.suggestions.map((suggestion, index) => (
-                  <Suggestion
-                    {...suggestion}
-                    selected={index === selectedIndex}
-                    key={`suggestion-${index}`}
-                    onClick={() => onExpandFeedback?.(index)}
-                  />
+        {hideSuggestionList ? null : (
+          <div className={"flex flex-col p-6 gap-2"}>
+            {state === "loading" ? (
+              mockSuggestions
+                .slice(0, 3)
+                .map((_suggestion, index) => (
+                  <SuggestionSkeleton key={`suggestion-${index}`} />
                 ))
-              ) : (
-                <div className={"p-2"}>
-                  <p>
-                    {
-                      "It looks like there isn't anything to improve on yet. Congrats!"
-                    }
-                  </p>
-                </div>
-              )}
-            </div>
-          </>
+            ) : showSuggestions ? (
+              suggestions.map((suggestion, index) => (
+                <Suggestion
+                  suggestion={suggestion}
+                  selected={index === selectedIndex}
+                  key={`suggestion-${index}`}
+                  onClick={() => onExpandFeedback?.(index)}
+                />
+              ))
+            ) : showNoSuggestionsPossible ? (
+              <div className={"p-2"}>
+                <p>{"Nothing to improve on yet. Congrats!"}</p>
+              </div>
+            ) : null}
+          </div>
         )}
         <div className={"p-4 gap-2 flex justify-end"}>
-          {analysis.state === "completed" ? (
+          {state === "completed" ? (
             <Button
               label={"Reset"}
               variant="outlined"
@@ -104,14 +107,14 @@ export const Feedback: FunctionComponent<Props> = ({
             />
           ) : null}
           <Button
+            disabled={state === "disabled"}
             label={
-              analysis.state === "loading"
+              state === "loading"
                 ? "Analysing"
-                : analysis.state === "completed"
+                : state === "completed"
                 ? "Analyse again"
                 : "Analyse"
             }
-            loading={analysis.state === "loading"}
             onClick={onRequestAnalysis}
           />
         </div>

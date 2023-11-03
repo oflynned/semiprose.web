@@ -15,3 +15,5 @@ export * from "./Modal";
 export * from "./Suggestion";
 export * from "./Pill";
 export * from "./Comment";
+export * from "./StoryTitleInput";
+export * from "./Paper";

@@ -1,9 +1,10 @@
-import { Comment, Layout, Story } from "~/design-system";
+import { Comment, Layout, Story, StoryTitleInput } from "~/design-system";
 import { useLoaderData } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
 import { pastStories } from "~/constants";
 import type { Story as StoryType } from "~/types";
 import { json } from "@remix-run/node";
+import { useState } from "react";
 
 type LoaderData = {
   story: Awaited<StoryType | undefined>;
@@ -17,6 +18,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function StoryDetail() {
   const { story } = useLoaderData<LoaderData>();
+  const [comment, setComment] = useState("");
 
   return (
     <Layout>
@@ -24,6 +26,10 @@ export default function StoryDetail() {
         <div className={"flex flex-col gap-4 max-w-screen-md"}>
           <Story {...story} />
           <h3 className={"text-2xl font-medium"}>{"Comments"}</h3>
+          <StoryTitleInput
+            value={comment}
+            onChange={(value) => setComment(value)}
+          />
           <div className={"flex flex-col gap-2"}>
             {story.comments.map((comment) => (
               <Comment {...comment} key={comment.id} />

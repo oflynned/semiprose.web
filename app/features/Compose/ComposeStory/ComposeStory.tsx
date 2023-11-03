@@ -1,19 +1,23 @@
-import { Button, Prompt } from "~/design-system";
+import { Prompt, StoryTitleInput, Paper } from "~/design-system";
 import { prompt } from "~/constants";
-import type { FunctionComponent } from "react";
+import type { ComponentProps, FunctionComponent } from "react";
 import { useState } from "react";
 import clsx from "clsx";
-
-type ActionState = "disabled" | "clickable" | "loading" | "completed";
+import { SaveDraftButton } from "./SaveDraftButton";
+import { PublishButton } from "./PublishButton";
 
 type Props = {
+  onType?: (text: string) => void;
   publish?: (title: string, content: string) => Promise<void>;
   saveDraft?: (title: string, content: string) => Promise<void>;
   hidden?: boolean;
 };
 
+type ButtonState = ComponentProps<typeof SaveDraftButton>["state"];
+
 export const ComposeStory: FunctionComponent<Props> = ({
   hidden = false,
+  onType,
   publish,
   saveDraft,
 }) => {
@@ -22,15 +26,17 @@ export const ComposeStory: FunctionComponent<Props> = ({
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const [draftState, setDraftState] = useState<ActionState>("disabled");
-  const [publishState, setPublishState] = useState<ActionState>("disabled");
+  const [draftState, setDraftState] = useState<ButtonState>("disabled");
+  const [publishState, setPublishState] = useState<ButtonState>("disabled");
 
   const debounce = (fn: () => Promise<void>) => {
-    clearTimeout(debouncer);
+    if (debouncer) {
+      clearTimeout(debouncer);
+    }
 
     const newTimer = setTimeout(async () => {
       await fn();
-    }, 3000);
+    }, 1000);
 
     setDebouncer(newTimer);
   };
@@ -47,6 +53,8 @@ export const ComposeStory: FunctionComponent<Props> = ({
   };
 
   const onClickSaveDraft = async () => {
+    console.log("saving draft", content);
+
     setDraftState("loading");
 
     try {
@@ -58,6 +66,8 @@ export const ComposeStory: FunctionComponent<Props> = ({
   };
 
   const onTextChange = (text: string) => {
+    onType?.(text);
+
     if (text.length === 0) {
       setDraftState("disabled");
       setPublishState("disabled");
@@ -74,19 +84,13 @@ export const ComposeStory: FunctionComponent<Props> = ({
     setDraftState("clickable");
     setPublishState("clickable");
 
+    console.log("text before running debounce", text);
+    setContent(text);
+
     debounce(async () => {
       await onClickSaveDraft();
     });
   };
-
-  const isPublishDisabled =
-    publishState === "disabled" || publishState === "completed";
-
-  const isDraftDisabled =
-    isPublishDisabled ||
-    publishState === "loading" ||
-    draftState === "disabled" ||
-    draftState === "completed";
 
   return (
     <>
@@ -96,46 +100,30 @@ export const ComposeStory: FunctionComponent<Props> = ({
           { hidden },
         ])}
       >
-        <input
-          className={"text-4xl font-bold focus:outline-none"}
-          placeholder={"Title"}
+        <StoryTitleInput
           value={title}
-          onChange={(e) => {
-            const reference = e.target.value;
-
-            setTitle(reference);
-            onTextChange(reference);
+          onChange={(value) => {
+            setTitle(value);
+            onTextChange(value);
           }}
         />
         <div className={"flex-1"}>
           <Prompt {...prompt} />
         </div>
-        <textarea
-          className={
-            "border border-gray-100 focus:outline-gray-200 bg-gray-50 h-full rounded-xl p-8"
-          }
+        <Paper
           value={content}
-          onChange={(e) => {
-            const reference = e.target.value;
-
-            setContent(reference);
-            onTextChange(reference);
+          onChange={(value) => {
+            setContent(value);
+            onTextChange(value);
           }}
         />
         <div className={"flex gap-4 justify-end"}>
-          <Button
-            variant={"outlined"}
-            label={draftState === "completed" ? "Draft saved" : "Save draft"}
-            disabled={isDraftDisabled}
-            loading={draftState === "loading"}
+          <SaveDraftButton
+            state={draftState}
+            publishState={publishState}
             onClick={onClickSaveDraft}
           />
-          <Button
-            label={"Publish"}
-            disabled={isPublishDisabled}
-            loading={publishState === "loading"}
-            onClick={onClickPublish}
-          />
+          <PublishButton state={publishState} onClick={onClickPublish} />
         </div>
       </div>
     </>

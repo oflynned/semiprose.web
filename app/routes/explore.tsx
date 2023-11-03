@@ -1,9 +1,7 @@
 import { Button, Excerpt, Layout, Prompt, Search } from "~/design-system";
 import { Link, useNavigate } from "@remix-run/react";
-import { pastStories, prompt, story } from "~/constants";
+import { pastStories, prompt } from "~/constants";
 import { toCount } from "~/formatters";
-
-const stories = [story];
 
 export default function Explore() {
   const navigate = useNavigate();

@@ -3,7 +3,6 @@ import type { Comment, Prompt, User } from "~/types";
 export type Story = {
   id: string;
   publishedAt: string;
-  duration: number;
   readership: number;
   tags: string[];
   title: string;

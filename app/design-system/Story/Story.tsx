@@ -3,21 +3,32 @@ import { Card } from "~/design-system";
 import type { Story as StoryType } from "~/types";
 import { toCount, toDate, toDuration } from "~/formatters";
 
-export const Story: FunctionComponent<StoryType> = ({
+type Props = {
+  showWordCount?: boolean;
+} & StoryType;
+
+export const Story: FunctionComponent<Props> = ({
   title,
   author,
   prompt,
   paragraphs,
   publishedAt,
   readership,
-  duration,
   tags,
 }) => {
+  // TODO should both of these be moved to the server? probably
+  const wordCount = paragraphs.join(" ").trim().split(" ").length;
+  const minsToRead = Math.ceil(wordCount / 200);
+
   return (
     <div className={"flex flex-col gap-4 max-w-screen-md"}>
       <h1 className={"text-3xl font-medium"}>{title}</h1>
       <h5>
-        {[toDuration(duration), `Published ${toDate(publishedAt)}`].join(" — ")}
+        {[
+          `${wordCount} words`,
+          toDuration(minsToRead),
+          `Published ${toDate(publishedAt)}`,
+        ].join(" — ")}
       </h5>
       <Card>
         <div className={"flex flex-col p-8 gap-4 bg-blue-50"}>

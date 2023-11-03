@@ -4,12 +4,12 @@ import { Button, Card } from "~/design-system";
 
 type Props = {
   improvement: Suggestion;
-  onClearFeedback?: () => void;
+  onCloseFeedback?: () => void;
 };
 
 export const FeedbackDetail: FunctionComponent<Props> = ({
   improvement,
-  onClearFeedback,
+  onCloseFeedback,
 }) => {
   return (
     <Card border>
@@ -18,7 +18,7 @@ export const FeedbackDetail: FunctionComponent<Props> = ({
         <p className={"leading-relaxed"}>{improvement.description}</p>
         <p className={"leading-relaxed"}>{improvement.example}</p>
         <div className={"flex justify-end"}>
-          <Button label={"Close"} variant={"text"} onClick={onClearFeedback} />
+          <Button label={"Close"} variant={"text"} onClick={onCloseFeedback} />
         </div>
       </div>
     </Card>

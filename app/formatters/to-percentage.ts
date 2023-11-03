@@ -1,5 +1,5 @@
 export const toPercentage = (percentage: number) => {
-  return Intl.NumberFormat("en-US", {
+  return Intl.NumberFormat("en", {
     style: "percent",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,

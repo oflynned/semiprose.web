@@ -6,9 +6,11 @@ type Variant = "primary" | "outlined" | "text";
 
 type Visibility = "visible" | "invisible" | "gone";
 
+type ButtonState = "disabled" | "clickable" | "loading" | "completed";
+
 type Props = {
   label: string;
-  loading?: boolean;
+  state?: ButtonState;
   variant?: Variant;
   visibility?: Visibility;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
@@ -28,13 +30,16 @@ const interactions: Record<Variant, string> = {
 
 export const Button: FunctionComponent<Props> = ({
   onClick,
+  state = "clickable",
   label,
   variant = "primary",
-  disabled = false,
-  loading = false,
   visibility = "visible",
+  disabled: overrideDisabled = false,
   ...props
 }) => {
+  const disabled = overrideDisabled || state === "disabled";
+  const loading = state === "loading";
+
   return (
     <button
       {...props}

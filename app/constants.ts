@@ -17,7 +17,8 @@ export const prompt: Prompt = {
 
 const comment: Comment = {
   id: "comment-1",
-  comment: "Wow thats racist wtf is wrong with you",
+  postedAt: new Date().toISOString(),
+  comment: "My dog could write better than this",
   user: {
     id: "another-user",
     initials: "PB",
@@ -35,10 +36,9 @@ export const story: Story = {
   ],
   author: user,
   publishedAt: new Date().toISOString(),
-  duration: 5,
   readership: 53,
   tags: ["fantasy", "adventure", "mystery"],
-  comments: [comment, comment, comment, comment, comment, comment, comment],
+  comments: [comment],
 };
 
 export const pastStories: Story[] = [
@@ -62,7 +62,6 @@ export const pastStories: Story[] = [
       initials: "ED",
     },
     publishedAt: new Date(2023, 10, 15).toISOString(),
-    duration: 6,
     readership: 62,
     tags: ["time-travel", "mystery", "romance"],
     comments: [comment],
@@ -85,7 +84,6 @@ export const pastStories: Story[] = [
       initials: "MM",
     },
     publishedAt: new Date(2023, 11, 5).toISOString(),
-    duration: 4,
     readership: 48,
     tags: ["music", "inspiration", "time-travel"],
     comments: [comment],
@@ -108,7 +106,6 @@ export const pastStories: Story[] = [
       initials: "J",
     },
     publishedAt: new Date(2023, 11, 20).toISOString(),
-    duration: 5,
     readership: 55,
     tags: ["literature", "wisdom", "history"],
     comments: [comment],

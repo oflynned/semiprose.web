@@ -5,12 +5,11 @@ import clsx from "clsx";
 type Props = {
   selected?: boolean;
   onClick?: () => void;
-} & SuggestionType;
+  suggestion: SuggestionType;
+};
 
 export const Suggestion: FunctionComponent<Props> = ({
-  title,
-  shortDescription,
-  gradingWeight,
+  suggestion,
   onClick,
   selected,
 }) => {
@@ -27,17 +26,19 @@ export const Suggestion: FunctionComponent<Props> = ({
           "flex rounded-lg border-2 items-center justify-center w-12 h-12 border-purple-300 bg-purple-100"
         }
       >
-        <span className={"text-purple-500 font-medium"}>{gradingWeight}</span>
+        <span className={"text-purple-500 font-medium"}>
+          {suggestion.gradingWeight}
+        </span>
       </div>
       <div className={"flex flex-col flex-1"}>
-        <h5>{title}</h5>
+        <h5>{suggestion.title}</h5>
         <p
           className={clsx([
             "text-gray-400 text-sm text-ellipsis",
             { "text-gray-600": selected },
           ])}
         >
-          {shortDescription}
+          {suggestion.shortDescription}
         </p>
       </div>
     </div>

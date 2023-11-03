@@ -6,5 +6,5 @@ export const toDuration = (mins: number) => {
     return `${hours} hours and ${minutes} minutes to read`;
   }
 
-  return `${minutes} minutes to read`;
+  return `${minutes} minute read`;
 };

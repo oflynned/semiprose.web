@@ -1,3 +1,3 @@
 export const toCount = (count: number) => {
-  return Intl.NumberFormat("en-US", { notation: "compact" }).format(count);
+  return Intl.NumberFormat("en", { notation: "compact" }).format(count);
 };
