@@ -1,14 +1,13 @@
 import type { ComponentProps, FunctionComponent } from "react";
 import { useState } from "react";
+import type { Button } from "~/design-system";
 import { Feedback, FeedbackDetail } from "~/design-system";
 import type { Suggestion } from "~/types";
 import { isDefined } from "~/helpers";
 
-type AnalysisState = ComponentProps<typeof Feedback>["state"];
-
 type Props = {
   text?: string;
-  analysisState?: AnalysisState;
+  analysisState?: ComponentProps<typeof Button>["state"];
   suggestions?: Suggestion[];
   onRequestAnalysis?: (text: string) => void;
   onResetAnalysis?: () => void;
@@ -32,7 +31,7 @@ export const FeedbackOverview: FunctionComponent<Props> = ({
       <div className={"max-w-[420px] flex-1"}>
         <Feedback
           suggestions={suggestions}
-          state={analysisState}
+          analysisState={analysisState}
           selectedIndex={index}
           onExpandFeedback={(index) => {
             setIndex(index);

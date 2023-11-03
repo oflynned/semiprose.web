@@ -1,7 +1,7 @@
 import type { ComponentProps, FunctionComponent } from "react";
+import type { Button } from "~/design-system";
 import {
   Suggestion,
-  Button,
   Card,
   Pill,
   PillSkeleton,
@@ -10,17 +10,12 @@ import {
 import { toPercentage } from "~/formatters";
 import { mockSuggestions } from "~/constants";
 import { isDefined } from "~/helpers";
-
-type AnalysisState =
-  | "disabled"
-  | "clickable"
-  | "loading"
-  | "completed"
-  | "error";
+import { AnalyseButton } from "~/features/Compose/FeedbackOverview/AnalyseButton";
+import { ResetFeedbackButton } from "~/features/Compose/FeedbackOverview/ResetFeedbackButton";
 
 type Props = {
   suggestions?: ComponentProps<typeof Suggestion>["suggestion"][];
-  state?: AnalysisState;
+  analysisState?: ComponentProps<typeof Button>["state"];
   selectedIndex?: number;
   onExpandFeedback?: (index: number) => void;
   onRequestAnalysis?: () => void;
@@ -29,7 +24,7 @@ type Props = {
 
 export const Feedback: FunctionComponent<Props> = ({
   suggestions,
-  state,
+  analysisState,
   selectedIndex,
   onExpandFeedback,
   onRequestAnalysis,
@@ -43,7 +38,8 @@ export const Feedback: FunctionComponent<Props> = ({
   };
 
   const hideSuggestionList =
-    state === "disabled" || (state === "clickable" && !isDefined(suggestions));
+    analysisState === "disabled" ||
+    (analysisState === "clickable" && !isDefined(suggestions));
   const showSuggestions = isDefined(suggestions) && suggestions.length > 0;
   const showNoSuggestionsPossible =
     isDefined(suggestions) && suggestions.length === 0;
@@ -55,9 +51,9 @@ export const Feedback: FunctionComponent<Props> = ({
           <h4 className={"font-bold text-2xl"}>{"Feedback"}</h4>
           <div className={"flex justify-between items-center gap-2"}>
             <h5 className={"font-medium"}>{"Impression"}</h5>
-            {state === "loading" ? (
+            {analysisState === "loading" ? (
               <PillSkeleton />
-            ) : state === "completed" ? (
+            ) : analysisState === "completed" ? (
               <Pill label={"Excellent"} />
             ) : (
               <p>{"-"}</p>
@@ -65,9 +61,9 @@ export const Feedback: FunctionComponent<Props> = ({
           </div>
           <div className={"flex justify-between items-center"}>
             <h5 className={"font-medium"}>{"Writing score"}</h5>
-            {state === "loading" ? (
+            {analysisState === "loading" ? (
               <PillSkeleton />
-            ) : state === "completed" ? (
+            ) : analysisState === "completed" ? (
               <Pill label={toPercentage(getScore(suggestions))} />
             ) : (
               <p>{"-"}</p>
@@ -76,7 +72,7 @@ export const Feedback: FunctionComponent<Props> = ({
         </div>
         {hideSuggestionList ? null : (
           <div className={"flex flex-col p-6 gap-2"}>
-            {state === "loading" ? (
+            {analysisState === "loading" ? (
               mockSuggestions
                 .slice(0, 3)
                 .map((_suggestion, index) => (
@@ -99,24 +95,13 @@ export const Feedback: FunctionComponent<Props> = ({
           </div>
         )}
         <div className={"p-4 gap-2 flex justify-end"}>
-          {state === "completed" ? (
-            <Button
-              label={"Reset"}
-              variant="outlined"
+          {analysisState === "completed" ? (
+            <ResetFeedbackButton
               onClick={onResetAnalysis}
+              state={"clickable"}
             />
           ) : null}
-          <Button
-            disabled={state === "disabled"}
-            label={
-              state === "loading"
-                ? "Analysing"
-                : state === "completed"
-                ? "Analyse again"
-                : "Analyse"
-            }
-            onClick={onRequestAnalysis}
-          />
+          <AnalyseButton onClick={onRequestAnalysis} state={analysisState} />
         </div>
       </div>
     </Card>
