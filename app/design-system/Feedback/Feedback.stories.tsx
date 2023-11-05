@@ -14,34 +14,26 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    analysis: {
-      state: "completed",
-      suggestions: mockSuggestions,
-    },
+    analysisState: "completed",
+    suggestions: mockSuggestions,
   },
 };
 
-export const Flawless: Story = {
+export const NoSuggestions: Story = {
   args: {
-    analysis: {
-      state: "completed",
-      suggestions: [],
-    },
+    analysisState: "completed",
+    suggestions: [],
   },
 };
 
 export const Loading: Story = {
   args: {
-    analysis: {
-      state: "loading",
-    },
+    analysisState: "loading",
   },
 };
 
-export const Empty: Story = {
+export const StartState: Story = {
   args: {
-    analysis: {
-      state: "empty",
-    },
+    analysisState: "clickable",
   },
 };

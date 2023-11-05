@@ -14,6 +14,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    ...mockSuggestions[0],
+    suggestion: mockSuggestions[0],
+  },
+};
+
+export const Selected: Story = {
+  args: {
+    suggestion: mockSuggestions[0],
+    selected: true,
   },
 };

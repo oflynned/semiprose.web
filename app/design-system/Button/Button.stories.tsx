@@ -35,13 +35,21 @@ export const TextButton: Story = {
 export const Disabled: Story = {
   args: {
     label: "Save",
+    state: "disabled",
+  },
+};
+
+export const ForceDisabledOverride: Story = {
+  args: {
+    label: "Save",
     disabled: true,
+    state: "clickable",
   },
 };
 
 export const Loading: Story = {
   args: {
     label: "Save",
-    loading: true,
+    state: "loading",
   },
 };
