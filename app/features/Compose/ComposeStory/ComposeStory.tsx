@@ -34,9 +34,7 @@ export const ComposeStory: FunctionComponent<Props> = ({
       clearTimeout(debouncer);
     }
 
-    const newTimer = setTimeout(async () => {
-      await fn();
-    }, 1000);
+    const newTimer = setTimeout(() => fn(), 1000);
 
     setDebouncer(newTimer);
   };
