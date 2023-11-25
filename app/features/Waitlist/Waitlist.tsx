@@ -10,15 +10,17 @@ export const Waitlist: FunctionComponent = () => {
   const isValidEmail = emailRegex.test(email ?? "");
 
   const requestAccess = async () => {
-    const response = await fetch("/api/waitlist", {
+    setAccessRequested(false);
+
+    const response = await fetch("http://localhost:3002/waitlist", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ email }),
     });
 
-    if (response.ok) {
-      setAccessRequested(true);
-      setEmail("");
-    }
+    setAccessRequested(response.ok);
   };
 
   return (
