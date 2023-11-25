@@ -12,7 +12,7 @@ export const Waitlist: FunctionComponent = () => {
   const requestAccess = async () => {
     setAccessRequested(false);
 
-    const response = await fetch("http://localhost:3002/waitlist", {
+    const response = await fetch("https://api.semiprose.syzible.com/waitlist", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
