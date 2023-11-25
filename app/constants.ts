@@ -115,54 +115,54 @@ export const pastStories: Story[] = [
 export const mockSuggestions: Suggestion[] = [
   {
     title: "Sentence Structure",
-    description:
+    indepthFeedback:
       "The paragraph could benefit from some variation in sentence length to maintain readability and make the narrative more engaging.",
-    shortDescription: "Varied sentence structure for engagement",
+    conciseFeedback: "Varied sentence structure for engagement",
     example:
       "For example, the sentence 'The forest she thought she knew had transformed into a surreal landscape, where gravity could shift, and reality wavered.' could be split into shorter sentences for a more dynamic flow.",
     gradingWeight: 2,
   },
   {
     title: "Show, Don't Tell",
-    description:
+    indepthFeedback:
       "To make the character, Lila, more relatable and the situation more immersive, providing deeper insight into her emotions and reactions would be an improvement.",
-    shortDescription: "Enhance character relatability",
+    conciseFeedback: "Enhance character relatability",
     example:
       "In the sentence 'She now faced a series of enigmatic challenges,' you could describe her emotions and physical reactions to these challenges to let readers feel her experience.",
     gradingWeight: 2,
   },
   {
     title: "Imagery",
-    description:
+    indepthFeedback:
       "While the imagery is vivid, further use of metaphors and similes could elevate the descriptions and make the narrative even more captivating.",
-    shortDescription: "Enhance metaphoric descriptions",
+    conciseFeedback: "Enhance metaphoric descriptions",
     example:
       "In the sentence 'a rush of cool air, scented with the essence of pine and mystery, greeted her,' you could use metaphors like 'cool air, like a phantom's whisper, scented with the essence of pine and enigma.'",
     gradingWeight: 2,
   },
   {
     title: "Word Choice",
-    description:
+    indepthFeedback:
       "Enhancing the choice of words and phrases, particularly in key moments, would add more impact to the narrative.",
-    shortDescription: "Enhance word choice for impact",
+    conciseFeedback: "Enhance word choice for impact",
     example:
       "In the sentence 'The countdown had begun,' consider using a more impactful word like 'The ominous countdown had commenced,' to heighten the tension.",
     gradingWeight: 1,
   },
   {
     title: "Pacing",
-    description:
+    indepthFeedback:
       "Creating a sense of rhythm and tension through sentence structure and pacing would help maintain the reader's interest and anticipation.",
-    shortDescription: "Enhance pacing for engagement",
+    conciseFeedback: "Enhance pacing for engagement",
     example:
       "To improve pacing, you could vary sentence length and structure in sentences like 'She now faced a series of enigmatic challenges, each more confounding than the last.' to maintain reader engagement.",
     gradingWeight: 2,
   },
   {
     title: "Character Development",
-    description:
+    indepthFeedback:
       "Providing a bit more insight into Lila's character and her motivation would make her more relatable, and readers would become more invested in her journey.",
-    shortDescription: "Develop character for relatability",
+    conciseFeedback: "Develop character for relatability",
     example:
       "In the sentence 'Lila's quest to uncover the greatest secret of her life had taken an unexpected turn,' provide a glimpse into her thoughts and emotions, like 'Lila's heart raced as her quest to unveil the forest's deepest enigma took an unforeseen twist.'",
     gradingWeight: 1,

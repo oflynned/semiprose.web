@@ -1,7 +1,7 @@
 export type Suggestion = {
   title: string;
-  description: string;
-  shortDescription: string;
+  conciseFeedback: string;
+  indepthFeedback: string;
   example: string;
   gradingWeight: number;
 };
