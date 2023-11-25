@@ -1,5 +1,9 @@
-import { Prompt, StoryTitleInput, Paper } from "~/design-system";
-import { prompt } from "~/constants";
+import {
+  Prompt,
+  StoryTitleInput,
+  Paper,
+  PromptSkeleton,
+} from "~/design-system";
 import type { ComponentProps, FunctionComponent } from "react";
 import { useState } from "react";
 import clsx from "clsx";
@@ -7,7 +11,8 @@ import { SaveDraftButton } from "./SaveDraftButton";
 import { PublishButton } from "./PublishButton";
 
 type Props = {
-  onType?: (text: string) => void;
+  prompt?: ComponentProps<typeof Prompt>;
+  onType?: (title: string, content: string) => void;
   publish?: (title: string, content: string) => Promise<void>;
   saveDraft?: (title: string, content: string) => Promise<void>;
   hidden?: boolean;
@@ -16,12 +21,13 @@ type Props = {
 type ButtonState = ComponentProps<typeof SaveDraftButton>["state"];
 
 export const ComposeStory: FunctionComponent<Props> = ({
+  prompt,
   hidden = false,
   onType,
   publish,
   saveDraft,
 }) => {
-  const [debouncer, setDebouncer] = useState<NodeJS.Timeout | undefined>();
+  const [debouncer, setDebouncer] = useState<NodeJS.Timeout>();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -51,8 +57,6 @@ export const ComposeStory: FunctionComponent<Props> = ({
   };
 
   const onClickSaveDraft = async () => {
-    console.log("saving draft", content);
-
     setDraftState("loading");
 
     try {
@@ -63,17 +67,17 @@ export const ComposeStory: FunctionComponent<Props> = ({
     }
   };
 
-  const onTextChange = (text: string) => {
-    onType?.(text);
+  const onTextChange = (storyTitle: string, storyContent: string) => {
+    onType?.(storyTitle, storyContent);
 
-    if (text.length === 0) {
+    if (storyContent.length === 0) {
       setDraftState("disabled");
       setPublishState("disabled");
 
       return;
     }
 
-    if (text === content) {
+    if (storyContent === content) {
       setDraftState("disabled");
       setPublishState("clickable");
       return;
@@ -82,8 +86,7 @@ export const ComposeStory: FunctionComponent<Props> = ({
     setDraftState("clickable");
     setPublishState("clickable");
 
-    console.log("text before running debounce", text);
-    setContent(text);
+    setContent(storyContent);
 
     debounce(async () => {
       await onClickSaveDraft();
@@ -94,25 +97,25 @@ export const ComposeStory: FunctionComponent<Props> = ({
     <>
       <div
         className={clsx([
-          "flex flex-col gap-8 flex-1 max-w-screen-md",
+          "flex flex-col gap-8 flex-1 max-w-screen-lg",
           { hidden },
         ])}
       >
         <StoryTitleInput
           value={title}
           onChange={(value) => {
+            onTextChange(value, content);
             setTitle(value);
-            onTextChange(value);
           }}
         />
         <div className={"flex-1"}>
-          <Prompt {...prompt} />
+          {prompt ? <Prompt {...prompt} /> : <PromptSkeleton />}
         </div>
         <Paper
           value={content}
           onChange={(value) => {
+            onTextChange(title, value);
             setContent(value);
-            onTextChange(value);
           }}
         />
         <div className={"flex gap-4 justify-end"}>

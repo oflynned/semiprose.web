@@ -2,9 +2,7 @@ import type { FunctionComponent } from "react";
 import { Card } from "~/design-system";
 import type { Prompt as PromptType } from "~/types";
 
-type Props = PromptType;
-
-export const Prompt: FunctionComponent<Props> = ({ week, text }) => {
+export const Prompt: FunctionComponent<PromptType> = ({ week, text }) => {
   return (
     <Card>
       <div className={"flex flex-col p-8 gap-4 bg-blue-50"}>

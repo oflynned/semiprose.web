@@ -38,7 +38,7 @@ export const Suggestion: FunctionComponent<Props> = ({
             { "text-gray-600": selected },
           ])}
         >
-          {suggestion.shortDescription}
+          {suggestion.conciseFeedback}
         </p>
       </div>
     </div>

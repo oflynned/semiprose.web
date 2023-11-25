@@ -14,15 +14,25 @@ export default function Explore() {
         </div>
         <div className={"flex flex-col max-w-screen-md gap-4"}>
           <h3 className={"font-medium text-2xl"}>{"This week's prompt"}</h3>
-          <p>{"3 days, 1 hour and 5 minutes until the next challenge."}</p>
+          <p>
+            {
+              "It inspires wonder, awe, and a little magic. Next prompt in 3 days, 1 hour and 5 minutes."
+            }
+          </p>
           <Prompt {...prompt} />
           <div className={"flex justify-end"}>
-            <Button label={"Compose"} onClick={() => navigate("/compose")} />
+            <Button
+              variant={"outlined"}
+              label={"Compose"}
+              onClick={() => navigate("/compose")}
+            />
           </div>
         </div>
         <div className={"flex flex-col gap-4"}>
           <h3 className={"font-medium text-2xl"}>{"Others wrote"}</h3>
-          <div className={"grid grid-cols-2 gap-4"}>
+          <div
+            className={"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4"}
+          >
             {pastStories.map((story) => (
               <div className={"flex flex-col max-w-screen-md"} key={story.id}>
                 <Link to={`/stories/${story.id}`}>

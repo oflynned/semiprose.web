@@ -1,4 +1,4 @@
-import { Comment, Layout, Story, StoryTitleInput } from "~/design-system";
+import { Comment, Layout, Story } from "~/design-system";
 import { useLoaderData } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
 import { pastStories } from "~/constants";

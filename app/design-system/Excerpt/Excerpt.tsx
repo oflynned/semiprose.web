@@ -12,7 +12,7 @@ export const Excerpt: FunctionComponent<Props> = ({
   const content = paragraphs.join(". ").trim();
 
   return (
-    <div className={"flex flex-col gap-4 max-w-screen-md"}>
+    <div className={"flex flex-col gap-4"}>
       <Card>
         <div
           className={
@@ -30,7 +30,7 @@ export const Excerpt: FunctionComponent<Props> = ({
             ))}
           </div>
           <p className={"leading-loose"}>
-            {content.length > 256 ? content.slice(0, 256) + "..." : content}
+            {content.length > 350 ? content.slice(0, 350) + "..." : content}
           </p>
         </div>
       </Card>

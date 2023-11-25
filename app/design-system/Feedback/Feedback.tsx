@@ -30,10 +30,13 @@ export const Feedback: FunctionComponent<Props> = ({
   onRequestAnalysis,
   onResetAnalysis,
 }) => {
-  const getScore = (suggestions: Props["suggestions"] = []) => {
+  const getScore = (suggestions: Props["suggestions"]) => {
     return (
       100 -
-      suggestions.reduce((acc, { gradingWeight }) => acc + gradingWeight, 0)
+      (suggestions ?? []).reduce(
+        (acc, { gradingWeight }) => acc + gradingWeight,
+        0
+      )
     );
   };
 

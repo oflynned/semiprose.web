@@ -1,53 +1,46 @@
 import type { ComponentProps, FunctionComponent } from "react";
 import { useState } from "react";
-import type { Button } from "~/design-system";
 import { Feedback, FeedbackDetail } from "~/design-system";
-import type { Suggestion } from "~/types";
 import { isDefined } from "~/helpers";
 
 type Props = {
-  text?: string;
-  analysisState?: ComponentProps<typeof Button>["state"];
-  suggestions?: Suggestion[];
-  onRequestAnalysis?: (text: string) => void;
-  onResetAnalysis?: () => void;
-  onOpenFeedback?: () => void;
-  onCloseFeedback?: () => void;
-};
+  onOpenPanel?: () => void;
+} & Pick<
+  ComponentProps<typeof Feedback>,
+  "onRequestAnalysis" | "analysisState" | "suggestions" | "onResetAnalysis"
+> &
+  Pick<ComponentProps<typeof FeedbackDetail>, "onClosePanel">;
 
 export const FeedbackOverview: FunctionComponent<Props> = ({
-  analysisState,
-  onOpenFeedback,
-  onCloseFeedback,
+  onOpenPanel,
+  onClosePanel,
   suggestions,
-  onRequestAnalysis,
-  onResetAnalysis,
-  text = "",
+  ...props
 }) => {
   const [index, setIndex] = useState<number>();
+
+  const showDetailPanel = isDefined(suggestions) && isDefined(index);
 
   return (
     <>
       <div className={"max-w-[420px] flex-1"}>
         <Feedback
           suggestions={suggestions}
-          analysisState={analysisState}
           selectedIndex={index}
           onExpandFeedback={(index) => {
             setIndex(index);
-            onOpenFeedback?.();
+            onOpenPanel?.();
           }}
-          onRequestAnalysis={() => onRequestAnalysis?.(text)}
-          onResetAnalysis={onResetAnalysis}
+          {...props}
         />
       </div>
-      {isDefined(suggestions) && isDefined(index) ? (
+      {showDetailPanel ? (
         <div className={"flex-1 max-w-screen-md"}>
           <FeedbackDetail
             improvement={suggestions[index]}
-            onCloseFeedback={() => {
+            onClosePanel={() => {
               setIndex(undefined);
-              onCloseFeedback?.();
+              onClosePanel?.();
             }}
           />
         </div>

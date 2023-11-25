@@ -1,41 +1,69 @@
-import { Layout } from "~/design-system";
-import { ComposeStory, FeedbackOverview } from "~/features";
-import type { ComponentProps } from "react";
-import { useState } from "react";
-import { mockSuggestions } from "~/constants";
+import { useLoaderData } from "@remix-run/react";
 import type { Suggestion } from "~/types";
+import type { LoaderFunction } from "@remix-run/node";
+import type { ComponentProps } from "react";
+import { ComposeStory } from "~/features/Compose/ComposeStory";
+import { useState } from "react";
+import { Layout } from "~/design-system";
 import { isDefined } from "~/helpers";
+import {
+  publishStoryAction,
+  requestAnalysisAction,
+  saveDraftAction,
+} from "~/features/Compose/actions";
+import { FeedbackOverview } from "~/features/Compose/FeedbackOverview";
+
+type Prompt = ComponentProps<typeof ComposeStory>["prompt"];
 
 type FeedbackState = "open" | "closed";
 
-const fakeRequest = (payload: unknown) =>
-  new Promise<void>((resolve) => {
-    setTimeout(() => {
-      console.log({ payload });
+type AnalysisState = ComponentProps<typeof FeedbackOverview>["analysisState"];
 
-      resolve();
-    }, 1000);
-  });
+const getPrompt = async () => {
+  const url = new URL("/prompt", "http://localhost:3002");
+  const response = await fetch(url);
 
-export default function Compose() {
-  const [feedbackState, setFeedbackState] = useState<FeedbackState>("closed");
+  return response.json();
+};
 
+const getFeedback = async () => {
+  const url = new URL("/analyser/feedback", "http://localhost:3002");
+  const response = await fetch(url);
+
+  return response.json();
+};
+
+type LoaderData = {
+  suggestions: Suggestion[];
+  prompt: Prompt;
+};
+
+export const loader: LoaderFunction = async () => {
+  const [suggestions, prompt] = await Promise.all([getFeedback(), getPrompt()]);
+
+  return { suggestions, prompt };
+};
+
+export default function ComposeRoute() {
+  const { suggestions, prompt } = useLoaderData<LoaderData>();
+
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [suggestions, setSuggestions] = useState<Suggestion[]>();
-  const [analysisState, setAnalysisState] =
-    useState<ComponentProps<typeof FeedbackOverview>["analysisState"]>(
-      "disabled"
-    );
+
+  const [analysisState, setAnalysisState] = useState<AnalysisState>("disabled");
+  const [feedbackState, setFeedbackState] = useState<FeedbackState>("closed");
 
   return (
     <Layout>
       <div className={"flex gap-4 h-full justify-between"}>
         <ComposeStory
+          prompt={prompt}
           hidden={feedbackState === "open"}
-          onType={(text) => {
-            setContent(text);
+          onType={(title, content) => {
+            setTitle(title);
+            setContent(content);
             setAnalysisState(
-              text.length === 0
+              content.length < 100
                 ? "disabled"
                 : isDefined(suggestions)
                 ? "completed"
@@ -43,29 +71,39 @@ export default function Compose() {
             );
           }}
           saveDraft={async (title, content) => {
-            await fakeRequest({ title, content });
+            try {
+              await saveDraftAction(title, content);
+            } catch (e) {
+              console.error(e);
+            }
           }}
           publish={async (title, content) => {
-            await fakeRequest({ title, content });
+            try {
+              await publishStoryAction(title, content);
+            } catch (e) {
+              console.error(e);
+            }
           }}
         />
         <FeedbackOverview
           analysisState={analysisState}
-          text={content}
           suggestions={suggestions}
-          onOpenFeedback={() => setFeedbackState("open")}
-          onCloseFeedback={() => setFeedbackState("closed")}
+          onOpenPanel={() => setFeedbackState("open")}
+          onClosePanel={() => setFeedbackState("closed")}
           onResetAnalysis={() => {
-            setSuggestions(undefined);
+            setFeedbackState("closed");
             setAnalysisState("disabled");
           }}
-          onRequestAnalysis={async (text) => {
+          onRequestAnalysis={async () => {
             setAnalysisState("loading");
 
-            await fakeRequest({ text });
+            try {
+              await requestAnalysisAction(title, content);
 
-            setAnalysisState("completed");
-            setSuggestions(mockSuggestions);
+              setAnalysisState("completed");
+            } catch (e) {
+              setAnalysisState("error");
+            }
           }}
         />
       </div>

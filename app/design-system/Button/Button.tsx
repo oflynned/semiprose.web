@@ -6,7 +6,7 @@ type Variant = "primary" | "outlined" | "text";
 
 type Visibility = "visible" | "invisible" | "gone";
 
-type ButtonState = "disabled" | "clickable" | "loading" | "completed";
+type ButtonState = "disabled" | "clickable" | "loading" | "completed" | "error";
 
 type Props = {
   label: string;
