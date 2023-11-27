@@ -28,12 +28,14 @@ export const Waitlist: FunctionComponent = () => {
   return (
     <>
       {accessRequested ? (
-        <Confetti width={window.innerWidth} height={window.outerHeight} />
+        <Confetti width={window.innerWidth} height={window.innerHeight} />
       ) : null}
-      <div className={"sm:h-screen w-screen"}>
+      <div className={"sm:min-h-screen w-screen"}>
         <div className={"flex flex-col sm:flex-row h-full"}>
           <div
-            className={"flex flex-col sm:flex-1 bg-purple-300 justify-between"}
+            className={
+              "flex flex-col sm:min-h-screen sm:flex-1 bg-purple-300 justify-between"
+            }
           >
             <div />
             <div className={"self-center px-4 pt-4"}>
