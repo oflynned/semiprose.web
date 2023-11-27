@@ -8,6 +8,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react";
 import { APP_NAME, TAGLINE } from "~/constants";
 import { useTheme } from "~/hooks";
@@ -20,6 +21,12 @@ export const meta: MetaFunction = () => {
 };
 const App = () => {
   const { theme } = useTheme();
+  const location = useLocation();
+
+  // TODO temporarily disable the rest of the app until we're ready to launch
+  if (location.pathname !== "/waitlist") {
+    return null;
+  }
 
   return (
     <html lang="en" className={theme} data-mode={theme}>

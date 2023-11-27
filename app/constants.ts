@@ -1,7 +1,7 @@
 import type { Suggestion, Prompt, Story, User, Comment } from "~/types";
 
-export const APP_NAME = "Semiprose";
-export const TAGLINE = "A writing app for the rest of us";
+export const APP_NAME = "Story Forge";
+export const TAGLINE = "Ignite your writing superpowers!";
 
 export const user: User = {
   id: "user-1",
