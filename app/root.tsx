@@ -14,7 +14,14 @@ import { APP_NAME, TAGLINE } from "~/constants";
 import { useTheme } from "~/hooks";
 import { ThemeProvider } from "./context";
 
-export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: styles },
+  {
+    rel: "icon",
+    href: "/favicon.svg",
+    type: "image/svg",
+  },
+];
 
 export const meta: MetaFunction = () => {
   return [{ title: APP_NAME }, { name: "description", content: TAGLINE }];
