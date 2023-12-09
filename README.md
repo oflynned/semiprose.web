@@ -8,7 +8,7 @@
 - [x] Create composition feedback component 
 - [x] Skeleton loading state
 - [x] Debounce text entry hook
-- [ ] Add landing page to explain what the product is
+- [x] Add landing page to explain what the product is
 - [ ] Create settings screen
 - [ ] Create comments component 
 - [ ] Create reactions component 
