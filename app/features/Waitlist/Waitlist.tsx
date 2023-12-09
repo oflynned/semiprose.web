@@ -79,7 +79,7 @@ export const Waitlist: FunctionComponent = () => {
               </h2>
 
               <ul className={"flex flex-col gap-4"}>
-                <li>
+                <li className={"flex flex-col gap-1"}>
                   <h3>✏️ Weekly Short Story Challenges</h3>
                   <p className={"leading-relaxed"}>
                     Embark on a creative journey with our dynamic weekly writing
@@ -87,7 +87,7 @@ export const Waitlist: FunctionComponent = () => {
                     genres, and refine your storytelling skills week after week.
                   </p>
                 </li>
-                <li>
+                <li className={"flex flex-col gap-1"}>
                   <h3>📚 Immersive Community Experience</h3>
                   <p className={"leading-relaxed"}>
                     Express your appreciation with a variety of reactions,
@@ -95,7 +95,7 @@ export const Waitlist: FunctionComponent = () => {
                     passionate readers and writers.
                   </p>
                 </li>
-                <li>
+                <li className={"flex flex-col gap-1"}>
                   <h3>✨ Tailored Insights for Mastery</h3>
                   <p className={"leading-relaxed"}>
                     Refine your craft with AI Writing Analysis. Receive
@@ -104,7 +104,7 @@ export const Waitlist: FunctionComponent = () => {
                     receive actionable recommendations.
                   </p>
                 </li>
-                <li>
+                <li className={"flex flex-col gap-1"}>
                   <h3>🌐 Global Collaboration</h3>
                   <p className={"leading-relaxed"}>
                     Connect with writers from around the world. {APP_NAME} is a

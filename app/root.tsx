@@ -34,7 +34,12 @@ export const meta: MetaFunction = () => {
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { pathname } = new URL(request.url);
-  const flags = await fetch("http://localhost:3002/feature-flags");
+
+  const endpoint = new URL(
+    "/feature-flags",
+    process.env.REACT_APP_API_ENDPOINT
+  );
+  const flags = await fetch(endpoint);
   const features = await flags.json();
 
   if (!features["ENABLE_APP"] && pathname !== "/waitlist") {

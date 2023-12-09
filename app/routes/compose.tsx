@@ -20,14 +20,14 @@ type FeedbackState = "open" | "closed";
 type AnalysisState = ComponentProps<typeof FeedbackOverview>["analysisState"];
 
 const getPrompt = async () => {
-  const url = new URL("/prompt", "http://localhost:3002");
+  const url = new URL("/prompt", process.env.REACT_APP_API_ENDPOINT);
   const response = await fetch(url);
 
   return response.json();
 };
 
 const getFeedback = async () => {
-  const url = new URL("/analyser/feedback", "http://localhost:3002");
+  const url = new URL("/analyser/feedback", process.env.REACT_APP_API_ENDPOINT);
   const response = await fetch(url);
 
   return response.json();
