@@ -1,6 +1,11 @@
 import styles from "./tailwind.css";
 
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type {
+  LinksFunction,
+  MetaFunction,
+  LoaderFunctionArgs,
+} from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -8,7 +13,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLocation,
+  useLoaderData,
 } from "@remix-run/react";
 import { APP_NAME, TAGLINE } from "~/constants";
 import { useTheme } from "~/hooks";
@@ -26,14 +31,22 @@ export const links: LinksFunction = () => [
 export const meta: MetaFunction = () => {
   return [{ title: APP_NAME }, { name: "description", content: TAGLINE }];
 };
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { pathname } = new URL(request.url);
+  const flags = await fetch("http://localhost:3002/feature-flags");
+  const features = await flags.json();
+
+  if (!features["ENABLE_APP"] && pathname !== "/waitlist") {
+    return redirect("/waitlist");
+  }
+
+  return json({ features });
+}
+
 const App = () => {
   const { theme } = useTheme();
-  const location = useLocation();
-
-  // TODO temporarily disable the rest of the app until we're ready to launch
-  if (location.pathname !== "/waitlist") {
-    return null;
-  }
+  useLoaderData<typeof loader>();
 
   return (
     <html lang="en" className={theme} data-mode={theme}>
