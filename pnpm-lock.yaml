@@ -98,8 +98,8 @@ devDependencies:
     specifier: 7.5.3
     version: 7.5.3
   storybook-addon-react-router-v6:
-    specifier: 2.0.8
-    version: 2.0.8(@storybook/blocks@7.5.3)(@storybook/channels@7.5.3)(@storybook/components@7.5.3)(@storybook/core-events@7.5.3)(@storybook/manager-api@7.5.3)(@storybook/preview-api@7.5.3)(@storybook/theming@7.5.3)(react-dom@18.2.0)(react-router-dom@6.18.0)(react@18.2.0)
+    specifier: 2.0.15
+    version: 2.0.15(@storybook/blocks@7.5.3)(@storybook/channels@7.5.3)(@storybook/components@7.5.3)(@storybook/core-events@7.5.3)(@storybook/manager-api@7.5.3)(@storybook/preview-api@7.5.3)(@storybook/theming@7.5.3)(react-dom@18.2.0)(react-router-dom@6.18.0)(react@18.2.0)
   storybook-tailwind-dark-mode:
     specifier: 1.0.22
     version: 1.0.22(@storybook/addons@7.5.2)(@storybook/api@7.5.2)(@storybook/components@7.5.3)(@storybook/core-events@7.5.3)(@storybook/theming@7.5.3)(react-dom@18.2.0)(react@18.2.0)
@@ -10358,8 +10358,9 @@ packages:
     resolution: {integrity: sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==}
     dev: true
 
-  /storybook-addon-react-router-v6@2.0.8(@storybook/blocks@7.5.3)(@storybook/channels@7.5.3)(@storybook/components@7.5.3)(@storybook/core-events@7.5.3)(@storybook/manager-api@7.5.3)(@storybook/preview-api@7.5.3)(@storybook/theming@7.5.3)(react-dom@18.2.0)(react-router-dom@6.18.0)(react@18.2.0):
-    resolution: {integrity: sha512-Pi97ccelVq6RiLxSg8/puVeiNQnpdl5WlEcpF2wn6IxKlOIpOBOv70W1VGemUpAmJur+7EM79Mf6vMXiRK2W0g==}
+  /storybook-addon-react-router-v6@2.0.15(@storybook/blocks@7.5.3)(@storybook/channels@7.5.3)(@storybook/components@7.5.3)(@storybook/core-events@7.5.3)(@storybook/manager-api@7.5.3)(@storybook/preview-api@7.5.3)(@storybook/theming@7.5.3)(react-dom@18.2.0)(react-router-dom@6.18.0)(react@18.2.0):
+    resolution: {integrity: sha512-4vOYIQwehlQLyXaCT9K0Iu0po2Z+pANGsqkfm/BQuAEjE9MoN7vrsrQLHINhKbmQVtNMmuS/oBR3GGNbqQ1gew==}
+    requiresBuild: true
     peerDependencies:
       '@storybook/blocks': ^7.0.0
       '@storybook/channels': ^7.0.0
