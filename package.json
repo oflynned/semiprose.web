@@ -42,7 +42,7 @@
     "autoprefixer": "10.4.16",
     "eslint": "8.53.0",
     "eslint-plugin-storybook": "0.6.15",
-    "postcss": "8.4.31",
+    "postcss": "8.4.38",
     "storybook": "7.5.3",
     "storybook-addon-react-router-v6": "2.0.8",
     "storybook-tailwind-dark-mode": "1.0.22",
