@@ -12,7 +12,7 @@ export const Card: FunctionComponent<PropsWithChildren<Props>> = ({
   return (
     <div
       className={clsx([
-        "rounded-2xl overflow-hidden",
+        "rounded-xl overflow-hidden",
         { "border border-gray-200": border },
       ])}
     >
