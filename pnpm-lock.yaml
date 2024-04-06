@@ -36,7 +36,7 @@ dependencies:
 devDependencies:
   '@remix-run/dev':
     specifier: 2.8.1
-    version: 2.8.1(@remix-run/serve@2.8.1)(typescript@5.4.4)(vite@5.2.8)
+    version: 2.8.1(@remix-run/serve@2.8.1)(typescript@5.4.4)(vite@4.5.3)
   '@remix-run/eslint-config':
     specifier: 2.8.1
     version: 2.8.1(eslint@8.57.0)(react@18.2.0)(typescript@5.4.4)
@@ -60,7 +60,7 @@ devDependencies:
     version: 8.0.6(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.4)
   '@storybook/react-vite':
     specifier: 8.0.6
-    version: 8.0.6(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.4)(vite@5.2.8)
+    version: 8.0.6(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.4)(vite@4.5.3)
   '@storybook/testing-library':
     specifier: 0.2.2
     version: 0.2.2
@@ -75,7 +75,7 @@ devDependencies:
     version: 2.8.1(@remix-run/dev@2.8.1)(@remix-run/node@2.8.1)(@remix-run/server-runtime@2.8.1)(react-dom@18.2.0)(react@18.2.0)
   '@vitejs/plugin-react':
     specifier: 4.2.1
-    version: 4.2.1(vite@5.2.8)
+    version: 4.2.1(vite@4.5.3)
   autoprefixer:
     specifier: 10.4.19
     version: 10.4.19(postcss@8.4.38)
@@ -104,11 +104,11 @@ devDependencies:
     specifier: 5.4.4
     version: 5.4.4
   vite:
-    specifier: 5.2.8
-    version: 5.2.8
+    specifier: 4.5.3
+    version: 4.5.3
   vite-tsconfig-paths:
     specifier: 4.3.2
-    version: 4.3.2(typescript@5.4.4)(vite@5.2.8)
+    version: 4.3.2(typescript@5.4.4)(vite@4.5.3)
 
 packages:
 
@@ -2486,7 +2486,7 @@ packages:
       '@sinclair/typebox': 0.27.8
     dev: true
 
-  /@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.4.4)(vite@5.2.8):
+  /@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.4.4)(vite@4.5.3):
     resolution: {integrity: sha512-2D6y7fNvFmsLmRt6UCOFJPvFoPMJGT0Uh1Wg0RaigUp7kdQPs6yYn8Dmx6GZkOH/NW0yMTwRz/p0SRMMRo50vA==}
     peerDependencies:
       typescript: '>= 4.3.x'
@@ -2500,7 +2500,7 @@ packages:
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.4.4)
       typescript: 5.4.4
-      vite: 5.2.8
+      vite: 4.5.3
     dev: true
 
   /@jridgewell/gen-mapping@0.3.3:
@@ -3244,7 +3244,7 @@ packages:
       '@babel/runtime': 7.23.2
     dev: true
 
-  /@remix-run/dev@2.8.1(@remix-run/serve@2.8.1)(typescript@5.4.4)(vite@5.2.8):
+  /@remix-run/dev@2.8.1(@remix-run/serve@2.8.1)(typescript@5.4.4)(vite@4.5.3):
     resolution: {integrity: sha512-qFt4jAsAJeIOyg6ngeSnTG/9Z5N9QJfeThP/8wRHc1crqYgTiEtcI3DZ8WlAXjVSF5emgn/ZZKqzLAI02OgMfQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -3317,7 +3317,7 @@ packages:
       tar-fs: 2.1.1
       tsconfig-paths: 4.2.0
       typescript: 5.4.4
-      vite: 5.2.8
+      vite: 4.5.3
       ws: 7.5.9
     transitivePeerDependencies:
       - '@types/node'
@@ -3513,126 +3513,6 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
     dev: true
-
-  /@rollup/rollup-android-arm-eabi@4.14.0:
-    resolution: {integrity: sha512-jwXtxYbRt1V+CdQSy6Z+uZti7JF5irRKF8hlKfEnF/xJpcNGuuiZMBvuoYM+x9sr9iWGnzrlM0+9hvQ1kgkf1w==}
-    cpu: [arm]
-    os: [android]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-android-arm64@4.14.0:
-    resolution: {integrity: sha512-fI9nduZhCccjzlsA/OuAwtFGWocxA4gqXGTLvOyiF8d+8o0fZUeSztixkYjcGq1fGZY3Tkq4yRvHPFxU+jdZ9Q==}
-    cpu: [arm64]
-    os: [android]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-darwin-arm64@4.14.0:
-    resolution: {integrity: sha512-BcnSPRM76/cD2gQC+rQNGBN6GStBs2pl/FpweW8JYuz5J/IEa0Fr4AtrPv766DB/6b2MZ/AfSIOSGw3nEIP8SA==}
-    cpu: [arm64]
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-darwin-x64@4.14.0:
-    resolution: {integrity: sha512-LDyFB9GRolGN7XI6955aFeI3wCdCUszFWumWU0deHA8VpR3nWRrjG6GtGjBrQxQKFevnUTHKCfPR4IvrW3kCgQ==}
-    cpu: [x64]
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-linux-arm-gnueabihf@4.14.0:
-    resolution: {integrity: sha512-ygrGVhQP47mRh0AAD0zl6QqCbNsf0eTo+vgwkY6LunBcg0f2Jv365GXlDUECIyoXp1kKwL5WW6rsO429DBY/bA==}
-    cpu: [arm]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-linux-arm64-gnu@4.14.0:
-    resolution: {integrity: sha512-x+uJ6MAYRlHGe9wi4HQjxpaKHPM3d3JjqqCkeC5gpnnI6OWovLdXTpfa8trjxPLnWKyBsSi5kne+146GAxFt4A==}
-    cpu: [arm64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-linux-arm64-musl@4.14.0:
-    resolution: {integrity: sha512-nrRw8ZTQKg6+Lttwqo6a2VxR9tOroa2m91XbdQ2sUUzHoedXlsyvY1fN4xWdqz8PKmf4orDwejxXHjh7YBGUCA==}
-    cpu: [arm64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-linux-powerpc64le-gnu@4.14.0:
-    resolution: {integrity: sha512-xV0d5jDb4aFu84XKr+lcUJ9y3qpIWhttO3Qev97z8DKLXR62LC3cXT/bMZXrjLF9X+P5oSmJTzAhqwUbY96PnA==}
-    cpu: [ppc64le]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-linux-riscv64-gnu@4.14.0:
-    resolution: {integrity: sha512-SDDhBQwZX6LPRoPYjAZWyL27LbcBo7WdBFWJi5PI9RPCzU8ijzkQn7tt8NXiXRiFMJCVpkuMkBf4OxSxVMizAw==}
-    cpu: [riscv64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-linux-s390x-gnu@4.14.0:
-    resolution: {integrity: sha512-RxB/qez8zIDshNJDufYlTT0ZTVut5eCpAZ3bdXDU9yTxBzui3KhbGjROK2OYTTor7alM7XBhssgoO3CZ0XD3qA==}
-    cpu: [s390x]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-linux-x64-gnu@4.14.0:
-    resolution: {integrity: sha512-C6y6z2eCNCfhZxT9u+jAM2Fup89ZjiG5pIzZIDycs1IwESviLxwkQcFRGLjnDrP+PT+v5i4YFvlcfAs+LnreXg==}
-    cpu: [x64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-linux-x64-musl@4.14.0:
-    resolution: {integrity: sha512-i0QwbHYfnOMYsBEyjxcwGu5SMIi9sImDVjDg087hpzXqhBSosxkE7gyIYFHgfFl4mr7RrXksIBZ4DoLoP4FhJg==}
-    cpu: [x64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-win32-arm64-msvc@4.14.0:
-    resolution: {integrity: sha512-Fq52EYb0riNHLBTAcL0cun+rRwyZ10S9vKzhGKKgeD+XbwunszSY0rVMco5KbOsTlwovP2rTOkiII/fQ4ih/zQ==}
-    cpu: [arm64]
-    os: [win32]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-win32-ia32-msvc@4.14.0:
-    resolution: {integrity: sha512-e/PBHxPdJ00O9p5Ui43+vixSgVf4NlLsmV6QneGERJ3lnjIua/kim6PRFe3iDueT1rQcgSkYP8ZBBXa/h4iPvw==}
-    cpu: [ia32]
-    os: [win32]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rollup/rollup-win32-x64-msvc@4.14.0:
-    resolution: {integrity: sha512-aGg7iToJjdklmxlUlJh/PaPNa4PmqHfyRMLunbL3eaMO0gp656+q1zOKkpJ/CVe9CryJv6tAN1HDoR8cNGzkag==}
-    cpu: [x64]
-    os: [win32]
-    requiresBuild: true
-    dev: true
-    optional: true
 
   /@rushstack/eslint-patch@1.5.1:
     resolution: {integrity: sha512-6i/8UoL0P5y4leBIGzvkZdS85RDMG9y1ihZzmTZQ5LdHUYmZ7pKFoj8X0236s3lusPs1Fa5HTQUpwI+UfTcmeA==}
@@ -3918,10 +3798,10 @@ packages:
       '@storybook/manager': 8.0.6
       '@storybook/node-logger': 8.0.6
       '@types/ejs': 3.1.4
-      '@yarnpkg/esbuild-plugin-pnp': 3.0.0-rc.15(esbuild@0.18.20)
+      '@yarnpkg/esbuild-plugin-pnp': 3.0.0-rc.15(esbuild@0.20.2)
       browser-assert: 1.2.1
       ejs: 3.1.9
-      esbuild: 0.18.20
+      esbuild: 0.20.2
       esbuild-plugin-alias: 0.2.1
       express: 4.18.2
       fs-extra: 11.1.1
@@ -3932,7 +3812,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/builder-vite@8.0.6(typescript@5.4.4)(vite@5.2.8):
+  /@storybook/builder-vite@8.0.6(typescript@5.4.4)(vite@4.5.3):
     resolution: {integrity: sha512-uQe1tTXdWXhP1ZO7sBRLUS5WKoD/ibrBWhyG6gY0RHC8RtGIx1sYxbg7ZzUXXX8z1GH0QJlOKrlAfcHzIchscw==}
     peerDependencies:
       '@preact/preset-vite': '*'
@@ -3965,7 +3845,7 @@ packages:
       magic-string: 0.30.5
       ts-dedent: 2.2.0
       typescript: 5.4.4
-      vite: 5.2.8
+      vite: 4.5.3
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -4528,7 +4408,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@storybook/react-vite@8.0.6(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.4)(vite@5.2.8):
+  /@storybook/react-vite@8.0.6(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.4)(vite@4.5.3):
     resolution: {integrity: sha512-M6R6nl7dcXZ+wQHqFD1Qh/v4GPygqlC0pwE/cZ7FKUYA2wO3qm81OpuZYBKJoFIyHbRP/8oPKSvuzkgZvGY+/g==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -4536,9 +4416,9 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
       vite: ^4.0.0 || ^5.0.0
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.4.4)(vite@5.2.8)
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.4.4)(vite@4.5.3)
       '@rollup/pluginutils': 5.0.5
-      '@storybook/builder-vite': 8.0.6(typescript@5.4.4)(vite@5.2.8)
+      '@storybook/builder-vite': 8.0.6(typescript@5.4.4)(vite@4.5.3)
       '@storybook/node-logger': 8.0.6
       '@storybook/react': 8.0.6(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.4)
       find-up: 5.0.0
@@ -4548,7 +4428,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       resolve: 1.22.8
       tsconfig-paths: 4.2.0
-      vite: 5.2.8
+      vite: 4.5.3
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - encoding
@@ -4961,10 +4841,6 @@ packages:
     resolution: {integrity: sha512-CS2rOaoQ/eAgAfcTfq6amKG7bsN+EMcgGY4FAFQdvSj2y1ixvOZTUA9mOtCai7E1SYu283XNw7urKK30nP3wkQ==}
     dev: true
 
-  /@types/estree@1.0.5:
-    resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
-    dev: true
-
   /@types/express-serve-static-core@4.17.39:
     resolution: {integrity: sha512-BiEUfAiGCOllomsRAZOiMFP7LAnrifHpt56pc4Z7l9K6ACyN06Ns1JLMBxwkfLOjJRlSf06NwWsT7yzfpaVpyQ==}
     dependencies:
@@ -5334,7 +5210,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      '@remix-run/dev': 2.8.1(@remix-run/serve@2.8.1)(typescript@5.4.4)(vite@5.2.8)
+      '@remix-run/dev': 2.8.1(@remix-run/serve@2.8.1)(typescript@5.4.4)(vite@4.5.3)
       '@remix-run/node': 2.8.1(typescript@5.4.4)
       '@remix-run/server-runtime': 2.8.1(typescript@5.4.4)
       '@vercel/static-config': 3.0.0
@@ -5352,7 +5228,7 @@ packages:
       ts-morph: 12.0.0
     dev: true
 
-  /@vitejs/plugin-react@4.2.1(vite@5.2.8):
+  /@vitejs/plugin-react@4.2.1(vite@4.5.3):
     resolution: {integrity: sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -5363,7 +5239,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.24.1(@babel/core@7.24.4)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.0
-      vite: 5.2.8
+      vite: 4.5.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5409,13 +5285,13 @@ packages:
   /@web3-storage/multipart-parser@1.0.0:
     resolution: {integrity: sha512-BEO6al7BYqcnfX15W2cnGR+Q566ACXAT9UQykORCWW80lmkpWsnEob6zJS1ZVBKsSJC8+7vJkHwlp+lXG1UCdw==}
 
-  /@yarnpkg/esbuild-plugin-pnp@3.0.0-rc.15(esbuild@0.18.20):
+  /@yarnpkg/esbuild-plugin-pnp@3.0.0-rc.15(esbuild@0.20.2):
     resolution: {integrity: sha512-kYzDJO5CA9sy+on/s2aIW0411AklfCi8Ck/4QDivOqsMKpStZA2SsR+X27VTggGwpStWaLrjJcDcdDMowtG8MA==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
       esbuild: '>=0.10.0'
     dependencies:
-      esbuild: 0.18.20
+      esbuild: 0.20.2
       tslib: 2.6.2
     dev: true
 
@@ -10596,31 +10472,6 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /rollup@4.14.0:
-    resolution: {integrity: sha512-Qe7w62TyawbDzB4yt32R0+AbIo6m1/sqO7UPzFS8Z/ksL5mrfhA0v4CavfdmFav3D+ub4QeAgsGEe84DoWe/nQ==}
-    engines: {node: '>=18.0.0', npm: '>=8.0.0'}
-    hasBin: true
-    dependencies:
-      '@types/estree': 1.0.5
-    optionalDependencies:
-      '@rollup/rollup-android-arm-eabi': 4.14.0
-      '@rollup/rollup-android-arm64': 4.14.0
-      '@rollup/rollup-darwin-arm64': 4.14.0
-      '@rollup/rollup-darwin-x64': 4.14.0
-      '@rollup/rollup-linux-arm-gnueabihf': 4.14.0
-      '@rollup/rollup-linux-arm64-gnu': 4.14.0
-      '@rollup/rollup-linux-arm64-musl': 4.14.0
-      '@rollup/rollup-linux-powerpc64le-gnu': 4.14.0
-      '@rollup/rollup-linux-riscv64-gnu': 4.14.0
-      '@rollup/rollup-linux-s390x-gnu': 4.14.0
-      '@rollup/rollup-linux-x64-gnu': 4.14.0
-      '@rollup/rollup-linux-x64-musl': 4.14.0
-      '@rollup/rollup-win32-arm64-msvc': 4.14.0
-      '@rollup/rollup-win32-ia32-msvc': 4.14.0
-      '@rollup/rollup-win32-x64-msvc': 4.14.0
-      fsevents: 2.3.3
-    dev: true
-
   /run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
@@ -11762,7 +11613,7 @@ packages:
       - terser
     dev: true
 
-  /vite-tsconfig-paths@4.3.2(typescript@5.4.4)(vite@5.2.8):
+  /vite-tsconfig-paths@4.3.2(typescript@5.4.4)(vite@4.5.3):
     resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
     peerDependencies:
       vite: '*'
@@ -11773,7 +11624,7 @@ packages:
       debug: 4.3.4
       globrex: 0.1.2
       tsconfck: 3.0.3(typescript@5.4.4)
-      vite: 5.2.8
+      vite: 4.5.3
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -11810,41 +11661,6 @@ packages:
       esbuild: 0.18.20
       postcss: 8.4.38
       rollup: 3.29.4
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: true
-
-  /vite@5.2.8:
-    resolution: {integrity: sha512-OyZR+c1CE8yeHw5V5t59aXsUPPVTHMDjEZz8MgguLL/Q7NblxhZUlTu9xSPqlsUO/y+X7dlU05jdhvyycD55DA==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^18.0.0 || >=20.0.0
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.20.2
-      postcss: 8.4.38
-      rollup: 4.14.0
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
