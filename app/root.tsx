@@ -18,6 +18,7 @@ import {
 import { APP_NAME, TAGLINE } from "~/constants";
 import { useTheme } from "~/hooks";
 import { ThemeProvider } from "./context";
+import { getFeatures } from "~/features";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
@@ -34,13 +35,7 @@ export const meta: MetaFunction = () => {
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { pathname } = new URL(request.url);
-
-  const endpoint = new URL(
-    "/feature-flags",
-    process.env.REACT_APP_API_ENDPOINT
-  );
-  const flags = await fetch(endpoint);
-  const features = await flags.json();
+  const features = await getFeatures();
 
   if (!features["ENABLE_APP"] && pathname !== "/waitlist") {
     return redirect("/waitlist");

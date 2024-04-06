@@ -17,9 +17,7 @@ export const Comment: FunctionComponent<Props> = ({
       <div className={"flex gap-2 p-4"}>
         <Avatar {...user} />
         <div className={"flex flex-col"}>
-          <div className={"flex gap-2"}>
-            <span>{[handle, toApproximateTime(postedAt)].join(" — ")}</span>
-          </div>
+          <p>{[handle, toApproximateTime(postedAt)].join(" — ")}</p>
           <p>{comment}</p>
         </div>
       </div>

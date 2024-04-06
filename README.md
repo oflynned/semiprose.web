@@ -9,10 +9,10 @@
 - [x] Skeleton loading state
 - [x] Debounce text entry hook
 - [x] Add landing page to explain what the product is
+- [x] Split grid into columns depending on screen size
 - [ ] Create settings screen
 - [ ] Create comments component 
 - [ ] Create reactions component 
 - [ ] Add Auth0 integration
 - [ ] Dark mode
-- [ ] Split grid into columns depending on screen size
 - [ ] Framer motion animations

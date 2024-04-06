@@ -108,16 +108,16 @@ export const ComposeStory: FunctionComponent<Props> = ({
             setTitle(value);
           }}
         />
-        <div className={"flex-1"}>
+        <div className={"flex flex-col flex-1 gap-8"}>
           {prompt ? <Prompt {...prompt} /> : <PromptSkeleton />}
+          <Paper
+            value={content}
+            onChange={(value) => {
+              onTextChange(title, value);
+              setContent(value);
+            }}
+          />
         </div>
-        <Paper
-          value={content}
-          onChange={(value) => {
-            onTextChange(title, value);
-            setContent(value);
-          }}
-        />
         <div className={"flex gap-4 justify-end"}>
           <SaveDraftButton
             state={draftState}

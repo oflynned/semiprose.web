@@ -30,11 +30,12 @@ export default function Explore() {
         </div>
         <div className={"flex flex-col gap-4"}>
           <h3 className={"font-medium text-2xl"}>{"Others wrote"}</h3>
-          <div
-            className={"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4"}
-          >
+          <div className={"gap-4 grid grid-cols-1 md:grid-cols-2"}>
             {pastStories.map((story) => (
-              <div className={"flex flex-col max-w-screen-md"} key={story.id}>
+              <div
+                className={"flex flex-col min-w-[400px] max-w-screen-md"}
+                key={story.id}
+              >
                 <Link to={`/stories/${story.id}`}>
                   <Excerpt {...story} />
                 </Link>
