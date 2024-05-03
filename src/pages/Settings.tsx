@@ -1,6 +1,6 @@
 import { Layout } from "~/design-system";
 
-export default function Settings() {
+export const Settings = () => {
   return (
     <Layout>
       <div className={"flex flex-col gap-4"}>
@@ -16,4 +16,4 @@ export default function Settings() {
       </div>
     </Layout>
   );
-}
+};

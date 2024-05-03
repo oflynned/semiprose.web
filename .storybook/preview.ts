@@ -1,4 +1,4 @@
-import "../app/tailwind.css";
+import "../src/tailwind.css";
 
 import type { Preview } from "@storybook/react";
 import {

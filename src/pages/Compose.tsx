@@ -1,13 +1,6 @@
-import { useLoaderData } from "@remix-run/react";
 import type { Suggestion } from "~/types";
-import type { LoaderFunction } from "@remix-run/node";
 import type { ComponentProps } from "react";
-import {
-  ComposeStory,
-  FeedbackOverview,
-  getFeedback,
-  getFeatures,
-} from "~/features";
+import { ComposeStory, FeedbackOverview, Feature } from "~/features";
 import { useState } from "react";
 import { Layout } from "~/design-system";
 import { isDefined } from "~/helpers";
@@ -23,31 +16,33 @@ type FeedbackState = "open" | "closed";
 
 type AnalysisState = ComponentProps<typeof FeedbackOverview>["analysisState"];
 
-const getPrompt = async () => {
-  const url = new URL("/prompts/latest", process.env.REACT_APP_API_ENDPOINT);
-  const response = await fetch(url);
+// const getPrompt = async () => {
+//   const url = new URL("/prompts/latest", process.env.REACT_APP_API_ENDPOINT);
+//   const response = await fetch(url);
+//
+//   return response.json();
+// };
+//
+// type LoaderData = {
+//   suggestions: Suggestion[];
+//   prompt: Prompt;
+//   features: Record<string, boolean>;
+// };
+//
+// export const get = async () => {
+//   const [suggestions, prompt, features] = await Promise.all([
+//     getFeedback(),
+//     getPrompt(),
+//     getFeatures(),
+//   ]);
+//
+//   return { suggestions, prompt, features };
+// };
 
-  return response.json();
-};
-
-type LoaderData = {
-  suggestions: Suggestion[];
-  prompt: Prompt;
-  features: Record<string, boolean>;
-};
-
-export const loader: LoaderFunction = async () => {
-  const [suggestions, prompt, features] = await Promise.all([
-    getFeedback(),
-    getPrompt(),
-    getFeatures(),
-  ]);
-
-  return { suggestions, prompt, features };
-};
-
-export default function ComposeRoute() {
-  const { suggestions, prompt, features } = useLoaderData<LoaderData>();
+export const Compose = () => {
+  const [prompt] = useState<Prompt | undefined>();
+  const [suggestions] = useState<Suggestion[] | undefined>();
+  const [features] = useState<Feature[] | undefined>();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -55,8 +50,11 @@ export default function ComposeRoute() {
   const [analysisState, setAnalysisState] = useState<AnalysisState>("disabled");
   const [feedbackState, setFeedbackState] = useState<FeedbackState>("closed");
 
-  console.log(features);
   const enableFeedback = false;
+
+  if (!prompt || !suggestions || !features) {
+    return null;
+  }
 
   return (
     <Layout>
@@ -116,4 +114,4 @@ export default function ComposeRoute() {
       </div>
     </Layout>
   );
-}
+};

@@ -1,7 +1,7 @@
-import { useLocation } from "@remix-run/react";
 import type { FunctionComponent, PropsWithChildren } from "react";
 import { NavigationBar } from "~/design-system";
 import { user } from "~/constants";
+import { useLocation } from "react-router";
 
 export const Layout: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const location = useLocation();

@@ -1,24 +1,14 @@
 import { Comment, Layout, Story } from "~/design-system";
-import { useLoaderData } from "@remix-run/react";
-import type { LoaderFunction } from "@remix-run/node";
 import { pastStories } from "~/constants";
-import type { Story as StoryType } from "~/types";
-import { json } from "@remix-run/node";
-import { useState } from "react";
+import { ComponentProps, useState } from "react";
 
-type LoaderData = {
-  story: Awaited<StoryType | undefined>;
+export const getStory = async (slug: string) => {
+  return pastStories.find((story) => story.id === slug);
 };
 
-export const loader: LoaderFunction = async ({ params }) => {
-  const story = pastStories.find((story) => story.id === params.slug);
-
-  return json<LoaderData>({ story });
-};
-
-export default function StoryDetail() {
-  const { story } = useLoaderData<LoaderData>();
+export const StoryDetail = () => {
   const [comment, setComment] = useState("");
+  const [story] = useState<ComponentProps<typeof Story> | undefined>();
 
   return (
     <Layout>
@@ -45,4 +35,4 @@ export default function StoryDetail() {
       )}
     </Layout>
   );
-}
+};
