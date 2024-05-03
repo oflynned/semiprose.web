@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SuggestionSkeleton } from "~/design-system";
+import { SuggestionSkeleton } from "./SuggestionSkeleton.tsx";
 
 const meta = {
   title: "SuggestionSkeleton",

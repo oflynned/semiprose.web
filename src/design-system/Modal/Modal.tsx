@@ -1,7 +1,7 @@
 import type { FunctionComponent, PropsWithChildren } from "react";
-import { Card } from "~/design-system";
+import { Card } from "../Card";
 import { useRef } from "react";
-import { useClickOutside } from "~/hooks";
+import { useClickOutside } from "../../hooks";
 
 type Props = {
   open?: boolean;

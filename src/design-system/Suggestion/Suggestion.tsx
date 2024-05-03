@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "react";
-import type { Suggestion as SuggestionType } from "~/types";
+import type { Suggestion as SuggestionType } from "../../types";
 import clsx from "clsx";
 
 type Props = {

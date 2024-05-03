@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "react";
-import type { User } from "~/types";
+import { User } from "../../types";
 
 type Props = Pick<User, "initials">;
 

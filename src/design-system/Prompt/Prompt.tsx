@@ -1,6 +1,6 @@
 import type { FunctionComponent } from "react";
-import { Card } from "~/design-system";
-import type { Prompt as PromptType } from "~/types";
+import { Card } from "../Card";
+import type { Prompt as PromptType } from "../../types";
 
 export const Prompt: FunctionComponent<PromptType> = ({ week, text }) => {
   return (

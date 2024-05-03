@@ -1,17 +1,13 @@
 import type { ComponentProps, FunctionComponent } from "react";
-import type { Button } from "~/design-system";
-import {
-  Suggestion,
-  Card,
-  Pill,
-  PillSkeleton,
-  SuggestionSkeleton,
-} from "~/design-system";
-import { toPercentage } from "~/formatters";
-import { mockSuggestions } from "~/constants";
-import { isDefined } from "~/helpers";
-import { AnalyseButton } from "~/features/Compose/FeedbackOverview/AnalyseButton";
-import { ResetFeedbackButton } from "~/features/Compose/FeedbackOverview/ResetFeedbackButton";
+import { Suggestion, SuggestionSkeleton } from "../Suggestion";
+import { Button } from "../Button";
+import { isDefined } from "../../helpers";
+import { Card } from "../Card";
+import { Pill, PillSkeleton } from "../Pill";
+import { toPercentage } from "../../formatters";
+import { mockSuggestions } from "../../constants.ts";
+import { ResetFeedbackButton } from "../../features/Compose/FeedbackOverview/ResetFeedbackButton";
+import { AnalyseButton } from "../../features/Compose/FeedbackOverview/AnalyseButton";
 
 type Props = {
   suggestions?: ComponentProps<typeof Suggestion>["suggestion"][];

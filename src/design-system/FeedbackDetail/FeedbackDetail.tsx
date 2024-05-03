@@ -1,6 +1,7 @@
 import type { FunctionComponent } from "react";
-import type { Suggestion } from "~/types";
-import { Button, Card } from "~/design-system";
+import { Suggestion } from "../../types";
+import { Card } from "../Card";
+import { Button } from "../Button";
 
 type Props = {
   improvement: Suggestion;

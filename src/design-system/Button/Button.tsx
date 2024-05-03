@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, FunctionComponent } from "react";
 import clsx from "clsx";
-import { Spinner } from "~/design-system";
+import { Spinner } from "../Spinner";
 
 type Variant = "primary" | "outlined" | "text";
 

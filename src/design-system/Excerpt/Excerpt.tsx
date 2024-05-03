@@ -1,7 +1,7 @@
 import type { FunctionComponent } from "react";
-import type { Story } from "~/types";
-import { Card } from "~/design-system";
-import { Tag } from "~/design-system/Tag";
+import type { Story } from "../../types";
+import { Card } from "../Card";
+import { Tag } from "../Tag";
 
 type Props = Pick<Story, "id" | "title" | "paragraphs" | "tags">;
 

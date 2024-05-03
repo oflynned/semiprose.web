@@ -1,5 +1,5 @@
-import { Excerpt, Layout, Search } from "~/design-system";
-import { pastStories } from "~/constants";
+import { Excerpt, Layout, Search } from "../../design-system";
+import { pastStories } from "../../constants";
 
 export const Stories = () => {
   return (

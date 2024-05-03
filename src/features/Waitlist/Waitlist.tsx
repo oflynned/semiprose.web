@@ -1,8 +1,8 @@
 import type { FunctionComponent } from "react";
 import { useState } from "react";
-import { Button } from "~/design-system";
-import { APP_NAME } from "~/constants";
 import Confetti from "react-confetti";
+import { APP_NAME } from "../../constants.ts";
+import { Button } from "../../design-system";
 
 export const Waitlist: FunctionComponent = () => {
   const [email, setEmail] = useState<string>();
@@ -70,7 +70,7 @@ export const Waitlist: FunctionComponent = () => {
 
               <div>
                 {accessRequested ? (
-                  <p>You've been added successfully!</p>
+                  <p>{"You've been added successfully!"}</p>
                 ) : null}
               </div>
 

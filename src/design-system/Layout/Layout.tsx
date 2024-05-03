@@ -1,6 +1,6 @@
 import type { FunctionComponent, PropsWithChildren } from "react";
-import { NavigationBar } from "~/design-system";
-import { user } from "~/constants";
+import { NavigationBar } from "../NavigationBar";
+import { user } from "../../constants";
 import { useLocation } from "react-router";
 
 export const Layout: FunctionComponent<PropsWithChildren> = ({ children }) => {

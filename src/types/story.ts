@@ -1,4 +1,4 @@
-import type { Comment, Prompt, User } from "~/types";
+import type { Comment, Prompt, User } from "../types";
 
 export type Story = {
   id: string;
