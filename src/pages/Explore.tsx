@@ -1,6 +1,6 @@
-import { Button, Excerpt, Layout, Prompt, Search } from "~/design-system";
-import { pastStories, prompt } from "~/constants";
-import { toCount } from "~/formatters";
+import { Button, Excerpt, Layout, Prompt, Search } from "../design-system";
+import { pastStories, prompt } from "../constants";
+import { toCount } from "../formatters";
 import { useNavigate } from "react-router";
 
 export const Explore = () => {

@@ -1,4 +1,4 @@
-import { Button } from "~/design-system";
+import { Button } from "../design-system";
 import { useNavigate } from "react-router";
 
 export const Homepage = () => {

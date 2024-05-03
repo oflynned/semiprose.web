@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PillSkeleton } from "~/design-system";
+import { PillSkeleton } from "./PillSkeleton";
 
 const meta = {
   title: "PillSkeleton",

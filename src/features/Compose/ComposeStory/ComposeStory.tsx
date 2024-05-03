@@ -1,14 +1,14 @@
-import {
-  Prompt,
-  StoryTitleInput,
-  Paper,
-  PromptSkeleton,
-} from "~/design-system";
 import type { ComponentProps, FunctionComponent } from "react";
 import { useState } from "react";
 import clsx from "clsx";
 import { SaveDraftButton } from "./SaveDraftButton";
 import { PublishButton } from "./PublishButton";
+import {
+  Paper,
+  Prompt,
+  PromptSkeleton,
+  StoryTitleInput,
+} from "../../../design-system";
 
 type Props = {
   prompt?: ComponentProps<typeof Prompt>;

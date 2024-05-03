@@ -1,16 +1,17 @@
+import "./index.css";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "~/context";
-import { Homepage } from "~/pages/Homepage.tsx";
-import { Login } from "~/pages/Login.tsx";
-import { Explore } from "~/pages/Explore.tsx";
-import { Compose } from "~/pages/Compose.tsx";
-import { Waitlist } from "~/features";
-import { Stories } from "~/pages/stories";
-import { StoryDetail } from "~/pages/stories/slugId.tsx";
-import { Notifications } from "~/pages/Notifications.tsx";
+import { FeatureProvider, ThemeProvider } from "./context";
+import { Homepage } from "./pages/Homepage";
+import { Login } from "./pages/Login";
+import { Explore } from "./pages/Explore";
+import { Compose } from "./pages/Compose";
+import { Waitlist } from "./features";
+import { Stories } from "./pages/stories";
+import { StoryDetail } from "./pages/stories/slugId";
+import { Notifications } from "./pages/Notifications";
 
 const router = createBrowserRouter([
   {
@@ -54,7 +55,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <FeatureProvider>
+        <RouterProvider router={router} />
+      </FeatureProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

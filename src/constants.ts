@@ -1,4 +1,4 @@
-import type { Suggestion, Prompt, Story, User, Comment } from "~/types";
+import type { Suggestion, Prompt, Story, User, Comment } from "./types";
 
 export const APP_NAME = "Semiprose";
 export const TAGLINE = "Ignite your writing superpowers!";

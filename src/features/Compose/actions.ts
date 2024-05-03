@@ -1,10 +1,10 @@
-import type { Suggestion } from "~/types";
+import { Suggestion } from "../../types";
 
 export const requestAnalysisAction = async (
   title: string,
   story: string
 ): Promise<Suggestion[]> => {
-  const url = new URL("/analyser/feedback", process.env.REACT_APP_API_ENDPOINT);
+  const url = new URL("/analyser/feedback", "http://localhost:3002");
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -18,7 +18,7 @@ export const requestAnalysisAction = async (
 };
 
 export const saveDraftAction = async (title: string, story: string) => {
-  const url = new URL("/story/draft", process.env.REACT_APP_API_ENDPOINT);
+  const url = new URL("/story/draft", "http://localhost:3002");
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -32,7 +32,7 @@ export const saveDraftAction = async (title: string, story: string) => {
 };
 
 export const publishStoryAction = async (title: string, story: string) => {
-  const url = new URL("/story", process.env.REACT_APP_API_ENDPOINT);
+  const url = new URL("/story", "http://localhost:3002");
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Feedback } from "./Feedback";
-import { mockSuggestions } from "~/constants";
+import { mockSuggestions } from "../../constants";
 
 const meta = {
   title: "Feedback",

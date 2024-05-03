@@ -1,10 +1,11 @@
 import type { ComponentProps, FunctionComponent } from "react";
-import { Button, ProfileButton } from "~/design-system";
 import { NavigationItem } from "./NavigationItem";
-import type { User } from "~/types";
+import type { User } from "../../types";
 import { useRef, useState } from "react";
-import { useTheme, useClickOutside } from "~/hooks";
 import { useNavigate } from "react-router";
+import { ProfileButton } from "../ProfileButton";
+import { useClickOutside, useTheme } from "../../hooks";
+import { Button } from "../Button";
 
 type Props = {
   pageId: string;

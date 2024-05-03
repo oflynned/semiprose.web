@@ -1,7 +1,7 @@
 import type { FunctionComponent } from "react";
-import { Card } from "~/design-system";
-import type { Story as StoryType } from "~/types";
-import { toCount, toDate, toDuration } from "~/formatters";
+import { Card } from "../Card";
+import type { Story as StoryType } from "../../types";
+import { toCount, toDate, toDuration } from "../../formatters";
 
 type Props = {
   showWordCount?: boolean;

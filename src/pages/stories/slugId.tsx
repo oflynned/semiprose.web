@@ -1,5 +1,5 @@
-import { Comment, Layout, Story } from "~/design-system";
-import { pastStories } from "~/constants";
+import { Comment, Layout, Story } from "../../design-system";
+import { pastStories } from "../../constants";
 import { ComponentProps, useState } from "react";
 
 export const getStory = async (slug: string) => {

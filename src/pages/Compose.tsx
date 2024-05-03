@@ -1,14 +1,14 @@
-import type { Suggestion } from "~/types";
-import type { ComponentProps } from "react";
-import { ComposeStory, FeedbackOverview, Feature } from "~/features";
-import { useState } from "react";
-import { Layout } from "~/design-system";
-import { isDefined } from "~/helpers";
+import type { Suggestion } from "../types";
+import { ComponentProps, useEffect, useState } from "react";
+import { ComposeStory, FeedbackOverview, getFeatures } from "../features";
+import { Layout } from "../design-system";
+import { isDefined } from "../helpers";
 import {
   publishStoryAction,
   requestAnalysisAction,
   saveDraftAction,
-} from "~/features/Compose/actions";
+} from "../features/Compose/actions";
+import { useFeature } from "../context";
 
 type Prompt = ComponentProps<typeof ComposeStory>["prompt"];
 
@@ -16,33 +16,10 @@ type FeedbackState = "open" | "closed";
 
 type AnalysisState = ComponentProps<typeof FeedbackOverview>["analysisState"];
 
-// const getPrompt = async () => {
-//   const url = new URL("/prompts/latest", process.env.REACT_APP_API_ENDPOINT);
-//   const response = await fetch(url);
-//
-//   return response.json();
-// };
-//
-// type LoaderData = {
-//   suggestions: Suggestion[];
-//   prompt: Prompt;
-//   features: Record<string, boolean>;
-// };
-//
-// export const get = async () => {
-//   const [suggestions, prompt, features] = await Promise.all([
-//     getFeedback(),
-//     getPrompt(),
-//     getFeatures(),
-//   ]);
-//
-//   return { suggestions, prompt, features };
-// };
-
 export const Compose = () => {
-  const [prompt] = useState<Prompt | undefined>();
+  const [prompt, setPrompt] = useState<Prompt | undefined>();
   const [suggestions] = useState<Suggestion[] | undefined>();
-  const [features] = useState<Feature[] | undefined>();
+  const { chatGptAnalysis } = useFeature();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -50,9 +27,20 @@ export const Compose = () => {
   const [analysisState, setAnalysisState] = useState<AnalysisState>("disabled");
   const [feedbackState, setFeedbackState] = useState<FeedbackState>("closed");
 
-  const enableFeedback = false;
+  const getPrompt = async () => {
+    const url = new URL("/prompts/latest", "http://localhost:3002");
+    const response = await fetch(url);
 
-  if (!prompt || !suggestions || !features) {
+    return response.json();
+  };
+
+  useEffect(() => {
+    Promise.all([getPrompt(), getFeatures()]).then(([prompt]) => {
+      setPrompt(prompt);
+    });
+  }, []);
+
+  if (!prompt || !suggestions) {
     return null;
   }
 
@@ -88,7 +76,7 @@ export const Compose = () => {
             }
           }}
         />
-        {enableFeedback ? (
+        {chatGptAnalysis === "ENABLED" ? (
           <FeedbackOverview
             analysisState={analysisState}
             suggestions={suggestions}

@@ -1,8 +1,8 @@
-import { APP_NAME, TAGLINE } from "~/constants";
-import { Button } from "~/design-system";
+import { APP_NAME, TAGLINE } from "../constants";
+import { Button } from "../design-system";
 
 const createUser = async () => {
-  return fetch("localhost:3002/users", {
+  return fetch("http://localhost:3002/users", {
     method: "POST",
     headers: {
       Authorization: "Bearer token",
@@ -27,7 +27,10 @@ export const Login = () => {
             <Button
               label={"Get user"}
               onClick={() => {
-                fetch("localhost:3002/users", { method: "GET", headers: {} });
+                fetch("http://localhost:3002/users", {
+                  method: "GET",
+                  headers: {},
+                });
               }}
             />
           </div>

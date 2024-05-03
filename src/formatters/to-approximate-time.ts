@@ -1,4 +1,4 @@
-import { toDate } from "~/formatters/to-date";
+import { toDate } from "./to-date.ts";
 
 export const toApproximateTime = (timestamp: string) => {
   const now = new Date();

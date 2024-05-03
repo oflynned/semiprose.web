@@ -1,7 +1,7 @@
-import { Avatar, Card } from "~/design-system";
+import { Avatar, Card } from "../../design-system";
 import type { FunctionComponent } from "react";
-import type { Comment as CommentType } from "~/types";
-import { toApproximateTime } from "~/formatters";
+import type { Comment as CommentType } from "../../types";
+import { toApproximateTime } from "../../formatters";
 
 type Props = CommentType;
 

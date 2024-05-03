@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "react";
-import { Card } from "~/design-system";
+import { Card } from "../Card";
 
 export const PromptSkeleton: FunctionComponent = () => {
   return (

@@ -1,4 +1,4 @@
-import { Layout } from "~/design-system";
+import { Layout } from "../design-system";
 
 export const Notifications = () => {
   return (

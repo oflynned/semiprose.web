@@ -1,7 +1,7 @@
 import type { ComponentProps, FunctionComponent } from "react";
 import { useState } from "react";
-import { Feedback, FeedbackDetail } from "~/design-system";
-import { isDefined } from "~/helpers";
+import { Feedback, FeedbackDetail } from "../../../design-system";
+import { isDefined } from "../../../helpers";
 
 type Props = {
   onOpenPanel?: () => void;

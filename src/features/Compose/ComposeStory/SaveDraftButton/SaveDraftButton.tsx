@@ -1,5 +1,5 @@
-import { Button } from "~/design-system";
 import type { ComponentProps, FunctionComponent } from "react";
+import { Button } from "../../../../design-system";
 
 type Props = { publishState: ComponentProps<typeof Button>["state"] } & Omit<
   ComponentProps<typeof Button>,
