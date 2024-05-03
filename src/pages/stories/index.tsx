@@ -1,9 +1,12 @@
 import { Excerpt, Layout, Search } from "../../design-system";
 import { pastStories } from "../../constants";
+import { useFirebase } from "../../hooks";
 
 export const Stories = () => {
+  const { user } = useFirebase();
+
   return (
-    <Layout>
+    <Layout user={user}>
       <div className={"flex flex-col max-w-screen-md gap-8"}>
         <form>
           <Search onChange={(value) => console.log(value)} />

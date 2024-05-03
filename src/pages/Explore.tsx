@@ -2,12 +2,14 @@ import { Button, Excerpt, Layout, Prompt, Search } from "../design-system";
 import { pastStories, prompt } from "../constants";
 import { toCount } from "../formatters";
 import { useNavigate } from "react-router";
+import { useFirebase } from "../hooks";
 
 export const Explore = () => {
+  const { user } = useFirebase();
   const navigate = useNavigate();
 
   return (
-    <Layout>
+    <Layout user={user}>
       <div className={"flex flex-col gap-8"}>
         <div className={"max-w-screen-md"}>
           <Search />

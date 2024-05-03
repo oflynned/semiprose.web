@@ -8,7 +8,7 @@ import {
   requestAnalysisAction,
   saveDraftAction,
 } from "../features/Compose/actions";
-import { useFeature } from "../context";
+import { useFeature, useFirebase } from "../hooks";
 
 type Prompt = ComponentProps<typeof ComposeStory>["prompt"];
 
@@ -17,6 +17,7 @@ type FeedbackState = "open" | "closed";
 type AnalysisState = ComponentProps<typeof FeedbackOverview>["analysisState"];
 
 export const Compose = () => {
+  const { user } = useFirebase();
   const [prompt, setPrompt] = useState<Prompt | undefined>();
   const [suggestions] = useState<Suggestion[] | undefined>();
   const { chatGptAnalysis } = useFeature();
@@ -45,7 +46,7 @@ export const Compose = () => {
   }
 
   return (
-    <Layout>
+    <Layout user={user}>
       <div className={"flex gap-4 h-full justify-between"}>
         <ComposeStory
           prompt={prompt}

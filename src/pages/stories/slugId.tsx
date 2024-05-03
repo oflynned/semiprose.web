@@ -1,17 +1,19 @@
 import { Comment, Layout, Story } from "../../design-system";
 import { pastStories } from "../../constants";
 import { ComponentProps, useState } from "react";
+import { useFirebase } from "../../hooks";
 
 export const getStory = async (slug: string) => {
   return pastStories.find((story) => story.id === slug);
 };
 
 export const StoryDetail = () => {
+  const { user } = useFirebase();
   const [comment, setComment] = useState("");
   const [story] = useState<ComponentProps<typeof Story> | undefined>();
 
   return (
-    <Layout>
+    <Layout user={user}>
       {story ? (
         <div className={"flex flex-col gap-4 max-w-screen-md"}>
           <Story {...story} />
