@@ -1,13 +1,8 @@
 import { defineConfig } from "vite";
-import { vitePlugin as remix } from "@remix-run/dev";
-import { installGlobals } from "@remix-run/node";
+import react from "@vitejs/plugin-react-swc";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-installGlobals();
-
+// https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    port: 3000,
-  },
-  plugins: [remix(), tsconfigPaths()],
+  plugins: [tsconfigPaths(), react()],
 });

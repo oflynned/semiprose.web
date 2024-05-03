@@ -1,10 +1,10 @@
 import type { ComponentProps, FunctionComponent } from "react";
 import { Button, ProfileButton } from "~/design-system";
-import { Link, useNavigate } from "@remix-run/react";
 import { NavigationItem } from "./NavigationItem";
 import type { User } from "~/types";
 import { useRef, useState } from "react";
 import { useTheme, useClickOutside } from "~/hooks";
+import { useNavigate } from "react-router";
 
 type Props = {
   pageId: string;
@@ -65,9 +65,9 @@ export const NavigationBar: FunctionComponent<Props> = ({ pageId, user }) => {
         </div>
         <div className={"flex flex-col gap-2"}>
           {section.map(({ id, label }) => (
-            <Link to={`/${id}`} key={label}>
+            <a href={`/${id}`} key={label}>
               <NavigationItem active={pageId === id} label={label} />
-            </Link>
+            </a>
           ))}
         </div>
       </div>

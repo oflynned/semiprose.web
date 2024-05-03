@@ -1,7 +1,7 @@
 import { Button } from "~/design-system";
-import { useNavigate } from "@remix-run/react";
+import { useNavigate } from "react-router";
 
-export default function Index() {
+export const Homepage = () => {
   const navigate = useNavigate();
 
   return (
@@ -19,4 +19,4 @@ export default function Index() {
       </div>
     </div>
   );
-}
+};

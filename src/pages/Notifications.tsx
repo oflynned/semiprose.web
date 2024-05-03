@@ -1,6 +1,6 @@
 import { Layout } from "~/design-system";
 
-export default function Notifications() {
+export const Notifications = () => {
   return (
     <Layout>
       <div className={"flex flex-col gap-4"}>
@@ -9,4 +9,4 @@ export default function Notifications() {
       </div>
     </Layout>
   );
-}
+};

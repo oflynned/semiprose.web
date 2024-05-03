@@ -1,9 +1,9 @@
 import { Button, Excerpt, Layout, Prompt, Search } from "~/design-system";
-import { Link, useNavigate } from "@remix-run/react";
 import { pastStories, prompt } from "~/constants";
 import { toCount } from "~/formatters";
+import { useNavigate } from "react-router";
 
-export default function Explore() {
+export const Explore = () => {
   const navigate = useNavigate();
 
   return (
@@ -38,9 +38,9 @@ export default function Explore() {
                 className={"flex flex-col min-w-[400px] max-w-screen-md"}
                 key={story.id}
               >
-                <Link to={`/stories/${story.id}`}>
+                <a href={`/stories/${story.id}`}>
                   <Excerpt {...story} />
-                </Link>
+                </a>
                 <div className={"flex justify-between mx-8 my-4"}>
                   <div>
                     <p>{`@${story.author.username}`}</p>
@@ -59,4 +59,4 @@ export default function Explore() {
       </div>
     </Layout>
   );
-}
+};

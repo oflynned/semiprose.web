@@ -1,4 +1,4 @@
-import type { FunctionComponent, HTMLProps } from "react";
+import type { FunctionComponent } from "react";
 import { Avatar } from "~/design-system";
 import type { User } from "~/types";
 import clsx from "clsx";
