@@ -1,7 +1,7 @@
 import type { FunctionComponent } from "react";
 import { useState } from "react";
 import Confetti from "react-confetti";
-import { APP_NAME } from "../../constants.ts";
+import { APP_NAME } from "../../constants";
 import { Button } from "../../design-system";
 
 export const Waitlist: FunctionComponent = () => {

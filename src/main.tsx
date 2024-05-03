@@ -4,14 +4,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { FeatureProvider, ThemeProvider } from "./context";
-import { Homepage } from "./pages/Homepage.tsx";
-import { Login } from "./pages/Login.tsx";
-import { Explore } from "./pages/Explore.tsx";
-import { Compose } from "./pages/Compose.tsx";
+import { Homepage } from "./pages/Homepage";
+import { Login } from "./pages/Login";
+import { Explore } from "./pages/Explore";
+import { Compose } from "./pages/Compose";
 import { Waitlist } from "./features";
 import { Stories } from "./pages/stories";
-import { StoryDetail } from "./pages/stories/slugId.tsx";
-import { Notifications } from "./pages/Notifications.tsx";
+import { StoryDetail } from "./pages/stories/slugId";
+import { Notifications } from "./pages/Notifications";
 
 const router = createBrowserRouter([
   {

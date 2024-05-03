@@ -5,7 +5,7 @@ import { isDefined } from "../../helpers";
 import { Card } from "../Card";
 import { Pill, PillSkeleton } from "../Pill";
 import { toPercentage } from "../../formatters";
-import { mockSuggestions } from "../../constants.ts";
+import { mockSuggestions } from "../../constants";
 import { ResetFeedbackButton } from "../../features/Compose/FeedbackOverview/ResetFeedbackButton";
 import { AnalyseButton } from "../../features/Compose/FeedbackOverview/AnalyseButton";
 
