@@ -1,4 +1,4 @@
-import styles from "./tailwind.css";
+import stylesheet from "~/tailwind.css?url";
 
 import type {
   LinksFunction,
@@ -8,20 +8,19 @@ import type {
 import { json, redirect } from "@remix-run/node";
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import { APP_NAME, TAGLINE } from "~/constants";
 import { useTheme } from "~/hooks";
 import { ThemeProvider } from "./context";
 import { getFeatures } from "~/features";
+import { APP_NAME, TAGLINE } from "~/constants";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: styles },
+  { rel: "stylesheet", href: stylesheet },
   {
     rel: "icon",
     href: "/favicon.svg",
@@ -60,7 +59,6 @@ const App = () => {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );

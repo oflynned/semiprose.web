@@ -4,9 +4,9 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix build",
-    "dev": "remix dev --manual",
-    "start": "remix-serve ./build/index.js",
+    "build": "remix vite:build",
+    "dev": "remix vite:dev",
+    "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -42,14 +42,13 @@
     "eslint-plugin-storybook": "0.8.0",
     "postcss": "8.4.38",
     "storybook": "8.0.6",
-    "storybook-addon-react-router-v6": "2.0.15",
-    "storybook-tailwind-dark-mode": "1.0.22",
+    "storybook-addon-remix-react-router": "3.0.0",
     "tailwindcss": "3.4.3",
     "typescript": "5.4.4",
     "vite": "5.2.8",
     "vite-tsconfig-paths": "4.3.2"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   }
 }

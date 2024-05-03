@@ -1,6 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import { resolve, dirname } from "path";
-const tsconfigPaths = require("vite-tsconfig-paths").default;
+import tsconfigPaths from "vite-tsconfig-paths";
 
 const config: StorybookConfig = {
   stories: ["../app/**/*.stories.tsx"],
@@ -10,8 +10,6 @@ const config: StorybookConfig = {
     "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
-    "storybook-tailwind-dark-mode",
-    "storybook-addon-react-router-v6",
   ],
   framework: {
     name: "@storybook/react-vite",

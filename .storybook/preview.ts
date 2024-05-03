@@ -1,11 +1,10 @@
 import "../app/tailwind.css";
 
 import type { Preview } from "@storybook/react";
-import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import {
   reactRouterParameters,
   withRouter,
-} from "storybook-addon-react-router-v6";
+} from "storybook-addon-remix-react-router";
 
 const preview: Preview = {
   decorators: [withRouter],

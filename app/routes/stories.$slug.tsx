@@ -25,17 +25,19 @@ export default function StoryDetail() {
       {story ? (
         <div className={"flex flex-col gap-4 max-w-screen-md"}>
           <Story {...story} />
-          <h3 className={"text-2xl font-medium"}>{"Comments"}</h3>
-          <input
-            className={"border border-gray-200 rounded-xl p-4"}
-            placeholder={"Add a comment"}
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <div className={"flex flex-col gap-2"}>
-            {story.comments.map((comment) => (
-              <Comment {...comment} key={comment.id} />
-            ))}
+          <div className={"flex flex-col gap-4"}>
+            <h3 className={"text-2xl font-medium"}>{"Comments"}</h3>
+            <input
+              className={"border border-gray-200 rounded-xl p-4"}
+              placeholder={"Add a comment"}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <div className={"flex flex-col gap-2"}>
+              {story.comments.map((comment) => (
+                <Comment {...comment} key={comment.id} />
+              ))}
+            </div>
           </div>
         </div>
       ) : (

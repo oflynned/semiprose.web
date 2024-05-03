@@ -30,7 +30,9 @@ export default function Explore() {
         </div>
         <div className={"flex flex-col gap-4"}>
           <h3 className={"font-medium text-2xl"}>{"Others wrote"}</h3>
-          <div className={"gap-4 grid grid-cols-1 md:grid-cols-2"}>
+          <div
+            className={"gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}
+          >
             {pastStories.map((story) => (
               <div
                 className={"flex flex-col min-w-[400px] max-w-screen-md"}
@@ -43,13 +45,11 @@ export default function Explore() {
                   <div>
                     <p>{`@${story.author.username}`}</p>
                   </div>
-                  <div className={"flex gap-2"}>
-                    <div className={"flex gap-1"}>
-                      <span className={"material-symbols-outlined"}>
-                        trending_up
-                      </span>
-                      <p>{toCount(story.readership)}</p>
-                    </div>
+                  <div className={"flex gap-1"}>
+                    <span className={"material-symbols-outlined"}>
+                      trending_up
+                    </span>
+                    <p>{toCount(story.readership)}</p>
                   </div>
                 </div>
               </div>
