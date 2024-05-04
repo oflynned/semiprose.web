@@ -3,6 +3,7 @@ import { useState } from "react";
 import Confetti from "react-confetti";
 import { APP_NAME } from "../../constants";
 import { Button } from "../../design-system";
+import { Config } from "../../data/config.ts";
 
 export const Waitlist: FunctionComponent = () => {
   const [email, setEmail] = useState<string>();
@@ -14,7 +15,8 @@ export const Waitlist: FunctionComponent = () => {
   const requestAccess = async () => {
     setAccessRequested(false);
 
-    const response = await fetch("https://api.semiprose.syzible.com/waitlist", {
+    const config = new Config();
+    const response = await fetch(config.getEndpoint("/waitlist"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

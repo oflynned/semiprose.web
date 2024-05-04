@@ -1,5 +1,8 @@
+import { Config } from "./config.ts";
+
 export const getUser = async (token: string) => {
-  const response = await fetch("http://localhost:3002/users/me", {
+  const config = new Config();
+  const response = await fetch(config.getEndpoint("/users/me"), {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
