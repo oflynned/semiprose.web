@@ -4,7 +4,6 @@ import {
   createContext,
   useEffect,
   useState,
-  useContext,
 } from "react";
 import { Feature, getFeatures } from "../features";
 
@@ -17,8 +16,6 @@ export const FeatureContext = createContext<{
   waitlist: "PENDING",
   chatGptAnalysis: "PENDING",
 });
-
-export const useFeature = () => useContext(FeatureContext);
 
 export const FeatureProvider: FunctionComponent<PropsWithChildren> = ({
   children,

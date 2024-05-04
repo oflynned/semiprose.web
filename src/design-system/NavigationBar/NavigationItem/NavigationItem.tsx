@@ -9,15 +9,13 @@ type Props = {
 export const NavigationItem: FunctionComponent<Props> = ({
   label,
   active = false,
-}) => {
-  return (
-    <h2
-      className={clsx([
-        "text-2xl p-4 rounded-xl hover:bg-gray-100 active:bg-gray-200 font-bold clickable",
-        { "bg-gray-100": active },
-      ])}
-    >
-      {label}
-    </h2>
-  );
-};
+}) => (
+  <h2
+    className={clsx([
+      "text-2xl p-4 rounded-xl hover:bg-gray-100 active:bg-gray-200 font-bold clickable",
+      { "bg-gray-100": active },
+    ])}
+  >
+    {label}
+  </h2>
+);
