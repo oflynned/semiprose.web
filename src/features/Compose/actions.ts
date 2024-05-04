@@ -1,11 +1,12 @@
 import { Suggestion } from "../../types";
+import { Config } from "../../data/config.ts";
 
 export const requestAnalysisAction = async (
   title: string,
   story: string
 ): Promise<Suggestion[]> => {
-  const url = new URL("/analyser/feedback", "http://localhost:3002");
-  const response = await fetch(url, {
+  const config = new Config();
+  const response = await fetch(config.getEndpoint("/analyser/feedback"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -18,8 +19,8 @@ export const requestAnalysisAction = async (
 };
 
 export const saveDraftAction = async (title: string, story: string) => {
-  const url = new URL("/story/draft", "http://localhost:3002");
-  const response = await fetch(url, {
+  const config = new Config();
+  const response = await fetch(config.getEndpoint("/story/draft"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -32,8 +33,8 @@ export const saveDraftAction = async (title: string, story: string) => {
 };
 
 export const publishStoryAction = async (title: string, story: string) => {
-  const url = new URL("/story", "http://localhost:3002");
-  const response = await fetch(url, {
+  const config = new Config();
+  const response = await fetch(config.getEndpoint("/story"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
