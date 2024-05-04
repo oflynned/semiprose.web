@@ -4,9 +4,10 @@ import type { User } from "../../types";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { ProfileButton } from "../ProfileButton";
-import { useClickOutside, useFirebase, useTheme } from "../../hooks";
+import { useClickOutside, useTheme } from "../../hooks";
 import { Button } from "../Button";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth.ts";
 
 type Props = {
   pageId: string;
@@ -25,7 +26,7 @@ const section: Section[] = [
 ];
 
 export const NavigationBar: FunctionComponent<Props> = ({ pageId, user }) => {
-  const { logout } = useFirebase();
+  const { signOut } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -51,10 +52,7 @@ export const NavigationBar: FunctionComponent<Props> = ({ pageId, user }) => {
     {
       label: "Log out",
       icon: "logout",
-      onClick: () => {
-        logout();
-        navigate("/login");
-      },
+      onClick: () => signOut(),
     },
   ];
 
