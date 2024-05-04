@@ -1,14 +1,13 @@
 import type { Suggestion } from "../types";
 import { ComponentProps, useEffect, useState } from "react";
 import { ComposeStory, FeedbackOverview, getFeatures } from "../features";
-import { Layout } from "../design-system";
 import { isDefined } from "../helpers";
 import {
   publishStoryAction,
   requestAnalysisAction,
   saveDraftAction,
 } from "../features/Compose/actions";
-import { useFeature, useFirebase } from "../hooks";
+import { useFeature } from "../hooks";
 
 type Prompt = ComponentProps<typeof ComposeStory>["prompt"];
 
@@ -17,7 +16,6 @@ type FeedbackState = "open" | "closed";
 type AnalysisState = ComponentProps<typeof FeedbackOverview>["analysisState"];
 
 export const Compose = () => {
-  const { user } = useFirebase();
   const [prompt, setPrompt] = useState<Prompt | undefined>();
   const [suggestions] = useState<Suggestion[] | undefined>();
   const { chatGptAnalysis } = useFeature();
@@ -41,66 +39,60 @@ export const Compose = () => {
     });
   }, []);
 
-  if (!prompt || !suggestions) {
-    return null;
-  }
-
   return (
-    <Layout user={user}>
-      <div className={"flex gap-4 h-full justify-between"}>
-        <ComposeStory
-          prompt={prompt}
-          hidden={feedbackState === "open"}
-          onType={(title, content) => {
-            setTitle(title);
-            setContent(content);
-            setAnalysisState(
-              content.length < 100
-                ? "disabled"
-                : isDefined(suggestions)
-                ? "completed"
-                : "clickable"
-            );
+    <div className={"flex gap-4 h-full justify-between"}>
+      <ComposeStory
+        prompt={prompt}
+        hidden={feedbackState === "open"}
+        onType={(title, content) => {
+          setTitle(title);
+          setContent(content);
+          setAnalysisState(
+            content.length < 100
+              ? "disabled"
+              : isDefined(suggestions)
+              ? "completed"
+              : "clickable"
+          );
+        }}
+        saveDraft={async (title, content) => {
+          try {
+            await saveDraftAction(title, content);
+          } catch (e) {
+            console.error(e);
+          }
+        }}
+        publish={async (title, content) => {
+          try {
+            await publishStoryAction(title, content);
+          } catch (e) {
+            console.error(e);
+          }
+        }}
+      />
+      {chatGptAnalysis === "ENABLED" ? (
+        <FeedbackOverview
+          analysisState={analysisState}
+          suggestions={suggestions}
+          onOpenPanel={() => setFeedbackState("open")}
+          onClosePanel={() => setFeedbackState("closed")}
+          onResetAnalysis={() => {
+            setFeedbackState("closed");
+            setAnalysisState("disabled");
           }}
-          saveDraft={async (title, content) => {
+          onRequestAnalysis={async () => {
+            setAnalysisState("loading");
+
             try {
-              await saveDraftAction(title, content);
+              await requestAnalysisAction(title, content);
+
+              setAnalysisState("completed");
             } catch (e) {
-              console.error(e);
-            }
-          }}
-          publish={async (title, content) => {
-            try {
-              await publishStoryAction(title, content);
-            } catch (e) {
-              console.error(e);
+              setAnalysisState("error");
             }
           }}
         />
-        {chatGptAnalysis === "ENABLED" ? (
-          <FeedbackOverview
-            analysisState={analysisState}
-            suggestions={suggestions}
-            onOpenPanel={() => setFeedbackState("open")}
-            onClosePanel={() => setFeedbackState("closed")}
-            onResetAnalysis={() => {
-              setFeedbackState("closed");
-              setAnalysisState("disabled");
-            }}
-            onRequestAnalysis={async () => {
-              setAnalysisState("loading");
-
-              try {
-                await requestAnalysisAction(title, content);
-
-                setAnalysisState("completed");
-              } catch (e) {
-                setAnalysisState("error");
-              }
-            }}
-          />
-        ) : null}
-      </div>
-    </Layout>
+      ) : null}
+    </div>
   );
 };

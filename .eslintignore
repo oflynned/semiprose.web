@@ -2,3 +2,7 @@ node_modules/
 dist/
 public/
 env.d.ts
+.idea/
+.cache/
+.vscode/
+

@@ -1,17 +1,28 @@
 import { APP_NAME, TAGLINE } from "../constants";
 import { Button } from "../design-system";
-// eslint-disable-next-line
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { useFirebase } from "../hooks";
+import { useAuth } from "../hooks/useAuth.ts";
+import { Navigate } from "react-router";
 
 export const Login = () => {
-  const { user, login, register } = useFirebase();
+  const { state, loginWithGoogle, loginWithEmail, registerWithEmail } =
+    useAuth();
+
+  if (state.state === "loading") {
+    return (
+      <div className={"h-screen w-screen flex justify-center items-center"}>
+        <p>{"Loading..."}</p>
+      </div>
+    );
+  }
+
+  if (state.state === "authenticated") {
+    return <Navigate to={"/explore"} replace />;
+  }
 
   return (
     <div
       className={"w-screen h-screen flex flex-col items-center justify-center"}
     >
-      <pre>{JSON.stringify(user)}</pre>
       <div className={"w-[512px] h-[512px] bg-blue-50"}>
         <div className={"flex flex-col p-8 justify-between h-full"}>
           <div className={"flex flex-col gap-2"}>
@@ -19,34 +30,17 @@ export const Login = () => {
             <p>{TAGLINE}</p>
           </div>
           <div className={"flex gap-2 justify-end"}>
-            <Button label={"Create user"} onClick={register} />
-
-            <Button label={"Get user"} onClick={login} />
-
             <Button
-              label={"Login with Google"}
-              onClick={() => {
-                const authProvider = new GoogleAuthProvider();
-                authProvider.addScope("profile");
-                authProvider.addScope("email");
-
-                getAuth().onAuthStateChanged((user) => {
-                  if (user) {
-                    console.log(user);
-                  } else {
-                    console.log("Not logged in");
-                  }
-                });
-
-                signInWithPopup(getAuth(), authProvider)
-                  .then(() => {
-                    console.log("Logged in with Google");
-                  })
-                  .catch((error) => {
-                    console.error("Error logging in with Google", error);
-                  });
-              }}
+              label={"Register with Email"}
+              onClick={() =>
+                registerWithEmail("oflynned@gmail.com", "password")
+              }
             />
+            <Button
+              label={"Login with Email"}
+              onClick={() => loginWithEmail("oflynned@gmail.com", "password")}
+            />
+            <Button label={"Login with Google"} onClick={loginWithGoogle} />
           </div>
         </div>
       </div>

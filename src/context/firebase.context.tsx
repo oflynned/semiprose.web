@@ -3,50 +3,33 @@ import {
   PropsWithChildren,
   createContext,
   useState,
-  useEffect,
-  useCallback,
+  useMemo,
 } from "react";
-import { User } from "../types";
 import firebase from "firebase/compat/app";
-import { getAuth } from "firebase/auth";
+import {
+  UserInfo,
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+} from "firebase/auth";
 
-// type UserResponse = {
-//   id: string;
-//   name: string;
-//   email: string;
-//   username: string;
-//   createdAt: string;
-//   lastActiveAt: string;
-// };
-
-const createUser = async (token?: string) =>
-  fetch("http://localhost:3002/users", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({
-      username: "oflynned",
-    }),
-  });
-
-const getUser = async (token: string) =>
-  fetch("http://localhost:3002/users/me", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export type AuthState = "loading" | "authenticated" | "unauthenticated";
 
 export const FirebaseContext = createContext<{
-  user?: User;
-  login: () => void;
-  register: () => void;
+  userInfo?: UserInfo | null;
+  token?: string;
+  state?: AuthState;
+  loginWithGoogle: () => Promise<void>;
+  loginWithEmail: (email: string, password: string) => Promise<void>;
+  register: (email: string, password: string) => Promise<void>;
+  logout: () => void;
 }>({
-  login: () => {},
-  register: () => {},
+  loginWithGoogle: async () => {},
+  loginWithEmail: async (_email: string, _password: string) => {},
+  register: async (_email: string, _password: string) => {},
+  logout: () => {},
 });
 
 type Props = {
@@ -57,46 +40,82 @@ export const FirebaseProvider: FunctionComponent<PropsWithChildren<Props>> = ({
   app,
   children,
 }) => {
+  const auth = useMemo(() => getAuth(app), [app]);
+
   const [token, setToken] = useState<string>();
-  const [user, setUser] = useState<User>();
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(
+    auth.currentUser ? auth.currentUser : null
+  );
+  const [state, setState] = useState<AuthState>(
+    auth.currentUser ? "authenticated" : "unauthenticated"
+  );
 
-  const fetchUser = useCallback(async () => {
-    if (!token) {
-      return;
+  const register = async (email: string, password: string) => {
+    setState("loading");
+
+    await createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const loginWithGoogle = async () => {
+    setState("loading");
+
+    const provider = new GoogleAuthProvider();
+    provider.addScope("profile");
+    provider.addScope("email");
+
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (e) {
+      setState("unauthenticated");
     }
+  };
 
-    const response = await getUser(token);
-    const data = await response.json();
+  const loginWithEmail = async (email: string, password: string) => {
+    setState("loading");
 
-    if (data) {
-      setUser({
-        id: data.id,
-        username: data.username,
-        initials: data.username.split("").at(0) ?? "",
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (e) {
+      setState("unauthenticated");
+    }
+  };
+
+  const logout = async () => {
+    setState("loading");
+
+    await auth.signOut();
+
+    setUserInfo(null);
+    setToken(undefined);
+    setState("unauthenticated");
+  };
+
+  auth.onAuthStateChanged((user) => {
+    setState("loading");
+    setUserInfo(user);
+
+    user
+      ?.getIdToken()
+      .then((token) => {
+        setToken(token);
+        setState("authenticated");
+      })
+      .catch(() => {
+        setToken(undefined);
+        setState("unauthenticated");
       });
-    } else {
-      setUser(undefined);
-    }
-  }, [token]);
-
-  useEffect(() => {
-    fetchUser();
-  }, [token]);
-
-  useEffect(() => {
-    console.log("user changed", user);
-  }, [user]);
-
-  getAuth(app).onAuthStateChanged((user) => {
-    user?.getIdToken().then(setToken);
   });
 
   return (
     <FirebaseContext.Provider
       value={{
-        user,
-        login: () => fetchUser(),
-        register: () => createUser(token),
+        userInfo,
+        state,
+        token,
+        loginWithEmail,
+        loginWithGoogle,
+        register,
+        logout,
       }}
     >
       {children}

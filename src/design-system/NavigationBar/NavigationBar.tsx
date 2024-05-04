@@ -4,8 +4,9 @@ import type { User } from "../../types";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { ProfileButton } from "../ProfileButton";
-import { useClickOutside, useTheme } from "../../hooks";
+import { useClickOutside, useFirebase, useTheme } from "../../hooks";
 import { Button } from "../Button";
+import { Link } from "react-router-dom";
 
 type Props = {
   pageId: string;
@@ -24,6 +25,7 @@ const section: Section[] = [
 ];
 
 export const NavigationBar: FunctionComponent<Props> = ({ pageId, user }) => {
+  const { logout } = useFirebase();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -46,7 +48,14 @@ export const NavigationBar: FunctionComponent<Props> = ({ pageId, user }) => {
           icon: "light_mode",
           onClick: () => toggleTheme("light"),
         },
-    { label: "Log out", icon: "logout", onClick: () => navigate("/logout") },
+    {
+      label: "Log out",
+      icon: "logout",
+      onClick: () => {
+        logout();
+        navigate("/login");
+      },
+    },
   ];
 
   return (
@@ -66,9 +75,9 @@ export const NavigationBar: FunctionComponent<Props> = ({ pageId, user }) => {
         </div>
         <div className={"flex flex-col gap-2"}>
           {section.map(({ id, label }) => (
-            <a href={`/${id}`} key={label}>
+            <Link to={`/${id}`} key={label}>
               <NavigationItem active={pageId === id} label={label} />
-            </a>
+            </Link>
           ))}
         </div>
       </div>
