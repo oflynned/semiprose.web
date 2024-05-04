@@ -86,8 +86,6 @@ export const FirebaseProvider: FunctionComponent<PropsWithChildren<Props>> = ({
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      console.log("onAuthStateChanged", user);
-
       setState({ state: "loading" });
 
       if (user) {

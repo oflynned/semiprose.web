@@ -8,7 +8,6 @@ import {
 import { useFirebase } from "../hooks";
 import { getUser } from "../data/get-user.ts";
 import { UserEntity } from "../data/entity";
-import firebase from "firebase/compat/app";
 
 export type UserState =
   | { state: "idle"; user?: never }
@@ -38,9 +37,6 @@ export const AuthProvider: FunctionComponent<PropsWithChildren> = ({
   const [userState, setUserState] = useState<UserState>({ state: "idle" });
 
   useEffect(() => {
-    console.log("token state change", state);
-    console.log("user state change", userState);
-
     if (state.state === "unauthenticated") {
       setUserState({ state: "unauthenticated" });
       return;
