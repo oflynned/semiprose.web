@@ -8,6 +8,7 @@ import {
   saveDraftAction,
 } from "../features/Compose/actions";
 import { useFeature } from "../hooks";
+import { Config } from "../data/config.ts";
 
 type Prompt = ComponentProps<typeof ComposeStory>["prompt"];
 
@@ -27,8 +28,8 @@ export const Compose = () => {
   const [feedbackState, setFeedbackState] = useState<FeedbackState>("closed");
 
   const getPrompt = async () => {
-    const url = new URL("/prompts/latest", "http://localhost:3002");
-    const response = await fetch(url);
+    const config = new Config();
+    const response = await fetch(config.getEndpoint("/prompts/latest"));
 
     return response.json();
   };
