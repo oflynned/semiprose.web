@@ -7,12 +7,12 @@ import {
 } from "react";
 import { useFirebase } from "../hooks";
 import { getUser } from "../data/get-user.ts";
-import { UserEntity } from "../data/entity";
+import { User } from "../data/schema";
 
 export type UserState =
   | { state: "idle"; user?: never }
   | { state: "loading"; user?: never }
-  | { state: "authenticated"; user: UserEntity }
+  | { state: "authenticated"; user: User; token: string }
   | { state: "unauthenticated"; user?: never };
 
 export const AuthContext = createContext<{
@@ -49,7 +49,11 @@ export const AuthProvider: FunctionComponent<PropsWithChildren> = ({
     if (state?.state === "authenticated") {
       getUser(state.user.accessToken)
         .then((user) => {
-          setUserState({ state: "authenticated", user });
+          setUserState({
+            state: "authenticated",
+            user,
+            token: state.user.accessToken,
+          });
         })
         .catch(() => {
           setUserState({ state: "unauthenticated" });
