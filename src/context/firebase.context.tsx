@@ -7,11 +7,17 @@ import {
 } from "react";
 import firebase from "firebase/compat/app";
 import {
+  // eslint-disable-next-line import/named
   UserInfo,
+  // eslint-disable-next-line import/named
   getAuth,
+  // eslint-disable-next-line import/named
   signInWithPopup,
+  // eslint-disable-next-line import/named
   signInWithEmailAndPassword,
+  // eslint-disable-next-line import/named
   createUserWithEmailAndPassword,
+  // eslint-disable-next-line import/named
   GoogleAuthProvider,
 } from "firebase/auth";
 
@@ -100,6 +106,8 @@ export const FirebaseProvider: FunctionComponent<PropsWithChildren<Props>> = ({
           .catch(() => {
             setState({ state: "unauthenticated" });
           });
+      } else {
+        setState({ state: "unauthenticated" });
       }
     });
   }, [auth]);

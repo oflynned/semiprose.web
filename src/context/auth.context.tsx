@@ -23,7 +23,7 @@ export const AuthContext = createContext<{
   registerWithEmail: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
 }>({
-  state: { state: "loading" },
+  state: { state: "idle" },
   loginWithGoogle: async () => {},
   loginWithEmail: async (_email: string, _password: string) => {},
   registerWithEmail: async (_email: string, _password: string) => {},
@@ -42,6 +42,8 @@ export const AuthProvider: FunctionComponent<PropsWithChildren> = ({
   }, [userState]);
 
   useEffect(() => {
+    console.log({ state });
+
     if (state.state === "unauthenticated") {
       setUserState({ state: "unauthenticated" });
       return;
