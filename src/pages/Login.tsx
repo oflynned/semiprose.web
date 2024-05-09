@@ -10,7 +10,7 @@ export const Login = () => {
     useAuth();
 
   useEffect(() => {
-    if (state.state === "authenticated") {
+    if (state.state === "unregistered") {
       // this should probably be done in a different place using some form that's shown once to the user
       // since they have to enter their username anyway and see if it's available
       createUser({ username: "oflynned" }, state.token);

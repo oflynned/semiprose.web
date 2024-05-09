@@ -5,7 +5,7 @@ export const userSchema = z.object({
   createdAt: z.string(),
   lastActiveAt: z.string(),
   username: z.string(),
-  biography: z.string(),
+  biography: z.string().nullable(),
   initials: z.string(),
 });
 

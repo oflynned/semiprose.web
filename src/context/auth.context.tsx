@@ -10,10 +10,11 @@ import { getUser } from "../data/get-user.ts";
 import { User } from "../data/schema";
 
 export type UserState =
-  | { state: "idle"; user?: never }
-  | { state: "loading"; user?: never }
+  | { state: "idle"; user?: never; token?: never }
+  | { state: "loading"; user?: never; token?: never }
+  | { state: "unregistered"; user?: never; token: string }
   | { state: "authenticated"; user: User; token: string }
-  | { state: "unauthenticated"; user?: never };
+  | { state: "unauthenticated"; user?: never; token?: never };
 
 export const AuthContext = createContext<{
   state: UserState;
@@ -37,6 +38,10 @@ export const AuthProvider: FunctionComponent<PropsWithChildren> = ({
   const [userState, setUserState] = useState<UserState>({ state: "idle" });
 
   useEffect(() => {
+    console.log({ userState });
+  }, [userState]);
+
+  useEffect(() => {
     if (state.state === "unauthenticated") {
       setUserState({ state: "unauthenticated" });
       return;
@@ -55,8 +60,16 @@ export const AuthProvider: FunctionComponent<PropsWithChildren> = ({
             token: state.user.accessToken,
           });
         })
-        .catch(() => {
-          setUserState({ state: "unauthenticated" });
+        .catch((e) => {
+          console.error(e);
+
+          // TODO guess we need a state where you have a firebase account but no user account yet
+          //      eg something like "unregistered" or "unclaimed"
+          //      also need to differentiate between errors in zod type vs errors in the request
+          setUserState({
+            state: "unregistered",
+            token: state.user.accessToken,
+          });
         });
     }
   }, [state]);
