@@ -1,6 +1,6 @@
 import type { Suggestion } from "../types";
 import { ComponentProps, useEffect, useState } from "react";
-import { ComposeStory, FeedbackOverview, getFeatures } from "../features";
+import { ComposeStory, FeedbackOverview } from "../features";
 import { isDefined } from "../helpers";
 import {
   publishStoryAction,
@@ -35,9 +35,7 @@ export const Compose = () => {
   };
 
   useEffect(() => {
-    Promise.all([getPrompt(), getFeatures()]).then(([prompt]) => {
-      setPrompt(prompt);
-    });
+    getPrompt().then(setPrompt);
   }, []);
 
   return (

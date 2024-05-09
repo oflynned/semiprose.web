@@ -2,10 +2,20 @@ import { APP_NAME, TAGLINE } from "../constants";
 import { Button } from "../design-system";
 import { useAuth } from "../hooks/useAuth.ts";
 import { Navigate } from "react-router";
+import { createUser } from "../data/create-user.ts";
+import { useEffect } from "react";
 
 export const Login = () => {
   const { state, loginWithGoogle, loginWithEmail, registerWithEmail } =
     useAuth();
+
+  useEffect(() => {
+    if (state.state === "authenticated") {
+      // this should probably be done in a different place using some form that's shown once to the user
+      // since they have to enter their username anyway and see if it's available
+      createUser({ username: "oflynned" }, state.token);
+    }
+  }, [state]);
 
   if (state.state === "loading") {
     return (
@@ -32,15 +42,22 @@ export const Login = () => {
           <div className={"flex gap-2 justify-end"}>
             <Button
               label={"Register with Email"}
-              onClick={() =>
-                registerWithEmail("oflynned@gmail.com", "password")
-              }
+              onClick={async () => {
+                await registerWithEmail("oflynned@gmail.com", "password");
+              }}
             />
             <Button
               label={"Login with Email"}
-              onClick={() => loginWithEmail("oflynned@gmail.com", "password")}
+              onClick={async () => {
+                await loginWithEmail("oflynned@gmail.com", "password");
+              }}
             />
-            <Button label={"Login with Google"} onClick={loginWithGoogle} />
+            <Button
+              label={"Login with Google"}
+              onClick={async () => {
+                await loginWithGoogle();
+              }}
+            />
           </div>
         </div>
       </div>

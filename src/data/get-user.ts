@@ -1,14 +1,8 @@
-import { Config } from "./config.ts";
+import { request } from "./request.ts";
+import { User, userSchema } from "./schema";
 
-export const getUser = async (token: string) => {
-  const config = new Config();
-  const response = await fetch(config.getEndpoint("/users/me"), {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getUser = async (token: string): Promise<User> => {
+  const response = await request(token, "/users/me", "get");
 
-  return response.json();
+  return userSchema.parse(response);
 };
