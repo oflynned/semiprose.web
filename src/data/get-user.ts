@@ -1,8 +1,10 @@
 import { request } from "./request.ts";
 import { User, userSchema } from "./schema";
 
-export const getUser = async (token: string): Promise<User> => {
-  const response = await request(token, "/users/me", "get");
+export const getUser = async (token?: string): Promise<User> => {
+  console.log({ token });
 
-  return userSchema.parse(response);
+  const response = await request("/users/me", "get", token);
+
+  return userSchema.parse(response) as User;
 };

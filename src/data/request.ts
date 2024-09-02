@@ -2,22 +2,23 @@ import { Config } from "./config.ts";
 
 type Method = "get" | "post" | "put" | "delete";
 
-export const request = async <T>(
-  token: string,
+const config = new Config();
+
+export const request = async <R, T>(
   endpoint: string,
   method: Method,
-  body?: T
-): Promise<unknown> => {
-  const config = new Config();
+  token?: string,
+  body?: T,
+) => {
   const url = config.getEndpoint(endpoint);
   const request = await fetch(url, {
     method,
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: token ? `Bearer ${token}` : "",
     },
     body: JSON.stringify(body),
   });
 
-  return request.json();
+  return (await request.json()) as R;
 };

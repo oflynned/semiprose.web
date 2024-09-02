@@ -20,9 +20,7 @@ export const FeatureContext = createContext<{
 export const FeatureProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
-  const [featureMap, setFeatureMap] = useState<
-    Record<Feature, boolean> | undefined
-  >();
+  const [featureMap, setFeatureMap] = useState<Record<Feature, boolean>>();
 
   useEffect(() => {
     getFeatures().then(setFeatureMap).catch(console.error);

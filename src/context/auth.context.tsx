@@ -6,8 +6,8 @@ import {
   useEffect,
 } from "react";
 import { useFirebase } from "../hooks";
-import { getUser } from "../data/get-user.ts";
 import { User } from "../data/schema";
+import { useGetUser } from "../data/useGetUser.ts";
 
 export type UserState =
   | { state: "idle"; user?: never; token?: never }
@@ -33,48 +33,45 @@ export const AuthContext = createContext<{
 export const AuthProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
-  const { state, loginWithGoogle, loginWithEmail, register, logout } =
-    useFirebase();
+  const {
+    state: authState,
+    loginWithGoogle,
+    loginWithEmail,
+    register,
+    logout,
+  } = useFirebase();
+
+  const { data } = useGetUser({
+    enabled: Boolean(authState.user?.accessToken),
+    retry: false,
+  });
+
   const [userState, setUserState] = useState<UserState>({ state: "idle" });
 
   useEffect(() => {
-    console.log({ userState });
-  }, [userState]);
-
-  useEffect(() => {
-    console.log({ state });
-
-    if (state.state === "unauthenticated") {
+    if (authState.state === "unauthenticated") {
       setUserState({ state: "unauthenticated" });
       return;
     }
 
-    if (state?.state === "idle" || state?.state === "loading") {
+    if (authState?.state === "idle" || authState?.state === "loading") {
       return;
     }
 
-    if (state?.state === "authenticated") {
-      getUser(state.user.accessToken)
-        .then((user) => {
-          setUserState({
-            state: "authenticated",
-            user,
-            token: state.user.accessToken,
-          });
-        })
-        .catch((e) => {
-          console.error(e);
-
-          // TODO guess we need a state where you have a firebase account but no user account yet
-          //      eg something like "unregistered" or "unclaimed"
-          //      also need to differentiate between errors in zod type vs errors in the request
-          setUserState({
-            state: "unregistered",
-            token: state.user.accessToken,
-          });
-        });
+    if (!data) {
+      setUserState({
+        state: "unregistered",
+        token: authState.user.accessToken,
+      });
+      return;
     }
-  }, [state]);
+
+    setUserState({
+      state: "authenticated",
+      user: data as never,
+      token: authState.user.accessToken,
+    });
+  }, [data, authState]);
 
   const signOut = async () => {
     await logout();

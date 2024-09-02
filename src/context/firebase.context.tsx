@@ -92,23 +92,25 @@ export const FirebaseProvider: FunctionComponent<PropsWithChildren<Props>> = ({
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
+      if (!user) {
+        setState({ state: "unauthenticated" });
+
+        return;
+      }
+
       setState({ state: "loading" });
 
-      if (user) {
-        user
-          .getIdToken()
-          .then((token) => {
-            setState({
-              state: "authenticated",
-              user: { ...user, accessToken: token },
-            });
-          })
-          .catch(() => {
-            setState({ state: "unauthenticated" });
+      user.getIdToken().then(
+        (token) => {
+          setState({
+            state: "authenticated",
+            user: { ...user, accessToken: token },
           });
-      } else {
-        setState({ state: "unauthenticated" });
-      }
+        },
+        () => {
+          setState({ state: "unauthenticated" });
+        },
+      );
     });
   }, [auth]);
 
