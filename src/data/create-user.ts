@@ -7,9 +7,9 @@ export type CreateUserRequest = {
 
 export const createUser = async (
   dto: CreateUserRequest,
-  token: string
+  token: string,
 ): Promise<User> => {
-  const response = await request(token, "/users", "post", dto);
+  const response = await request("/users", "post", token, dto);
 
   return userSchema.parse(response);
 };
